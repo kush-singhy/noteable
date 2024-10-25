@@ -3,18 +3,18 @@ import logo from '../assets/book-line.png'
 
 function Header() {
     return (
-        <div class="header">
-            <div class="header-content">
-                <div class="logo-box">
-                    <img src={logo} class="logo" alt="Logo" />
+        <div className="header">
+            <div className="header-content">
+                <div className="logo-box">
+                    <img src={logo} className="logo" alt="Logo" />
                 </div>
-                <div class="title">Noteable</div>
-                <div class="nav-links">
-                    <a href="/">Notes</a>
-                    <a href="/wishlist">Wishlist</a>
+                <div className="title">Noteable</div>
+                <div className="nav-links">
+                    {/* <a href="/">Notes</a>
+                    <a href="/wishlist">Wishlist</a> */}
                 </div>
-                <div class="add-book">
-                    <a href="/add" class="btn add-book-btn">Add Book</a>
+                <div className="add-book">
+                    <a href="/add" className="btn add-book-btn">Add Book</a>
                 </div>
             </div>
         </div>
