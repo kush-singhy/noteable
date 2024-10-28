@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import bookNotes from "../mock-data";
 import Bookgrid from "./Bookgrid";
+import fetchBookCover from "../util/fetchBookCover";
 
 
 function Homepage() {
     const [readStatus, setReadStatus] = useState(true);
     const [sortType, setSortType] = useState('date');
+    
 
     return (
         <div className="container">

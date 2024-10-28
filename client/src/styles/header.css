@@ -29,6 +29,7 @@
     font-size: 2.3rem;
     color: #0774ce;
     margin-left: 20px;
+    cursor: pointer;
 }
 
 .add-book {
