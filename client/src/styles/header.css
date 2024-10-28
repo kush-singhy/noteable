@@ -19,30 +19,9 @@
 .logo {
     width: 60px;
 }
+
 .logo-box {
     min-width: 70px;
-}
-
-.nav-links {
-    display: flex;
-    justify-content: space-evenly;
-    margin-left: auto;
-    text-align: end;
-}
-.nav-links a {
-    color: black;
-    position: relative;
-    width: 80px;
-    text-decoration: none;
-    padding: 5px 0;
-    text-align: center;
-    transition: color 0.3s ease, transform 0.3s ease;
-    display: block;
-}
-
-.nav-links a:hover {
-    color: #3498db; 
-    transform: translateY(-2px);
 }
 
 .header .title {
@@ -53,7 +32,7 @@
 }
 
 .add-book {
-    padding-left: 25px;
+    margin-left: auto;
     text-align: center;
 }
 

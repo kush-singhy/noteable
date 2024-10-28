@@ -1,0 +1,166 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.page {
+    width: 100%;
+    font-family: 'Afacad Flux', sans-serif;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.small-container {
+    width: 800px;
+}
+
+
+.add-form-label {
+    width: 80px;
+}
+
+.add-search {
+    margin: 25px 0 0 0;
+    position: relative;
+}
+
+.search-results {
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px;
+    z-index: 1;
+}
+
+.add-form {
+    margin-top: 15px;
+}
+
+.add-info {
+    margin: 10px 0;
+}
+
+#add-notes {
+    display: none;
+}
+
+.notes-input {
+    height: 300px;
+}
+
+.read-switch {
+    margin-bottom: 18px;
+}
+
+.notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.notes-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 4px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.icon-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+}
+
+.edit-btn {
+    color: #333;
+    background-color: lightblue;
+}
+
+.delete-btn {
+    color: #333;
+    background-color: lightsalmon;
+}
+
+.cancel-btn {
+    background-color: lightgray;
+}
+
+.modal-btn {
+    width: 70px;
+    height: 35px;
+    display: flex;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+}
+
+
+.notes-img {
+    width: 150px;
+    height: 200px;
+    border-radius: 5px;
+    margin-right: 25px;
+    object-fit: cover;
+}
+
+.notes-header h1 {
+    font-size: 2.3rem;
+    margin: 0;
+    color: #333;
+}
+
+.notes-header h5 {
+    font-size: 1.3rem;
+    margin: 0 0 15px 0;
+    color: #666;
+}
+
+.notes-info {
+    margin-bottom: 20px;
+}
+
+.notes-info p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #444;
+}
+
+.notes-body {
+    margin-bottom: 30px;
+}
+
+.notes-body p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}

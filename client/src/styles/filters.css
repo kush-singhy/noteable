@@ -1,0 +1,71 @@
+.filters {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.toggle {
+    position: relative;
+    width: 240px;
+    height: 38px;
+    display: flex;
+    padding: 3px;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    background-color: rgb(248, 249, 250);
+    border: 1px solid rgb(222, 226, 230);
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.25);
+}
+
+.toggle button {
+    z-index: 1;
+    text-decoration: none;
+    width: 125px;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: black;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.toggle button.active {
+    color: white;
+}
+
+.slider {
+    position: absolute;
+    width: 114px;
+    height: 32px;
+    border-radius: 20px;
+    background-color: #3498DB;
+    transition: transform 0.2s ease;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.slider.left {
+    transform: translateX(-60px);
+}
+
+.slider.right {
+    transform: translateX(60px);
+}
+
+.sort-select {
+    width: 240px;
+}
+
+.hide-select {
+    visibility: hidden;
+}
+
+.sort-label {
+    border-radius: 20px;
+}
+
+.sort-input {
+    max-width: 180px;
+    border-radius: 20px;
+}

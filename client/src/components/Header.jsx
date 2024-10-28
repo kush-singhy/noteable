@@ -9,12 +9,8 @@ function Header() {
                     <img src={logo} className="logo" alt="Logo" />
                 </div>
                 <div className="title">Noteable</div>
-                <div className="nav-links">
-                    {/* <a href="/">Notes</a>
-                    <a href="/wishlist">Wishlist</a> */}
-                </div>
                 <div className="add-book">
-                    <a href="/add" className="btn add-book-btn">Add Book</a>
+                    <button className="btn add-book-btn">Add Book</button>
                 </div>
             </div>
         </div>

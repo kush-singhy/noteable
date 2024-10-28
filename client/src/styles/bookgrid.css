@@ -1,0 +1,74 @@
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    transition: height 0.3s ease-out;
+}
+
+.book-card {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 15px;
+}
+
+.book-card:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+}
+
+.book-card-body {
+    width: 200px;
+    padding: 10px 20px;
+    height: 180px;
+}
+
+.book-card-text {
+    margin-top: 12px;
+    line-height: 1;
+}
+
+.book-card-title {
+    height: 30px;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+
+.book-card-subtitle {
+    margin: 0 0 12px 0;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    color: #777;
+}
+
+.cover-img {
+    width: 100%;
+    height: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.read-badge {
+    border: 1px solid #198754;
+    color: #198754;
+    width: 42px;
+}
+
+.to-read-badge {
+    border: 1px solid #999;
+    color: #999;
+}

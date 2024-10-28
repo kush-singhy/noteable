@@ -5,19 +5,7 @@ import Bookgrid from "./Bookgrid";
 
 function Homepage() {
     const [readStatus, setReadStatus] = useState(true);
-    const [sortType,setSortType] = useState('date');
-
-    const filteredBooks = bookNotes.filter((book) => {
-        return book.status === readStatus;
-    });
-
-    if (sortType === 'date') {
-        filteredBooks.sort((a, b) => new Date(b.read_date) - new Date(a.read_date));
-    } else if (sortType === 'rating') {
-        filteredBooks.sort((a, b) => b.rating - a.rating);
-    } else if (sortType === 'title') {
-        filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
-    }
+    const [sortType, setSortType] = useState('date');
 
     return (
         <div className="container">
@@ -56,7 +44,7 @@ function Homepage() {
             </div>
 
             <Bookgrid 
-                books={filteredBooks}
+                books={bookNotes}
                 readStatus={readStatus}
                 sortType={sortType} 
             />
