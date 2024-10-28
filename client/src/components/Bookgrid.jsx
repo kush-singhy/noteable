@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import Bookcard from "./Bookcard";
-import bookNotes from "../mock-data";
 import defaultCover from "../assets/gradient.jpg"
 
 
-function Bookgrid() {
-    const [readStatus, setReadStatus] = useState(true);
-    const [sortType,setSortType] = useState('date');
+function Bookgrid(props) {
+    const { books, readStatus, sortType } = props;
 
     function createCard(book) {
         return (
@@ -22,7 +20,7 @@ function Bookgrid() {
         );
     }
 
-    const filteredBooks = bookNotes.filter((book) => {
+    const filteredBooks = books.filter((book) => {
         return book.status === readStatus;
     });
 
@@ -35,33 +33,8 @@ function Bookgrid() {
     }
 
     return (
-        <div className="container">
-            <div className="filters">
-                <div className="toggle">
-                    <button onClick={() => {setReadStatus(true)}}>Notes</button>
-                    <button onClick={() => {setReadStatus(false)}}>Wishlist</button>
-                </div>
-
-                <div className="input-group sort-select">
-                    <label className="input-group-text" htmlFor="sort-select">Sort by:</label>
-                    <select 
-                        className="form-select" 
-                        id="sort-select" 
-                        onChange={(e) => setSortType(e.target.value)}
-                    >
-                        <option value="date">Date Read</option>
-                        <option value="rating">Rating</option>
-                        <option value="title">Title</option>
-                    </select>
-                </div>
-
-
-            </div>
-
-            <div className="book-grid">
-                {filteredBooks.map(createCard)}
-            </div>
-
+        <div className="book-grid">
+            {filteredBooks.map(createCard)}
         </div>
     )
 }   

@@ -1,12 +1,12 @@
 import React from "react"
 import Header from "./components/Header"
-import Bookgrid from "./components/Bookgrid"
+import Homepage from "./components/Homepage"
 
 function App() {
   return (
     <div className="page">
       <Header />
-      <Bookgrid />
+      <Homepage />
     </div>
   )
 }
