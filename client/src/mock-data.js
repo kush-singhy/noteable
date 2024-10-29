@@ -1,7 +1,7 @@
 const bookNotes = [
     {
       id: 1,
-      title: 'Atomic Habits',
+      title: 'Atomic Habits (mock)',
       author: 'James Clear',
       isbn: '9780735211292',
       coverUrl: 'https://bookcover.longitood.com/bookcover/9780735211292',

@@ -27,6 +27,7 @@ db.connect();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(express.json());
 
 const coverCache = new Map();
 
@@ -68,6 +69,32 @@ app.get('/books', async (req, res) => {
     } catch (error) {
         console.error('Error fetching books:', error);
         res.status(500).send('Error fetching books');
+    }
+})
+
+app.post('/book', async (req, res) => {
+    const { title, author, isbn, readStatus, date, rating, notes } = req.body;
+
+    try {
+        if (readStatus) {
+            const result = await db.query(
+                `INSERT INTO book_notes (title, author, isbn, status, read_date, rating, notes)
+                VALUES ($1, $2, $3, $4, $5, $6, $7)
+                RETURNING id`,
+                [title, author, isbn, true, date, rating, notes]
+            )
+            const bookId = result.rows[0].id;
+        } else {
+            const result = await db.query(
+                `INSERT INTO book_notes (title, author, isbn, status)
+                VALUES ($1, $2, $3, $4)
+                RETURNING id`,
+                [title, author, isbn, false]
+            )
+            const bookId = result.rows[0].id;
+        }
+    } catch (error) {
+        console.error(error.message);
     }
 })
 

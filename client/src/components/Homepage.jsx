@@ -20,7 +20,7 @@ function Homepage() {
             } catch (err) {
                 console.error('Error fetching books:', err);
                 setError('Error fetching books');
-                // setBooks(bookNotes);
+                setBooks(bookNotes);
             } finally {
                 setLoading(false);
             }
@@ -29,7 +29,6 @@ function Homepage() {
         fetchBooks();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
 
     return (
         <div className="container">
@@ -67,11 +66,14 @@ function Homepage() {
 
             </div>
 
-            <Bookgrid 
-                books={books}
-                readStatus={readStatus}
-                sortType={sortType} 
-            />
+            {loading ? 
+                <div>Loading...</div> : 
+                <Bookgrid 
+                    books={books}
+                    readStatus={readStatus}
+                    sortType={sortType} 
+                />
+            }
 
         </div>
     )
