@@ -77,6 +77,7 @@ app.post('/book', async (req, res) => {
 
     try {
         if (readStatus) {
+            console.log("Adding to notes...");
             const result = await db.query(
                 `INSERT INTO book_notes (title, author, isbn, status, read_date, rating, notes)
                 VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -85,6 +86,7 @@ app.post('/book', async (req, res) => {
             )
             const bookId = result.rows[0].id;
         } else {
+            console.log("Adding to wishlist...");
             const result = await db.query(
                 `INSERT INTO book_notes (title, author, isbn, status)
                 VALUES ($1, $2, $3, $4)
