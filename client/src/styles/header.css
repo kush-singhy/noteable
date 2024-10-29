@@ -18,6 +18,12 @@
 }
 .logo {
     width: 60px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.logo:hover {
+    transform: scale(0.95);
 }
 
 .logo-box {
@@ -38,7 +44,9 @@
 }
 
 .add-book-btn {
-    width: 100px;
+    padding: 7px 14px;
+    border-radius: 7px;
+    border: none;
     color: white;
     background-color: #3498db;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -50,4 +58,11 @@
     background-color: #3498db;
     transform: translateY(-2px);
     box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+}
+
+.add-book-btn:active {
+    color: white;
+    background-color: #3498db;
+    transform: translateY(0px) scale(0.98);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 }

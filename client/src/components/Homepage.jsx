@@ -1,13 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import bookNotes from "../mock-data";
 import Bookgrid from "./Bookgrid";
-import fetchBookCover from "../util/fetchBookCover";
+import axios from 'axios';
 
 
 function Homepage() {
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
     const [readStatus, setReadStatus] = useState(true);
     const [sortType, setSortType] = useState('date');
     
+    useEffect(() => {
+        const fetchBooks = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/books');
+                setBooks(response.data);
+            } catch (err) {
+                console.error('Error fetching books:', err);
+                setError('Error fetching books');
+                // setBooks(bookNotes);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBooks();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
 
     return (
         <div className="container">
@@ -46,7 +68,7 @@ function Homepage() {
             </div>
 
             <Bookgrid 
-                books={bookNotes}
+                books={books}
                 readStatus={readStatus}
                 sortType={sortType} 
             />

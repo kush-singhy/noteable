@@ -20,17 +20,24 @@ body {
 }
 
 .small-container {
-    width: 800px;
+    width: 600px;
 }
 
-
-.add-form-label {
-    width: 80px;
+.search-bar {
+    height: 42px;
 }
 
-.add-search {
-    margin: 25px 0 0 0;
-    position: relative;
+.search-icon {
+    width: 22px;
+    height: 22px;
+    transform: translateY(-1px);
+}
+
+.search-btn {
+    border: 1px solid rgb(222, 226, 230);
+    border-radius: 6px;
+    background-color: transparent;
+    padding: 0 10px;
 }
 
 .search-results {
@@ -42,23 +49,19 @@ body {
 }
 
 .add-form {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .add-info {
     margin: 10px 0;
 }
 
-#add-notes {
+.hide-inputs {
     display: none;
 }
 
 .notes-input {
-    height: 300px;
-}
-
-.read-switch {
-    margin-bottom: 18px;
+    height: 200px;
 }
 
 .notes-header {

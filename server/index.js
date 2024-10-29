@@ -4,6 +4,7 @@ import pg from "pg";
 import axios from "axios";
 import https from 'https';
 import 'dotenv/config';
+import cors from 'cors';
 
 const app = express();
 const port = 3000;
@@ -23,36 +24,14 @@ const db = new pg.Client({
 
 db.connect();
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const coverCache = new Map();
 
-// VARIABLES
-
-var books = [];
-
-var input = '';
-var searchResults = [];
-
 
 // UTILITY FUNCTIONS
-
-function formatPostgresDate(pgDate) {
-    const date = new Date(pgDate);
-
-    const monthNames = [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
-
-    const day = date.getDate();
-    const month = monthNames[date.getMonth()];
-    const year = date.getFullYear();
-
-    return `${day} ${month} ${year}`;
-} 
-
 
 async function fetchBookCover(book) {
     if (coverCache.has(book.isbn)) {
@@ -71,133 +50,26 @@ async function fetchBookCover(book) {
     return book;
 }
 
-async function fetchBooks() {
+
+// ROUTING
+
+app.get('/books', async (req, res) => {
     try {
         const result = await db.query(
             `SELECT *
             FROM book_notes
             ORDER BY read_date DESC`
         );
-        books = result.rows;
-        await Promise.all(books.map(fetchBookCover));
+        const bookList = result.rows;
+        // const books = await Promise.all(bookList.map(fetchBookCover));
+
+        res.json(bookList);
 
     } catch (error) {
         console.error('Error fetching books:', error);
         res.status(500).send('Error fetching books');
     }
-}
-
-
-// ROUTING
-
-app.get("/", async (req, res) => {
-    const sort = 'date';
-
-    if (books.length === 0) {
-        console.log('Fetching books...');
-        await fetchBooks();
-    } 
-    
-    const filteredBooks = books.filter((book) => book.status === true);
-
-    res.render("index.ejs", { 
-        books: filteredBooks, 
-        sort, 
-        notes: true,
-        formatPostgresDate 
-    });
-});
-
-
-app.get("/wishlist", async (req, res) => {
-    if (books.length === 0) {
-        console.log('Fetching books...');
-        await fetchBooks();
-    }
-
-    const filteredBooks = books.filter((book) => book.status === false);
-    res.render("index.ejs", { 
-        books: filteredBooks, 
-        formatPostgresDate 
-    });
-});
-
-app.get("/latest", async (req, res) => {
-    const sort = 'date';
-
-    if (books.length === 0) {
-        console.log('Fetching books...');
-        await fetchBooks();
-    } 
-    
-    const filteredBooks = books.filter((book) => book.status === true);
-    filteredBooks.sort((a, b) => new Date(b.read_date) - new Date(a.read_date));
-
-    res.render("index.ejs", { 
-        books: filteredBooks, 
-        sort, 
-        notes: true,
-        formatPostgresDate 
-    });
-});
-
-app.get("/highest-rating", async (req, res) => {
-    const sort = 'rating';
-
-    if (books.length === 0) {
-        console.log('Fetching books...');
-        await fetchBooks();
-    } 
-    
-    const filteredBooks = books.filter((book) => book.status === true);
-    filteredBooks.sort((a, b) => b.rating - a.rating);
-
-    res.render("index.ejs", { 
-        books: filteredBooks, 
-        sort, 
-        notes: true,
-        formatPostgresDate 
-    });
-});
-
-app.get("/title", async (req, res) => {
-    const sort = 'title';
-
-    if (books.length === 0) {
-        console.log('Fetching books...');
-        await fetchBooks();
-    } 
-    
-    const filteredBooks = books.filter((book) => book.status === true);
-    filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
-
-    res.render("index.ejs", { 
-        books: filteredBooks, 
-        sort, 
-        notes: true,
-        formatPostgresDate 
-    });
-});
-
-
-app.get("/view-notes/:id", async (req, res) => {
-    const bookId = parseInt(req.params.id);
-    try {
-        const result = await db.query(
-            `SELECT *
-            FROM book_notes
-            WHERE id = $1`,
-            [bookId]
-        );
-        let book = result.rows[0];
-        book = await fetchBookCover(book);
-        res.render("booknotes.ejs", { book, formatPostgresDate });
-    } catch (error) {
-        console.error("Error: ", error.message);
-        res.redirect("/");
-    }
-    
-});
+})
 
 
 app.post("/add/search", async (req, res) => {
