@@ -4,7 +4,7 @@ import Bookgrid from "./Bookgrid";
 import axios from 'axios';
 
 
-function Homepage() {
+function Home() {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -79,4 +79,4 @@ function Homepage() {
     )
 }   
 
-export default Homepage;
+export default Home;
