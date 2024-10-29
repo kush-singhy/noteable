@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Bookcard from "./Bookcard";
-import defaultCover from "../assets/gradient.jpg"
 
 
 function Bookgrid(props) {
@@ -12,7 +11,7 @@ function Bookgrid(props) {
                 key={book.id}
                 title={book.title}
                 author={book.author}
-                coverUrl={defaultCover}
+                coverUrl={book.cover}
                 status={book.status}
                 read_date={book.read_date}
                 rating={book.rating}

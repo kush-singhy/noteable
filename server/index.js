@@ -62,9 +62,9 @@ app.get('/books', async (req, res) => {
             ORDER BY read_date DESC`
         );
         const bookList = result.rows;
-        // const books = await Promise.all(bookList.map(fetchBookCover));
+        const books = await Promise.all(bookList.map(fetchBookCover));
 
-        res.json(bookList);
+        res.json(books);
 
     } catch (error) {
         console.error('Error fetching books:', error);
@@ -85,6 +85,7 @@ app.post('/book', async (req, res) => {
                 [title, author, isbn, true, date, rating, notes]
             )
             const bookId = result.rows[0].id;
+            res.sendStatus(200);
         } else {
             console.log("Adding to wishlist...");
             const result = await db.query(
@@ -94,9 +95,11 @@ app.post('/book', async (req, res) => {
                 [title, author, isbn, false]
             )
             const bookId = result.rows[0].id;
+            res.sendStatus(200);
         }
     } catch (error) {
         console.error(error.message);
+        res.status(500).send('Error adding book');
     }
 })
 
