@@ -4,8 +4,9 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import App from './components/App.jsx'
-import AddBook from './components/AddBook.jsx';
+import App from './pages/App.jsx'
+import AddBookPage from './pages/AddBookPage.jsx';
+import BookPage from './pages/BookViewPage.jsx';
 import './index.css'
 import './styles/styles.css'
 import './styles/header.css'
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/add",
-    element: <AddBook />,
+    element: <AddBookPage />,
+  },
+  {
+    path: "/book/:id",
+    element: <BookPage />,
   },
 ]);
 
