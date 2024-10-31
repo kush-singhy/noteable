@@ -1,14 +1,18 @@
 import React from "react"
+import { useLocation } from "react-router-dom"
 import Header from "../components/Header"
 import BookView from "../components/BookView"
 
-function BookPage() {
+function BookViewPage() {
+  const location = useLocation();
+  const book = location.state || {};
+
   return (
     <div className="page">
         <Header />
-        <BookView />
+        <BookView book = {book} />
     </div>
   )
 }
 
-export default BookPage;
+export default BookViewPage;

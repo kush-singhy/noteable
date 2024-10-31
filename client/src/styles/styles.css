@@ -23,6 +23,10 @@ body {
     width: 600px;
 }
 
+.medium {
+    width: 800px;
+}
+
 .search-bar {
     height: 42px;
 }
