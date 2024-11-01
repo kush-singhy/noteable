@@ -103,13 +103,13 @@ app.post('/book', async (req, res) => {
 })
 
 
-app.post("/add/search", async (req, res) => {
-    input = req.body.book_name;
+app.post("/search", async (req, res) => {
+    const {input} = req.body;
+
     if (input === '') {
-        searchResults = [];
-        res.redirect("/add");
+        res.sendStatus(200);
     } else {
-        console.log('User Input: ' + input);
+        console.log('User Input: ', input);
         const searchURL = `https://www.googleapis.com/books/v1/volumes?q=${input}&key=${apiKey}&maxResults=8`;
         try {
             const response = await axios.get(searchURL);
@@ -126,11 +126,11 @@ app.post("/add/search", async (req, res) => {
 
                 return {title, author, isbn};
             });
-            searchResults = filteredResults;
-            res.redirect("/add");
+            console.log(filteredResults);
+            res.json(filteredResults);
         } catch(error) {
             console.error('Error searching: ', error.message);
-            res.redirect("/add");
+            res.status(500).send('Error searching for book');
         }
     }
 });

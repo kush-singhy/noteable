@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import searchIcon from '../assets/search.svg'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 
 function AddBookForm() {
@@ -40,7 +41,6 @@ function AddBookForm() {
     }
 
     async function handleSubmit() {
-
         try {
             const response = await axios.post('http://localhost:3000/book', newBook);
             console.log(response);
@@ -54,14 +54,7 @@ function AddBookForm() {
 
     return (
         <div className="container small-container">
-            <div className="add-search">
-                <div className="search-bar input-group">
-                    <input type="text" className="form-control" placeholder="Search for a title..." />
-                    <button className="search-btn">
-                        <img src={searchIcon} className="search-icon" alt="Search"/>
-                    </button>
-                </div>
-            </div>
+            <SearchBar />
 
 
             <div className="add-form">
