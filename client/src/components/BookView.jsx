@@ -1,27 +1,37 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import StatusBadge from './StatusBadge';
+import defaultCover from '../assets/gradient.jpg';
 import formatDate from '../util/formatDate';
 import editIcon from '../assets/edit.svg';
 import deleteIcon from '../assets/delete.svg';
 
 function BookView(props) {
+	const navigate = useNavigate();
 	const { book } = props;
 
 	const date = formatDate(book.read_date);
 
+	const handleEdit = () => {
+		navigate(`/edit/${book.id}`, {
+			state: book
+		});
+	}
+
 	return (
 		<div className="container medium">
 			<div className="notes-header">
-				<img src={book.cover} className="notes-img" alt="Book Cover" />
+				<img src={book.cover ? book.cover : defaultCover} className="notes-img" alt="Book Cover" />
 				<span>
 					<h1>{book.title}</h1>
 					<h5>{book.author}</h5>
 					<StatusBadge status={book.status} />
 				</span>
 				<div className="notes-buttons">
-					<a href="" className="icon-btn edit-btn">
+					<button onClick={handleEdit} className="icon-btn edit-btn">
 						<img src={editIcon} alt="edit" />
-					</a>
+					</button>
 					<button
 						className="icon-btn delete-btn"
 						data-bs-toggle="modal"
@@ -32,15 +42,20 @@ function BookView(props) {
 				</div>
 			</div>
 
-			<div className="notes-info">
-				<p className="book-card-text">Read: {date}</p>
-				<p className="book-card-text">Rating: {book.rating}/5</p>
-			</div>
+			{book.status ? 
+			<div>
+				<div className="notes-info">
+					<p className="book-card-text">Read: {date}</p>
+					<p className="book-card-text">Rating: {book.rating}/5</p>
+				</div>
 
-			<div className="notes-body">
-				<h3>My Notes</h3>
-				<p className="book-card-text">{book.notes}</p>
-			</div>
+				<div className="notes-body">
+					<h3>My Notes</h3>
+					<p className="book-card-text">{book.notes}</p>
+				</div>
+			</div> : 
+			<></>
+			}
 
 			<div className="modal fade" id="deleteModal" tabIndex="-1">
 				<div className="modal-dialog">

@@ -10,6 +10,7 @@ import './styles/header.css';
 import './styles/filters.css';
 import './styles/bookgrid.css';
 import './styles/media-queries.css';
+import EditBookPage from './pages/EditBookPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: '/book/:id',
     element: <BookViewPage />,
+  },
+  {
+    path: '/edit/:id',
+    element: <EditBookPage />,
   },
 ]);
 
