@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StatusBadge from './StatusBadge';
+import defaultCover from '../assets/gradient.jpg';
 import formatDate from '../util/formatDate';
 
 function Bookcard(props) {
@@ -20,7 +21,7 @@ function Bookcard(props) {
     <div className="book-card" onClick={handleClick}>
       <div className="row g-0">
         <div className="col-4 col-md-4">
-          <img src={book.cover} className="cover-img" alt="Book Cover" />
+          <img src={book.cover ? book.cover : defaultCover} className="cover-img" alt="Book Cover" />
         </div>
         <div className="col-8 col-md-8">
           <div className="book-card-body">

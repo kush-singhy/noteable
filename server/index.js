@@ -45,7 +45,6 @@ async function fetchBookCover(book) {
             book.cover = coverUrl;
         } catch (error) {
             console.error(`Error fetching cover for ISBN ${book.isbn}:`, error.message);
-            book.cover = '/assets/gradient.jpg'; 
         }
     }
     return book;
@@ -74,7 +73,7 @@ app.get('/books', async (req, res) => {
 
 app.post('/book', async (req, res) => {
     const { title, author, isbn, readStatus, date, rating, notes } = req.body;
-
+    console.log(title, author, isbn, readStatus, date, rating, notes);
     try {
         if (readStatus) {
             console.log("Adding to notes...");
