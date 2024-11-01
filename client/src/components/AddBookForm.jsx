@@ -67,8 +67,9 @@ function AddBookForm() {
             <div className="add-form">
                 <h5>Or enter details here: </h5>
                 <div className="add-info">
-                    <div className="input-group mb-3">
+                    <div className="form-floating mb-3">
                         <input 
+                            id="title"
                             type="text" 
                             name="title" 
                             className="form-control" 
@@ -77,12 +78,15 @@ function AddBookForm() {
                             onChange={handleChange} 
                             autoComplete="off"
                         />
+                        <label htmlFor="title">Title</label>
                     </div>
-                    <div className="input-group mb-3">
-                        <input type="text" name="author" className="form-control" placeholder="Author..." value={newBook.author} onChange={handleChange} autoComplete="off" />
+                    <div className="form-floating mb-3">
+                        <input id="author" type="text" name="author" className="form-control" placeholder="Author..." value={newBook.author} onChange={handleChange} autoComplete="off" />
+                        <label htmlFor="author">Author</label>
                     </div>
-                    <div className="input-group mb-3">
-                        <input type="text" name="isbn" className="form-control" placeholder="ISBN..." value={newBook.isbn} onChange={handleChange} autoComplete="off" />
+                    <div className="form-floating mb-3">
+                        <input id="isbn" type="text" name="isbn" className="form-control" placeholder="ISBN..." value={newBook.isbn} onChange={handleChange} autoComplete="off" />
+                        <label htmlFor="isbn">ISBN</label>
                     </div>
                     <div className="toggle mb-4">
                         <div 
@@ -107,11 +111,12 @@ function AddBookForm() {
 
                 <div className={newBook.readStatus ? `` : `hide-inputs`}>
                     <h5>Add your thoughts: </h5>
-                    <div className="input-group mb-3">
-                        <input type="date" name="date" className="form-control" placeholder="Date..." onChange={handleChange} />
+                    <div className="form-floating mb-3">
+                        <input id="date" type="date" name="date" className="form-control" placeholder="Date..." onChange={handleChange} />
+                        <label htmlFor="date">Date Read</label>
                     </div>
-                    <div className="input-group mb-3">
-                        <select className="form-select" id="inputGroupSelect01" name="rating" defaultValue="" onChange={handleChange} >
+                    <div className="form-floating mb-3">
+                        <select id="rating" className="form-select" name="rating" defaultValue="" onChange={handleChange} >
                           <option value="" disabled>Rating...</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -119,9 +124,11 @@ function AddBookForm() {
                           <option value="4">4</option>
                           <option value="5">5</option>
                         </select>
+                        <label htmlFor="rating">Rating</label>
                       </div>
-                    <div className="input-group mb-3">
-                        <textarea name="notes" className="form-control notes-input" placeholder="Notes..." onChange={handleChange} value={newBook.notes}></textarea>
+                    <div className="form-floating mb-3">
+                        <textarea id="notes" name="notes" className="form-control notes-input" placeholder="Notes..." onChange={handleChange} value={newBook.notes}></textarea>
+                        <label htmlFor="notes">Notes</label>
                     </div>
                 </div>
                 <button onClick={handleSubmit} className="add-book-btn">Add</button>
