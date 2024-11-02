@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import searchIcon from '../assets/search.svg'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar";
 
 
-function AddBookForm() {
+function EditBookForm(props) {
     const navigate = useNavigate();
+    const { book } = props;
 
     const [newBook, setNewBook] = useState({
-        title: "",
-        author: "",
-        isbn: "",
-        readStatus: true,
-        date: null,
-        rating: 0,
-        notes: ""
+        title: book.title,
+        author: book.author,
+        isbn: book.isbn,
+        readStatus: book.status,
+        date: book.date,
+        rating: book.rating,
+        notes: book.notes
     });
 
     const handleChange = (event) => {
@@ -42,7 +42,7 @@ function AddBookForm() {
 
     async function handleSubmit() {
         try {
-            const response = await axios.post('http://localhost:3000/book', newBook);
+            const response = await axios.post(`http://localhost:3000/edit/${book.id}`, newBook);
             console.log(response);
             navigate('/');
         } catch (err) {
@@ -54,11 +54,7 @@ function AddBookForm() {
 
     return (
         <div className="container small-container">
-            <SearchBar />
-
-
             <div className="add-form">
-                <h5>Or enter details here: </h5>
                 <div className="add-info">
                     <div className="form-floating mb-3">
                         <input 
@@ -102,14 +98,15 @@ function AddBookForm() {
                     </div>
                 </div>
 
-                <div className={newBook.readStatus ? `` : `hide-inputs`}>
+                {newBook.readStatus ? 
+                <div>
                     <h5>Add your thoughts: </h5>
                     <div className="form-floating mb-3">
-                        <input id="date" type="date" name="date" className="form-control" placeholder="Date..." onChange={handleChange} />
+                        <input id="date" type="date" name="date" className="form-control" placeholder="Date..." value={newBook.date} defaultValue={book.status ? book.read_date.split('T')[0] : ""} onChange={handleChange} />
                         <label htmlFor="date">Date Read</label>
                     </div>
                     <div className="form-floating mb-3">
-                        <select id="rating" className="form-select" name="rating" defaultValue="" onChange={handleChange} >
+                        <select id="rating" className="form-select" name="rating" value={newBook.rating} defaultValue={book.status ? book.rating : ""} onChange={handleChange} >
                           <option value="" disabled>Rating...</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -120,11 +117,12 @@ function AddBookForm() {
                         <label htmlFor="rating">Rating</label>
                       </div>
                     <div className="form-floating mb-3">
-                        <textarea id="notes" name="notes" className="form-control notes-input" placeholder="Notes..." onChange={handleChange} value={newBook.notes}></textarea>
+                        <textarea id="notes" name="notes" className="notes-input form-control" placeholder="Notes..." onChange={handleChange} value={newBook.notes}></textarea>
                         <label htmlFor="notes">Notes</label>
                     </div>
-                </div>
-                <button onClick={handleSubmit} className="add-book-btn">Add</button>
+                </div> :
+                <></>}
+                <button onClick={handleSubmit} className="add-book-btn">Save Changes</button>
             </div>
 
           
@@ -132,4 +130,4 @@ function AddBookForm() {
     )
 }
 
-export default AddBookForm;
+export default EditBookForm;

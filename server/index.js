@@ -73,7 +73,7 @@ app.get('/books', async (req, res) => {
 
 app.post('/book', async (req, res) => {
     const { title, author, isbn, readStatus, date, rating, notes } = req.body;
-    console.log(title, author, isbn, readStatus, date, rating, notes);
+
     try {
         if (readStatus) {
             console.log("Adding to notes...");
@@ -103,13 +103,13 @@ app.post('/book', async (req, res) => {
 })
 
 
-app.post("/add/search", async (req, res) => {
-    input = req.body.book_name;
+app.post("/search", async (req, res) => {
+    const {input} = req.body;
+
     if (input === '') {
-        searchResults = [];
-        res.redirect("/add");
+        res.sendStatus(200);
     } else {
-        console.log('User Input: ' + input);
+        console.log('User Input: ', input);
         const searchURL = `https://www.googleapis.com/books/v1/volumes?q=${input}&key=${apiKey}&maxResults=8`;
         try {
             const response = await axios.get(searchURL);
@@ -126,101 +126,42 @@ app.post("/add/search", async (req, res) => {
 
                 return {title, author, isbn};
             });
-            searchResults = filteredResults;
-            res.redirect("/add");
+            console.log(filteredResults);
+            res.json(filteredResults);
         } catch(error) {
             console.error('Error searching: ', error.message);
-            res.redirect("/add");
+            res.status(500).send('Error searching for book');
         }
     }
 });
 
-app.get("/add", (req, res) => {
-    res.render("addbook.ejs", { input, results: searchResults });
-    input = '';
-    searchResults = [];
-});
-
-app.post("/add", async (req, res) => {
-    const { title, author, isbn, date, rating, notes } = req.body;
-    const status = req.body['read-status'];
-
-    try {
-        if (status === 'yes') {
-            const result = await db.query(
-                `INSERT INTO book_notes (title, author, isbn, status, read_date, rating, notes)
-                VALUES ($1, $2, $3, $4, $5, $6, $7)
-                RETURNING id`,
-                [title, author, isbn, true, date, rating, notes]
-            )
-            const bookId = result.rows[0].id;
-            await fetchBooks();
-            res.redirect("/view-notes/" + bookId);
-        } else if (status === 'no') {
-            const result = await db.query(
-                `INSERT INTO book_notes (title, author, isbn, status)
-                VALUES ($1, $2, $3, $4)
-                RETURNING id`,
-                [title, author, isbn, false]
-            )
-            const bookId = result.rows[0].id;
-            await fetchBooks();
-            res.redirect("/view-notes/" + bookId);
-        }
-    } catch (error) {
-        console.error(error.message);
-        res.redirect("/add");
-    }
-
-});
-
-app.get("/edit/:id", async (req, res) => {
-    const bookId = parseInt(req.params.id);
-    try {
-        const result = await db.query(
-            `SELECT *
-            FROM book_notes
-            WHERE id = $1`,
-            [bookId]
-        );
-        const book = result.rows[0];
-        res.render("editbook.ejs", { book, formatPostgresDate });
-
-    } catch (error) {
-        console.error(error.message);
-        res.redirect("/");
-    }
-});
 
 app.post("/edit/:id", async (req, res) => {
     const bookId = parseInt(req.params.id);
 
-    const { title, author, isbn, date, rating, notes } = req.body;
-    const status = req.body['read-status'];
+    const { title, author, isbn, readStatus, date, rating, notes } = req.body;
 
     try {
-        if (status === 'yes') {
+        if (readStatus) {
             const result = await db.query(
                 `UPDATE book_notes
                 SET title = $1, author = $2, isbn = $3, status = $4, read_date = $5, rating = $6, notes = $7
                 WHERE id = $8`,
                 [title, author, isbn, true, date, rating, notes, bookId]
             )
-            await fetchBooks();
-            res.redirect("/view-notes/" + bookId);
-        } else if (status === 'no') {
+            res.sendStatus(200);
+        } else {
             const result = await db.query(
                 `UPDATE book_notes
                 SET title = $1, author = $2, isbn = $3, status = $4, read_date = $5, rating = $6, notes = $7
                 WHERE id = $8`,
                 [title, author, isbn, false, null, null, null, bookId]
             )
-            await fetchBooks();
-            res.redirect("/view-notes/" + bookId);
+            res.sendStatus(200);
         }
     } catch (error) {
         console.error(error.message);
-        res.redirect("/edit/" + bookId);
+        res.status(500).send('Error editing book');
     }
 });
 
@@ -233,11 +174,10 @@ app.get("/delete/:id", async (req, res) => {
             WHERE id = $1`,
             [bookId]
         )
-        await fetchBooks();
-        res.redirect("/");
+        res.sendStatus(200);
     } catch (error) {
         console.error(error.message);
-        res.redirect("/view-notes/" + bookId);
+        res.status(500).send('Error deleting book');
     }
 });
 
