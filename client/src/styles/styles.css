@@ -27,8 +27,12 @@ body {
     width: 800px;
 }
 
+.add-search {
+    position: relative;
+}
 .search-bar {
     height: 42px;
+    position: relative;
 }
 
 .search-icon {
@@ -49,7 +53,7 @@ body {
     position: absolute;
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px;
-    z-index: 1;
+    z-index: 99;
 }
 
 .add-form {
