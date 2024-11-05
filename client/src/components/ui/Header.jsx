@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../assets/book-line.png'
+import logo from '../../assets/book-line.png'
 import { useNavigate } from "react-router-dom";
 
 function Header() {
@@ -13,8 +13,8 @@ function Header() {
 			<div className="header-content">
 				<div className="logo-box">
 					<img onClick={handleGoHome} src={logo} className="logo" alt="Logo" />
+					<div onClick={handleGoHome} className="title">noteable</div>
 				</div>
-				<div onClick={handleGoHome} className="title">Noteable</div>
 				<div className="add-book">
 					<button onClick={handleAddBook} className="add-book-btn">Add Book</button>
 				</div>

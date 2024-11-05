@@ -4,8 +4,8 @@ import axios from 'axios';
 import bookNotes from "../mock-data";
 
 import Bookgrid from "./Bookgrid";
-import Toggle from "./Toggle";
-import SortSelect from "./SortSelect";
+import Toggle from "./ui/Toggle";
+import SortSelect from "./ui/SortSelect";
 
 
 function Home() {

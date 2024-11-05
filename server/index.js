@@ -44,7 +44,6 @@ async function fetchBookCover(book) {
 			book.cover = coverUrl;
 		} catch (error) {
 			console.error(`Error fetching cover for ISBN ${book.isbn}:`, error.message);
-			book.cover = '/path/to/default/cover.jpg'; // Set a default cover image
 		}
 	}
 	return book;

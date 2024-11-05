@@ -3,10 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import SearchBar from "./SearchBar";
-import Input from "./Input";
-import RatingSelect from "./RatingSelect";
-import Textarea from "./Textarea";
-import Toggle from "./Toggle";
+import Input from "./ui/Input";
+import RatingSelect from "./ui/RatingSelect";
+import Textarea from "./ui/Textarea";
+import Toggle from "./ui/Toggle";
 
 
 function AddBookForm() {

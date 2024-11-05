@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import StatusBadge from './StatusBadge';
+import StatusBadge from './ui/StatusBadge';
 import defaultCover from '../assets/gradient.jpg';
 import formatDate from '../util/formatDate';
 import editIcon from '../assets/edit.svg';
