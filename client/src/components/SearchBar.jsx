@@ -15,6 +15,7 @@ function SearchBar(props) {
     }
 
     const handleBlur = () => {
+      
       setShowResults(false);
     }
 
@@ -39,8 +40,8 @@ function SearchBar(props) {
 
     function singleResult(result) {
       const handleSelectResult = () => {
-        console.log('clicked');
         onResultChange(result);
+        setShowResults(false);
       }
 
       return (
@@ -61,7 +62,7 @@ function SearchBar(props) {
           ref={inputRef}
           value={input}
           onChange={handleChange}
-          onBlur={handleBlur}
+          // onBlur={handleBlur}
           onFocus={handleFocus}
         />
         <button onClick={handleSubmit} className="search-btn">

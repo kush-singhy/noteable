@@ -12,14 +12,14 @@
     height: auto;
     background-color: white;
     border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) -3px 3px 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .book-card:hover {
     transform: translateY(-2px);
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 15px;
+    box-shadow: rgba(0, 0, 0, 0.3) -4px 4px 15px;
 }
 
 .book-card:active {
