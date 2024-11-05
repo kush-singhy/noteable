@@ -109,7 +109,6 @@ app.post("/search", async (req, res) => {
     if (input === '') {
         res.sendStatus(200);
     } else {
-        console.log('User Input: ', input);
         const searchURL = `https://www.googleapis.com/books/v1/volumes?q=${input}&key=${apiKey}&maxResults=8`;
         try {
             const response = await axios.get(searchURL, { httpsAgent: agent });
@@ -126,7 +125,6 @@ app.post("/search", async (req, res) => {
 
                 return {title, author, isbn};
             });
-            console.log(filteredResults);
             res.json(filteredResults);
         } catch(error) {
             console.error('Error searching: ', error.message);

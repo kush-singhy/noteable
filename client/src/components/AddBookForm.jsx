@@ -8,6 +8,7 @@ import SearchBar from "./SearchBar";
 function AddBookForm() {
     const navigate = useNavigate();
 
+    const [searchedBook, setSearchedBook] = useState({});
     const [newBook, setNewBook] = useState({
         title: "",
         author: "",
@@ -17,6 +18,17 @@ function AddBookForm() {
         rating: "",
         notes: ""
     });
+
+    const handleBookSearch = (value) => {
+        setNewBook(prevValue => {
+            return {
+                ...prevValue,
+                title: value.title,
+                author: value.author,
+                isbn: value.isbn
+            }
+        })
+    }
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -54,7 +66,7 @@ function AddBookForm() {
 
     return (
         <div className="container small-container">
-            <SearchBar />
+            <SearchBar onResultChange={handleBookSearch} />
 
 
             <div className="add-form">

@@ -47,7 +47,6 @@ function EditBookForm(props) {
     }
 
     async function handleSubmit() {
-        console.log('New: ', newBook.date);
         try {
             const response = await axios.post(`http://localhost:3000/edit/${book.id}`, newBook);
             console.log(response);
