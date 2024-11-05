@@ -1,179 +1,180 @@
 body {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .page {
-    width: 100%;
-    font-family: 'Afacad Flux', sans-serif;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+	width: 100%;
+	font-family: 'Afacad Flux', sans-serif;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 }
 
 .container {
-    max-width: 1100px;
-    margin: 40px 0;
-    display: flex;
-    flex-direction: column;
+	max-width: 1100px;
+	margin: 40px 0;
+	display: flex;
+	flex-direction: column;
 }
 
 .small-container {
-    width: 600px;
+	width: 600px;
 }
 
 .medium {
-    width: 800px;
+	width: 800px;
 }
 
 .add-search {
-    position: relative;
-    margin-bottom: 18px;
+	position: relative;
+	margin-bottom: 18px;
 }
 
 .search-bar {
-    display: flex;
-    height: 52px;
+	display: flex;
+	height: 52px;
 }
 
 .search-icon {
-    width: 22px;
-    height: 22px;
-    transform: translateY(-1px);
+	width: 22px;
+	height: 22px;
+	transform: translateY(-1px);
 }
 
 .search-btn {
-    border: 1px solid rgb(222, 226, 230);
-    border-radius: 6px;
-    background-color: transparent;
-    padding: 0 10px;
+	border: 1px solid rgb(222, 226, 230);
+	border-radius: 6px;
+	background-color: transparent;
+	padding: 0 10px;
 }
 
 .search-results {
-    margin: 0;
-    position: absolute;
-    width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px;
-    z-index: 99;
+	margin: 0;
+	position: absolute;
+	width: 100%;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px;
+	z-index: 99;
 }
 
 .add-form {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .add-info {
-    margin: 10px 0;
+	margin: 10px 0;
 }
 
 .hide-inputs {
-    display: none;
+	display: none;
 }
 
 .notes-input {
-    height: 200px;
+	height: 200px;
 }
 
 .notes-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
 }
 
 .notes-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-left: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-left: auto;
 }
 
 .icon-btn {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    border-radius: 4px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	border: none;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-size: 18px;
+	border-radius: 4px;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .icon-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+	transform: translateY(-2px);
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
 }
 
 .edit-btn {
-    color: #333;
-    background-color: lightblue;
+	color: #333;
+	background-color: lightblue;
 }
 
 .delete-btn {
-    color: #333;
-    background-color: lightsalmon;
+	color: #333;
+	background-color: lightsalmon;
 }
 
 .cancel-btn {
-    background-color: lightgray;
+	background-color: lightgray;
 }
 
 .modal-btn {
-    width: 70px;
-    height: 35px;
-    display: flex;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+	width: 70px;
+	height: 35px;
+	display: flex;
+	border: none;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-size: 18px;
+	border-radius: 6px;
+	text-decoration: none;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .modal-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+	transform: translateY(-2px);
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
 }
 
 
 .notes-img {
-    width: 150px;
-    height: 220px;
-    border-radius: 10px;
-    margin-right: 25px;
-    object-fit: cover;
+	width: 150px;
+	height: 220px;
+	border-radius: 10px;
+	margin-right: 25px;
+	object-fit: cover;
 }
 
 .notes-header h1 {
-    font-size: 2.3rem;
-    margin: 0;
-    color: #333;
+	font-size: 2.3rem;
+	margin: 0;
+	color: #333;
 }
 
 .notes-header h5 {
-    font-size: 1.3rem;
-    margin: 0 0 15px 0;
-    color: #666;
+	font-size: 1.3rem;
+	margin: 0 0 15px 0;
+	color: #666;
 }
 
 .notes-info {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .notes-info p {
-    margin: 10px 0;
-    font-size: 1.2rem;
-    color: #444;
+	margin: 10px 0;
+	font-size: 1.2rem;
+	color: #444;
 }
 
 .notes-body {
-    margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .notes-body p {
-    font-size: 1.2rem;
-    line-height: 1.5;
+	font-size: 1.2rem;
+	line-height: 1.5;
 }

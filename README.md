@@ -12,32 +12,6 @@ Build your library today!
 
 ## Run Locally
 
-Clone the project
-
-```bash
-  git clone https://github.com/kush-singhy/book-notes.git
-```
-
-Go to the project directory
-
-```bash
-  cd book-notes
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  nodemon index.js
-```
-
-You will need to set up a postgresql database. Queries are provided in queries.sql in the project repo. 
-
 
 ## Roadmap
 

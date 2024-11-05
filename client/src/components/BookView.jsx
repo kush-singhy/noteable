@@ -21,11 +21,11 @@ function BookView(props) {
 
 	const handleDelete = async () => {
 		try {
-            const response = await axios.get(`http://localhost:3000/delete/${book.id}`);
-            navigate('/');
-        } catch (err) {
-            console.error('Error deleting book:', err);
-        }
+			const response = await axios.get(`http://localhost:3000/delete/${book.id}`);
+			navigate('/');
+		} catch (err) {
+			console.error('Error deleting book:', err);
+		}
 	}
 
 	return (
@@ -51,19 +51,19 @@ function BookView(props) {
 				</div>
 			</div>
 
-			{book.status ? 
-			<div>
-				<div className="notes-info">
-					<p className="book-card-text">Read: {date}</p>
-					<p className="book-card-text">Rating: {book.rating}/5</p>
-				</div>
+			{book.status ?
+				<div>
+					<div className="notes-info">
+						<p className="book-card-text">Read: {date}</p>
+						<p className="book-card-text">Rating: {book.rating}/5</p>
+					</div>
 
-				<div className="notes-body">
-					<h3>My Notes</h3>
-					<p className="book-card-text">{book.notes}</p>
-				</div>
-			</div> : 
-			<></>
+					<div className="notes-body">
+						<h3>My Notes</h3>
+						<p className="book-card-text">{book.notes}</p>
+					</div>
+				</div> :
+				<></>
 			}
 
 			<div className="modal fade" id="deleteModal" tabIndex="-1">
