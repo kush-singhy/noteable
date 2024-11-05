@@ -15,7 +15,6 @@ function SearchBar(props) {
     }
 
     const handleBlur = () => {
-      
       setShowResults(false);
     }
 
@@ -26,7 +25,10 @@ function SearchBar(props) {
 
     const handleSubmit = async () => {
         if (inputRef.current) inputRef.current.focus();
-        if (input.length === 0) return;
+        if (input.length === 0) {
+          setResults([]);
+          return;
+        }
 
         try {
             const response = await axios.post('http://localhost:3000/search', { input });

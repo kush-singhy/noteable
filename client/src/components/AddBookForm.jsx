@@ -68,7 +68,6 @@ function AddBookForm() {
         <div className="container small-container">
             <SearchBar onResultChange={handleBookSearch} />
 
-
             <div className="add-form">
                 <h5>Or enter details here: </h5>
                 <div className="add-info">

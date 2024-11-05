@@ -29,10 +29,12 @@ body {
 
 .add-search {
     position: relative;
+    margin-bottom: 18px;
 }
+
 .search-bar {
+    display: flex;
     height: 52px;
-    position: relative;
 }
 
 .search-icon {

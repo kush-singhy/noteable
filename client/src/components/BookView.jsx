@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 import StatusBadge from './StatusBadge';
 import defaultCover from '../assets/gradient.jpg';
 import formatDate from '../util/formatDate';
@@ -17,6 +17,15 @@ function BookView(props) {
 		navigate(`/edit/${book.id}`, {
 			state: book
 		});
+	}
+
+	const handleDelete = async () => {
+		try {
+            const response = await axios.get(`http://localhost:3000/delete/${book.id}`);
+            navigate('/');
+        } catch (err) {
+            console.error('Error deleting book:', err);
+        }
 	}
 
 	return (
@@ -69,9 +78,9 @@ function BookView(props) {
 							Are you sure you want to delete this entry?
 						</div>
 						<div className="modal-footer">
-							<a href="" className="modal-btn delete-btn">
+							<button onClick={handleDelete} className="modal-btn delete-btn" data-bs-dismiss="modal">
 								Delete
-							</a>
+							</button>
 							<button
 								type="button"
 								className="modal-btn cancel-btn"
