@@ -39,12 +39,12 @@ async function fetchBookCover(book) {
         book.cover = coverCache.get(book.isbn);
     } else {
         try {
-            const response = await axios.get('https://bookcover.longitood.com/bookcover/' + book.isbn);
-            const coverUrl = response.data.url;
+            const coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`;
             coverCache.set(book.isbn, coverUrl);
             book.cover = coverUrl;
         } catch (error) {
             console.error(`Error fetching cover for ISBN ${book.isbn}:`, error.message);
+            book.cover = '/path/to/default/cover.jpg'; // Set a default cover image
         }
     }
     return book;
@@ -112,7 +112,7 @@ app.post("/search", async (req, res) => {
         console.log('User Input: ', input);
         const searchURL = `https://www.googleapis.com/books/v1/volumes?q=${input}&key=${apiKey}&maxResults=8`;
         try {
-            const response = await axios.get(searchURL);
+            const response = await axios.get(searchURL, { httpsAgent: agent });
             const results = response.data.items;
             const filteredResults = results.map((result) => {
                 const title = result.volumeInfo.title || 'NA';

@@ -8,14 +8,20 @@ function EditBookForm(props) {
     const navigate = useNavigate();
     const { book } = props;
 
+    // Fix incorrect date bug
+    let date = new Date(book.read_date);
+    const day = date.getDate() + 1;
+    date.setDate(day);
+    const formattedDate = date.toISOString();
+
     const [newBook, setNewBook] = useState({
         title: book.title,
         author: book.author,
         isbn: book.isbn,
         readStatus: book.status,
-        date: book.date,
-        rating: book.rating,
-        notes: book.notes
+        date: book.status ? formattedDate : null,
+        rating: book.status ? book.rating : "",
+        notes: book.status ? book.notes : ""
     });
 
     const handleChange = (event) => {
@@ -24,7 +30,7 @@ function EditBookForm(props) {
         setNewBook(prevValue => {
             return {
                 ...prevValue,
-                [name] : value
+                [name]: value
             }
         });
     }
@@ -41,6 +47,7 @@ function EditBookForm(props) {
     }
 
     async function handleSubmit() {
+        console.log('New: ', newBook.date);
         try {
             const response = await axios.post(`http://localhost:3000/edit/${book.id}`, newBook);
             console.log(response);
@@ -57,14 +64,14 @@ function EditBookForm(props) {
             <div className="add-form">
                 <div className="add-info">
                     <div className="form-floating mb-3">
-                        <input 
+                        <input
                             id="title"
-                            type="text" 
-                            name="title" 
-                            className="form-control" 
-                            placeholder="Title..." 
-                            value={newBook.title} 
-                            onChange={handleChange} 
+                            type="text"
+                            name="title"
+                            className="form-control"
+                            placeholder="Title..."
+                            value={newBook.title}
+                            onChange={handleChange}
                             autoComplete="off"
                         />
                         <label htmlFor="title">Title</label>
@@ -78,19 +85,19 @@ function EditBookForm(props) {
                         <label htmlFor="isbn">ISBN</label>
                     </div>
                     <div className="toggle mb-4">
-                        <div 
+                        <div
                             className={`slider ${newBook.readStatus ? 'left' : 'right'}`}
                         ></div>
                         <button
                             value='yes'
-                            className={newBook.readStatus ? 'active' : ''} 
+                            className={newBook.readStatus ? 'active' : ''}
                             onClick={handleStatus}
                         >
                             Have Read
                         </button>
-                        <button 
+                        <button
                             value='no'
-                            className={!newBook.readStatus ? 'active' : ''} 
+                            className={!newBook.readStatus ? 'active' : ''}
                             onClick={handleStatus}
                         >
                             Want to Read
@@ -98,35 +105,35 @@ function EditBookForm(props) {
                     </div>
                 </div>
 
-                {newBook.readStatus ? 
-                <div>
-                    <h5>Add your thoughts: </h5>
-                    <div className="form-floating mb-3">
-                        <input id="date" type="date" name="date" className="form-control" placeholder="Date..." value={newBook.date} defaultValue={book.status ? book.read_date.split('T')[0] : ""} onChange={handleChange} />
-                        <label htmlFor="date">Date Read</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <select id="rating" className="form-select" name="rating" value={newBook.rating} defaultValue={book.status ? book.rating : ""} onChange={handleChange} >
-                          <option value="" disabled>Rating...</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                        </select>
-                        <label htmlFor="rating">Rating</label>
-                      </div>
-                    <div className="form-floating mb-3">
-                        <textarea id="notes" name="notes" className="notes-input form-control" placeholder="Notes..." onChange={handleChange} value={newBook.notes}></textarea>
-                        <label htmlFor="notes">Notes</label>
-                    </div>
-                </div> :
-                <></>}
+                {newBook.readStatus ?
+                    <div>
+                        <h5>Add your thoughts: </h5>
+                        <div className="form-floating mb-3">
+                            <input id="date" type="date" name="date" className="form-control" placeholder="Date..." value={newBook.date ? newBook.date.split('T')[0] : null} onChange={handleChange} />
+                            <label htmlFor="date">Date Read</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <select id="rating" className="form-select" name="rating" value={newBook.rating} onChange={handleChange} >
+                                <option value="" disabled>Rating...</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <label htmlFor="rating">Rating</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <textarea id="notes" name="notes" className="notes-input form-control" placeholder="Notes..." onChange={handleChange} value={newBook.notes}></textarea>
+                            <label htmlFor="notes">Notes</label>
+                        </div>
+                    </div> :
+                    <></>}
                 <button onClick={handleSubmit} className="add-book-btn">Save Changes</button>
             </div>
 
-          
-    </div>
+
+        </div>
     )
 }
 

@@ -14,7 +14,7 @@ function AddBookForm() {
         isbn: "",
         readStatus: true,
         date: null,
-        rating: 0,
+        rating: "",
         notes: ""
     });
 
@@ -105,11 +105,11 @@ function AddBookForm() {
                 <div className={newBook.readStatus ? `` : `hide-inputs`}>
                     <h5>Add your thoughts: </h5>
                     <div className="form-floating mb-3">
-                        <input id="date" type="date" name="date" className="form-control" placeholder="Date..." onChange={handleChange} />
+                        <input id="date" type="date" name="date" className="form-control" placeholder="Date..." value={newBook.date ? newBook.date.split('T')[0] : null} onChange={handleChange} />
                         <label htmlFor="date">Date Read</label>
                     </div>
                     <div className="form-floating mb-3">
-                        <select id="rating" className="form-select" name="rating" defaultValue="" onChange={handleChange} >
+                        <select id="rating" className="form-select" name="rating" value={newBook.rating} onChange={handleChange} >
                           <option value="" disabled>Rating...</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
