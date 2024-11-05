@@ -1,4 +1,7 @@
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
+    .container {
+        max-width: 700px;
+    }
 
     .book-grid {
         grid-template-columns: repeat(2, 1fr);
