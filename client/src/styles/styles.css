@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	padding: 0;
+	padding: 0 !important;
 }
 
 .page {
@@ -20,11 +20,12 @@ body {
 }
 
 .small-container {
-	width: 600px;
+	max-width: 600px;
+	min-width: 350px;
 }
 
 .medium {
-	width: 800px;
+	width: 700px;
 }
 
 .add-search {
@@ -44,6 +45,7 @@ body {
 }
 
 .search-btn {
+	width: 52px;
 	border: 1px solid rgb(222, 226, 230);
 	border-radius: 6px;
 	background-color: transparent;
@@ -56,6 +58,7 @@ body {
 	width: 100%;
 	box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px;
 	z-index: 99;
+	border-radius: 6px;
 }
 
 .add-form {
@@ -76,16 +79,13 @@ body {
 
 .notes-header {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 20px;
 }
 
 .notes-buttons {
 	display: flex;
-	flex-direction: column;
 	gap: 10px;
-	margin-left: auto;
 }
 
 .icon-btn {
@@ -102,8 +102,8 @@ body {
 }
 
 .icon-btn:hover {
-	transform: translateY(-2px);
-	box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+	transform: translateY(-1px);
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px;
 }
 
 .edit-btn {
@@ -177,4 +177,40 @@ body {
 .notes-body p {
 	font-size: 1.2rem;
 	line-height: 1.5;
+}
+
+.edit-btn-box {
+	display: flex;
+	gap: 5px;
+}
+
+.edit-page-btn {
+	font-weight: 500;
+	padding: 6px 12px;
+	border-radius: 7px;
+	border: none;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.save-btn {
+	color: white;
+	background-color: #3498db;
+}
+
+.cancel-btn {
+	color: black;
+	background-color: lightgray;
+
+}
+
+.edit-page-btn:hover {
+	transform: translateY(-1px);
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px;
+}
+
+.add-book-btn:active {
+	color: white;
+	background-color: #3498db;
+	transform: translateY(0px) scale(0.98);
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 }

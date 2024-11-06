@@ -17,12 +17,12 @@
 }
 
 .book-card:hover {
-	transform: translateY(-2px);
-	box-shadow: rgba(0, 0, 0, 0.3) -4px 4px 15px;
+	transform: translateY(-1px);
+	box-shadow: rgba(0, 0, 0, 0.3) -4px 4px 12px;
 }
 
 .book-card:active {
-	transform: translateY(0px) scale(0.98);
+	transform: translateY(0px) scale(0.99);
 	box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 }
 

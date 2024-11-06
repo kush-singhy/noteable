@@ -128,7 +128,10 @@ function EditBookForm(props) {
 						</div>
 					</div> :
 					<></>}
-				<button onClick={handleSubmit} className="add-book-btn">Save Changes</button>
+				<div className="edit-btn-box">
+					<button onClick={handleSubmit} className="save-btn edit-page-btn">Save Changes</button>
+					<button onClick={() => { navigate(-1) }} className="cancel-btn edit-page-btn">Cancel</button>
+				</div>
 			</div>
 
 

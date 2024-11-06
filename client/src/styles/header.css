@@ -52,7 +52,6 @@
 	color: white;
 	background-color: #3498db;
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
-
 }
 
 .add-book-btn:hover {

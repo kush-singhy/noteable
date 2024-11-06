@@ -37,18 +37,7 @@ function BookView(props) {
 					<h5>{book.author}</h5>
 					<StatusBadge status={book.status} />
 				</span>
-				<div className="notes-buttons">
-					<button onClick={handleEdit} className="icon-btn edit-btn">
-						<img src={editIcon} alt="edit" />
-					</button>
-					<button
-						className="icon-btn delete-btn"
-						data-bs-toggle="modal"
-						data-bs-target="#deleteModal"
-					>
-						<img src={deleteIcon} alt="delete" />
-					</button>
-				</div>
+
 			</div>
 
 			{book.status ?
@@ -65,6 +54,18 @@ function BookView(props) {
 				</div> :
 				<></>
 			}
+			<div className="notes-buttons">
+				<button onClick={handleEdit} className="icon-btn edit-btn">
+					<img src={editIcon} alt="edit" />
+				</button>
+				<button
+					className="icon-btn delete-btn"
+					data-bs-toggle="modal"
+					data-bs-target="#deleteModal"
+				>
+					<img src={deleteIcon} alt="delete" />
+				</button>
+			</div>
 
 			<div className="modal fade" id="deleteModal" tabIndex="-1">
 				<div className="modal-dialog">

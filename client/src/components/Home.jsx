@@ -36,7 +36,7 @@ function Home() {
 
 
 	return (
-		<div className="container">
+		<div className="container large">
 			<div className="filters">
 				<Toggle status={readStatus} setStatus={setReadStatus} leftText="Notes" rightText="Wishlist" />
 				<SortSelect status={readStatus} setSortType={setSortType} />

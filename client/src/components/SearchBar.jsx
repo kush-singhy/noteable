@@ -15,8 +15,12 @@ function SearchBar(props) {
 	}
 
 	const handleBlur = () => {
-		setShowResults(false);
-	}
+		setTimeout(() => {
+			setShowResults(false);
+		}, 200);
+
+	};
+
 
 	const handleChange = async (event) => {
 		const value = event.target.value;
@@ -42,8 +46,8 @@ function SearchBar(props) {
 
 	function singleResult(result) {
 		const handleSelectResult = () => {
-			onResultChange(result);
 			setShowResults(false);
+			onResultChange(result);
 		}
 
 		return (
@@ -64,7 +68,7 @@ function SearchBar(props) {
 					ref={inputRef}
 					value={input}
 					onChange={handleChange}
-					// onBlur={handleBlur}
+					onBlur={handleBlur}
 					onFocus={handleFocus}
 				/>
 				<button onClick={handleSubmit} className="search-btn">
@@ -74,7 +78,7 @@ function SearchBar(props) {
 			<div className='search-results'>
 				{(results.length > 0 && showResults) &&
 					<ul class="list-group">
-						{results.map(singleResult)};
+						{results.map(singleResult)}
 					</ul>
 				}
 			</div>
