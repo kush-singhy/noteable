@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 import SearchBar from "./SearchBar";
 import Input from "./ui/Input";
@@ -34,6 +36,8 @@ function AddBookForm() {
 	}
 
 	const handleChange = (event) => {
+		console.log(event.target);
+
 		const { name, value } = event.target;
 
 		setNewBook(prevValue => {
@@ -42,6 +46,16 @@ function AddBookForm() {
 				[name]: value
 			}
 		});
+	}
+
+	const handleNotes = (event) => {
+		console.log(event);
+		setNewBook(prevValue => {
+			return {
+				...prevValue,
+				notes: event
+			}
+		})
 	}
 
 	const handleStatus = (status) => {
@@ -63,7 +77,14 @@ function AddBookForm() {
 		}
 	}
 
-
+	const modules = {
+		toolbar: [
+			[{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+			[{ size: [] }],
+			['bold', 'italic', 'underline', 'strike', 'blockquote'],
+			[{ 'list': 'ordered' }, { 'list': 'bullet' }],
+		]
+	};
 
 	return (
 		<div className="container small-container">
@@ -82,7 +103,18 @@ function AddBookForm() {
 					<h5>Add your thoughts: </h5>
 					<Input id="date" type="date" value={newBook.date ? newBook.date.split('T')[0] : null} onChange={handleChange} label="Date Read" />
 					<RatingSelect id="rating" value={newBook.rating} onChange={handleChange} label="Rating" />
-					<Textarea id="notes" value={newBook.notes} onChange={handleChange} label="Notes" />
+					{/* <Textarea id="notes" value={newBook.notes} onChange={handleChange} label="Notes" /> */}
+					<ReactQuill
+						className="notes-input"
+						theme="snow"
+						id="notes"
+						name="notes"
+						value={newBook.notes}
+						onChange={handleNotes}
+						modules={modules}
+						formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet']}
+						placeholder="Write something amazing..."
+					/>
 				</div>
 
 				<button onClick={handleSubmit} className="add-book-btn">Add</button>
