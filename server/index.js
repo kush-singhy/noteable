@@ -39,9 +39,10 @@ async function fetchBookCover(book) {
 		book.cover = coverCache.get(book.isbn);
 	} else {
 		try {
-			const coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`;
-			coverCache.set(book.isbn, coverUrl);
-			book.cover = coverUrl;
+			const response = await axios.get('https://bookcover.longitood.com/bookcover/' + book.isbn);
+            const coverUrl = response.data.url;
+            coverCache.set(book.isbn, coverUrl);
+            book.cover = coverUrl;
 		} catch (error) {
 			console.error(`Error fetching cover for ISBN ${book.isbn}:`, error.message);
 		}
