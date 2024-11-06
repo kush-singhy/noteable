@@ -1,68 +1,69 @@
 .header {
-    width: 100%;
-    padding: 10px;
-    color: black;
-    font-family: 'Josefin Sans', sans-serif;
-    display: flex;
-    justify-content: center;
+	width: 100%;
+	color: black;
+	font-family: 'Urbanist', sans-serif;
+	display: flex;
+	justify-content: center;
+	background-color: #B7E0FF77;
 }
 
 .header-content {
-    width: 100%;
-    background-color: #B7E0FF77;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 40px 50px;
-    border-radius: 10px;
-}
-.logo {
-    width: 60px;
-    transition: transform 0.2s ease;
-    cursor: pointer;
-}
-
-.logo:hover {
-    transform: scale(0.95);
+	width: 1100px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 30px;
 }
 
 .logo-box {
-    min-width: 70px;
+	display: flex;
+	cursor: pointer;
+	transition: transform 0.2s ease;
 }
 
+.logo-box:hover {
+	transform: translateY(-1px);
+}
+
+.logo {
+	width: 35px;
+}
+
+
 .header .title {
-    min-width: 200px;
-    font-size: 2.3rem;
-    color: #0774ce;
-    margin-left: 20px;
-    cursor: pointer;
+	line-height: 1.1;
+	font-weight: 600;
+	font-size: 1.8rem;
+	color: #0774ce;
+	margin-left: 8px;
 }
 
 .add-book {
-    margin-left: auto;
-    text-align: center;
+	margin-left: auto;
+	text-align: center;
 }
 
 .add-book-btn {
-    padding: 7px 14px;
-    border-radius: 7px;
-    border: none;
-    color: white;
-    background-color: #3498db;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+	font-size: 0.9rem;
+	font-weight: 500;
+	padding: 6px 12px;
+	border-radius: 7px;
+	border: none;
+	color: white;
+	background-color: #3498db;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .add-book-btn:hover {
-    color: white;
-    background-color: #3498db;
-    transform: translateY(-2px);
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+	color: white;
+	background-color: #3498db;
+	transform: translateY(-1px);
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
 }
 
 .add-book-btn:active {
-    color: white;
-    background-color: #3498db;
-    transform: translateY(0px) scale(0.98);
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+	color: white;
+	background-color: #3498db;
+	transform: translateY(0px) scale(0.98);
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 }

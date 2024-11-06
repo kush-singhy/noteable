@@ -1,146 +1,97 @@
 import React, { useEffect, useState } from "react";
-import searchIcon from '../assets/search.svg'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 import SearchBar from "./SearchBar";
+import Input from "./ui/Input";
+import RatingSelect from "./ui/RatingSelect";
+import Textarea from "./ui/Textarea";
+import Toggle from "./ui/Toggle";
 
 
 function AddBookForm() {
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
-    const [searchedBook, setSearchedBook] = useState({});
-    const [newBook, setNewBook] = useState({
-        title: "",
-        author: "",
-        isbn: "",
-        readStatus: true,
-        date: null,
-        rating: "",
-        notes: ""
-    });
+	const [newBook, setNewBook] = useState({
+		title: "",
+		author: "",
+		isbn: "",
+		readStatus: true,
+		date: null,
+		rating: "",
+		notes: ""
+	});
 
-    const handleBookSearch = (value) => {
-        setNewBook(prevValue => {
-            return {
-                ...prevValue,
-                title: value.title,
-                author: value.author,
-                isbn: value.isbn
-            }
-        })
-    }
+	const handleBookSearch = (value) => {
+		setNewBook(prevValue => {
+			return {
+				...prevValue,
+				title: value.title,
+				author: value.author,
+				isbn: value.isbn
+			}
+		})
+	}
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
+	const handleChange = (event) => {
+		const { name, value } = event.target;
 
-        setNewBook(prevValue => {
-            return {
-                ...prevValue,
-                [name] : value
-            }
-        });
-    }
+		setNewBook(prevValue => {
+			return {
+				...prevValue,
+				[name]: value
+			}
+		});
+	}
 
-    const handleStatus = (event) => {
-        const status = event.target.value === 'yes' ? true : false;
+	const handleStatus = (status) => {
+		setNewBook(prevValue => {
+			return {
+				...prevValue,
+				readStatus: status
+			}
+		})
+	}
 
-        setNewBook(prevValue => {
-            return {
-                ...prevValue,
-                readStatus: status
-            }
-        })
-    }
-
-    async function handleSubmit() {
-        try {
-            const response = await axios.post('http://localhost:3000/book', newBook);
-            console.log(response);
-            navigate('/');
-        } catch (err) {
-            console.error('Error adding book:', err);
-        }
-    }
+	async function handleSubmit() {
+		try {
+			const response = await axios.post('http://localhost:3000/book', newBook);
+			console.log(response);
+			navigate('/');
+		} catch (err) {
+			console.error('Error adding book:', err);
+		}
+	}
 
 
 
-    return (
-        <div className="container small-container">
-            <SearchBar onResultChange={handleBookSearch} />
+	return (
+		<div className="container small-container">
+			<SearchBar onResultChange={handleBookSearch} />
 
-            <div className="add-form">
-                <h5>Or enter details here: </h5>
-                <div className="add-info">
-                    <div className="form-floating mb-3">
-                        <input 
-                            id="title"
-                            type="text" 
-                            name="title" 
-                            className="form-control" 
-                            placeholder="Title..." 
-                            value={newBook.title} 
-                            onChange={handleChange} 
-                            autoComplete="off"
-                        />
-                        <label htmlFor="title">Title</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input id="author" type="text" name="author" className="form-control" placeholder="Author..." value={newBook.author} onChange={handleChange} autoComplete="off" />
-                        <label htmlFor="author">Author</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input id="isbn" type="text" name="isbn" className="form-control" placeholder="ISBN..." value={newBook.isbn} onChange={handleChange} autoComplete="off" />
-                        <label htmlFor="isbn">ISBN</label>
-                    </div>
-                    <div className="toggle mb-4">
-                        <div 
-                            className={`slider ${newBook.readStatus ? 'left' : 'right'}`}
-                        ></div>
-                        <button
-                            value='yes'
-                            className={newBook.readStatus ? 'active' : ''} 
-                            onClick={handleStatus}
-                        >
-                            Have Read
-                        </button>
-                        <button 
-                            value='no'
-                            className={!newBook.readStatus ? 'active' : ''} 
-                            onClick={handleStatus}
-                        >
-                            Want to Read
-                        </button>
-                    </div>
-                </div>
+			<div className="add-form">
+				<h5>Or enter details here: </h5>
+				<div className="add-info">
+					<Input id="title" type="text" value={newBook.title} onChange={handleChange} label="Title" />
+					<Input id="author" type="text" value={newBook.author} onChange={handleChange} label="Author" />
+					<Input id="isbn" type="text" value={newBook.isbn} onChange={handleChange} label="ISBN" />
+					<Toggle status={newBook.readStatus} setStatus={handleStatus} leftText="Have Read" rightText="Want to Read" />
+				</div>
 
-                <div className={newBook.readStatus ? `` : `hide-inputs`}>
-                    <h5>Add your thoughts: </h5>
-                    <div className="form-floating mb-3">
-                        <input id="date" type="date" name="date" className="form-control" placeholder="Date..." value={newBook.date ? newBook.date.split('T')[0] : null} onChange={handleChange} />
-                        <label htmlFor="date">Date Read</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <select id="rating" className="form-select" name="rating" value={newBook.rating} onChange={handleChange} >
-                          <option value="" disabled>Rating...</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                        </select>
-                        <label htmlFor="rating">Rating</label>
-                      </div>
-                    <div className="form-floating mb-3">
-                        <textarea id="notes" name="notes" className="form-control notes-input" placeholder="Notes..." onChange={handleChange} value={newBook.notes}></textarea>
-                        <label htmlFor="notes">Notes</label>
-                    </div>
-                </div>
-                <button onClick={handleSubmit} className="add-book-btn">Add</button>
-            </div>
+				<div className={newBook.readStatus ? `` : `hide-inputs`}>
+					<h5>Add your thoughts: </h5>
+					<Input id="date" type="date" value={newBook.date ? newBook.date.split('T')[0] : null} onChange={handleChange} label="Date Read" />
+					<RatingSelect id="rating" value={newBook.rating} onChange={handleChange} label="Rating" />
+					<Textarea id="notes" value={newBook.notes} onChange={handleChange} label="Notes" />
+				</div>
 
-          
-    </div>
-    )
+				<button onClick={handleSubmit} className="add-book-btn">Add</button>
+
+			</div>
+
+
+		</div>
+	)
 }
 
 export default AddBookForm;

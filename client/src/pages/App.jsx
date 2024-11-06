@@ -1,14 +1,14 @@
 import React from "react"
-import Header from "../components/Header"
+import Header from "../components/ui/Header"
 import Home from "../components/Home"
 
 function App() {
-  return (
-    <div className="page">
-      <Header />
-      <Home />
-    </div>
-  )
+	return (
+		<div className="page">
+			<Header />
+			<Home />
+		</div>
+	)
 }
 
 export default App

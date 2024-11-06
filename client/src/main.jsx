@@ -4,35 +4,35 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './pages/App.jsx';
 import AddBookPage from './pages/AddBookPage.jsx';
 import BookViewPage from './pages/BookViewPage.jsx';
+import EditBookPage from './pages/EditBookPage.jsx';
 import './index.css';
 import './styles/styles.css';
 import './styles/header.css';
 import './styles/filters.css';
 import './styles/bookgrid.css';
 import './styles/media-queries.css';
-import EditBookPage from './pages/EditBookPage.jsx';
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-  {
-    path: '/add',
-    element: <AddBookPage />,
-  },
-  {
-    path: '/book/:id',
-    element: <BookViewPage />,
-  },
-  {
-    path: '/edit/:id',
-    element: <EditBookPage />,
-  },
+	{
+		path: '/',
+		element: <App />,
+	},
+	{
+		path: '/add',
+		element: <AddBookPage />,
+	},
+	{
+		path: '/book/:id',
+		element: <BookViewPage />,
+	},
+	{
+		path: '/edit/:id',
+		element: <EditBookPage />,
+	},
 ]);
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+	<StrictMode>
+		<RouterProvider router={router} />
+	</StrictMode>
 );

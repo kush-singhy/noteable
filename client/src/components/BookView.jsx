@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import StatusBadge from './StatusBadge';
+import StatusBadge from './ui/StatusBadge';
 import defaultCover from '../assets/gradient.jpg';
 import formatDate from '../util/formatDate';
 import editIcon from '../assets/edit.svg';
@@ -21,11 +21,11 @@ function BookView(props) {
 
 	const handleDelete = async () => {
 		try {
-            const response = await axios.get(`http://localhost:3000/delete/${book.id}`);
-            navigate('/');
-        } catch (err) {
-            console.error('Error deleting book:', err);
-        }
+			const response = await axios.get(`http://localhost:3000/delete/${book.id}`);
+			navigate('/');
+		} catch (err) {
+			console.error('Error deleting book:', err);
+		}
 	}
 
 	return (
@@ -37,34 +37,35 @@ function BookView(props) {
 					<h5>{book.author}</h5>
 					<StatusBadge status={book.status} />
 				</span>
-				<div className="notes-buttons">
-					<button onClick={handleEdit} className="icon-btn edit-btn">
-						<img src={editIcon} alt="edit" />
-					</button>
-					<button
-						className="icon-btn delete-btn"
-						data-bs-toggle="modal"
-						data-bs-target="#deleteModal"
-					>
-						<img src={deleteIcon} alt="delete" />
-					</button>
-				</div>
+
 			</div>
 
-			{book.status ? 
-			<div>
-				<div className="notes-info">
-					<p className="book-card-text">Read: {date}</p>
-					<p className="book-card-text">Rating: {book.rating}/5</p>
-				</div>
+			{book.status ?
+				<div>
+					<div className="notes-info">
+						<p className="book-card-text">Read: {date}</p>
+						<p className="book-card-text">Rating: {book.rating}/5</p>
+					</div>
 
-				<div className="notes-body">
-					<h3>My Notes</h3>
-					<p className="book-card-text">{book.notes}</p>
-				</div>
-			</div> : 
-			<></>
+					<div className="notes-body">
+						<h3>My Notes</h3>
+						<p className="book-card-text">{book.notes}</p>
+					</div>
+				</div> :
+				<></>
 			}
+			<div className="notes-buttons">
+				<button onClick={handleEdit} className="icon-btn edit-btn">
+					<img src={editIcon} alt="edit" />
+				</button>
+				<button
+					className="icon-btn delete-btn"
+					data-bs-toggle="modal"
+					data-bs-target="#deleteModal"
+				>
+					<img src={deleteIcon} alt="delete" />
+				</button>
+			</div>
 
 			<div className="modal fade" id="deleteModal" tabIndex="-1">
 				<div className="modal-dialog">
