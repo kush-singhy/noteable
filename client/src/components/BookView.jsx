@@ -43,13 +43,17 @@ function BookView(props) {
 			{book.status ?
 				<div>
 					<div className="notes-info">
-						<p className="book-card-text">Read: {date}</p>
-						<p className="book-card-text">Rating: {book.rating}/5</p>
+						<p>Read: {date}</p>
+						<p>Rating: {book.rating}/5</p>
 					</div>
 
 					<div className="notes-body">
 						<h3>My Notes</h3>
-						<p className="book-card-text">{book.notes}</p>
+						<hr />
+						<div
+							dangerouslySetInnerHTML={{ __html: book.notes }}
+							className="book-card-text"
+						/>
 					</div>
 				</div> :
 				<></>
