@@ -1,25 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 import Header from '../components/ui/Header';
-import Home from '../components/Home';
+import HomePage from './HomePage';
+import Login from './Login';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
-  const successMessage = (reponse) => {
-    console.log('Success! ', reponse);
+  const [user, setUser] = useState(null);
+
+  const getUser = async () => {
+    try {
+      const url = 'http://localhost:3000/auth/login/success';
+      const { data } = await axios.get(url, { withCredentials: true });
+      setUser(data.user._json);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const errorMessage = (error) => {
-    console.log('Error ', error);
-  };
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div className="page">
-      <Header />
-      <div>
-        <h2>Login</h2>
-        <GoogleLogin onSuccess={successMessage} onError={errorMessage} />
-      </div>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={user ? <HomePage /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/login"
+          element={user ? <Navigate to="/" /> : <Login />}
+        />
+      </Routes>
     </div>
   );
 }

@@ -7,8 +7,8 @@ import pg from 'pg';
 import axios from 'axios';
 import https from 'https';
 import 'dotenv/config';
-import { GoogleStrategy } from 'passport-google-oauth2';
-import authRoute from './routes/auth';
+import GoogleStrategy from 'passport-google-oauth2';
+import authRoute from './routes/auth.js';
 
 const app = express();
 
@@ -215,7 +215,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '/auth/google/noteable',
+      callbackURL: '/auth/google/callback',
       scope: ['profile', 'email'],
     },
     function (accessToken, refreshToken, profile, callback) {
