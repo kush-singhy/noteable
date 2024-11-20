@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.12.1",
     "@tiptap/extension-placeholder": "^2.9.1",
     "@tiptap/pm": "^2.9.1",
     "@tiptap/react": "^2.9.1",
