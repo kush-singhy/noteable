@@ -82,16 +82,28 @@ async function fetchBookCover(book) {
 // ROUTING
 
 app.get('/books', async (req, res) => {
+  const userEmail = req.user.email;
   try {
     const result = await db.query(
-      `SELECT *
-            FROM book_notes
-            ORDER BY read_date DESC`
+      `SELECT 
+	  		un.id,
+	  		b.title,
+	  		b.author,
+	  		b.isbn,
+	  		un.status,
+	  		un.read_date,
+	  		un.rating,
+	  		un.note
+  		FROM users u
+  		JOIN user_notes un ON u.id = un.user_id
+  		JOIN books b ON un.book_id = b.id
+  		WHERE u.email = $1`,
+      [userEmail]
     );
 
     const bookList = result.rows;
-    console.log(bookList);
     const books = await Promise.all(bookList.map(fetchBookCover));
+    console.log(books);
 
     res.json(books);
   } catch (error) {
