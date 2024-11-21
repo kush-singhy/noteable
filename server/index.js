@@ -88,7 +88,9 @@ app.get('/books', async (req, res) => {
             FROM book_notes
             ORDER BY read_date DESC`
     );
+
     const bookList = result.rows;
+    console.log(bookList);
     const books = await Promise.all(bookList.map(fetchBookCover));
 
     res.json(books);
@@ -218,8 +220,23 @@ passport.use(
       callbackURL: '/auth/google/callback',
       scope: ['profile', 'email'],
     },
-    function (accessToken, refreshToken, profile, callback) {
-      callback(null, profile);
+    async (accessToken, refreshToken, profile, callback) => {
+      try {
+        const result = await db.query('SELECT * FROM users WHERE email = $1', [
+          profile.email,
+        ]);
+        if (result.rows.length === 0) {
+          const newUser = db.query(
+            'INSERT INTO users (email, password) VALUES ($1, $2)',
+            [profile.email, 'google']
+          );
+          callback(null, profile);
+        } else {
+          callback(null, profile);
+        }
+      } catch (err) {
+        callback(err);
+      }
     }
   )
 );

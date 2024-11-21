@@ -4,6 +4,7 @@ import passport from 'passport';
 const router = Router();
 
 router.get('/login/success', (req, res) => {
+  console.log('Login Success', req.user);
   if (req.user) {
     res.status(200).json({
       error: false,
