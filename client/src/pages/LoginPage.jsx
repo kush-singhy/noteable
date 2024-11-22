@@ -1,17 +1,17 @@
 import React from 'react';
-import { GoogleLogin } from '@react-oauth/google';
+import logo from '../assets/books.svg';
 
-import Header from '../components/ui/Header';
-import Home from '../components/Home';
-
-function Login() {
+function LoginPage() {
   const googleAuth = () => {
     window.open('http://localhost:3000/auth/google/callback', '_self');
   };
 
   return (
-    <div className="page">
-      <h2>noteable</h2>
+    <div>
+      <div className="">
+        <img src={logo} className="" alt="Logo" />
+        <div className="">noteable</div>
+      </div>
       <div>
         <h2>Login</h2>
         <button onClick={googleAuth}>Sign in with Google</button>
@@ -20,4 +20,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

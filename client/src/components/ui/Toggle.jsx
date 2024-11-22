@@ -13,7 +13,7 @@ function Toggle({ status, setStatus, leftText, rightText }) {
         {leftText}
       </button>
       <button
-        className={!(status === 'Completed') ? 'active' : ''}
+        className={status === 'To Read' ? 'active' : ''}
         onClick={() => setStatus('To Read')}
       >
         {rightText}

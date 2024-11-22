@@ -12,7 +12,7 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [readStatus, setReadStatus] = useState('');
+  const [readStatus, setReadStatus] = useState('Completed');
   const [sortType, setSortType] = useState('date');
 
   useEffect(() => {
@@ -22,7 +22,6 @@ function Home() {
           withCredentials: true,
         });
         setBooks(response.data);
-        console.log(books);
       } catch (err) {
         console.error('Error fetching books:', err);
         setError('Error fetching books');

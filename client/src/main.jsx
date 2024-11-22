@@ -19,29 +19,7 @@ import './styles/header.css';
 import './styles/filters.css';
 import './styles/bookgrid.css';
 import './styles/media-queries.css';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-  {
-    path: '/library',
-    element: <HomePage />,
-  },
-  {
-    path: '/add',
-    element: <AddBookPage />,
-  },
-  {
-    path: '/book/:id',
-    element: <BookViewPage />,
-  },
-  {
-    path: '/edit/:id',
-    element: <EditBookPage />,
-  },
-]);
+import './styles/login.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

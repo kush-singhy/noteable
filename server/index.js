@@ -103,7 +103,6 @@ app.get('/books', async (req, res) => {
 
     const bookList = result.rows;
     const books = await Promise.all(bookList.map(fetchBookCover));
-    console.log(books);
 
     res.json(books);
   } catch (error) {
