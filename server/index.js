@@ -112,30 +112,46 @@ app.get('/books', async (req, res) => {
 });
 
 app.post('/book', async (req, res) => {
+  const userEmail = req.user.email;
   const { title, author, isbn, readStatus, date, rating, notes } = req.body;
-
   try {
-    if (readStatus) {
-      console.log('Adding to notes...');
-      const result = await db.query(
-        `INSERT INTO book_notes (title, author, isbn, status, read_date, rating, notes)
-                VALUES ($1, $2, $3, $4, $5, $6, $7)
-                RETURNING id`,
-        [title, author, isbn, true, date, rating, notes]
-      );
-      const bookId = result.rows[0].id;
-      res.sendStatus(200);
+    const userResult = await db.query('SELECT id FROM users WHERE email = $1', [
+      userEmail,
+    ]);
+    const userId = userResult.rows[0].id;
+
+    const bookResult = await db.query('SELECT id FROM books WHERE isbn = $1', [
+      isbn,
+    ]);
+
+    let bookId;
+    if (bookResult.rows.length > 0) {
+      // Book exists
+      bookId = bookResult.rows[0].id;
     } else {
-      console.log('Adding to wishlist...');
-      const result = await db.query(
-        `INSERT INTO book_notes (title, author, isbn, status)
-                VALUES ($1, $2, $3, $4)
-                RETURNING id`,
-        [title, author, isbn, false]
+      // Insert the book if it doesn't exist
+      const insertBookResult = await db.query(
+        'INSERT INTO books (title, author, isbn) VALUES ($1, $2, $3) RETURNING id',
+        [title, author, isbn]
       );
-      const bookId = result.rows[0].id;
-      res.sendStatus(200);
+      bookId = insertBookResult.rows[0].id;
     }
+
+    if (readStatus === 'Completed') {
+      await db.query(
+        `INSERT INTO user_notes (user_id, book_id, status, read_date, rating, note)
+        VALUES ($1, $2, $3, $4, $5, $6)`,
+        [userId, bookId, readStatus, date, rating, notes]
+      );
+    } else {
+      await db.query(
+        `INSERT INTO user_notes (user_id, book_id, status)
+        VALUES ($1, $2, $3)`,
+        [userId, bookId, readStatus]
+      );
+    }
+
+    res.sendStatus(200);
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Error adding book');
