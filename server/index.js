@@ -200,23 +200,25 @@ app.post('/edit/:id', async (req, res) => {
   const { title, author, isbn, readStatus, date, rating, notes } = req.body;
 
   try {
-    if (readStatus) {
-      const result = await db.query(
-        `UPDATE book_notes
-                SET title = $1, author = $2, isbn = $3, status = $4, read_date = $5, rating = $6, notes = $7
-                WHERE id = $8`,
-        [title, author, isbn, true, date, rating, notes, bookId]
-      );
-      res.sendStatus(200);
-    } else {
-      const result = await db.query(
-        `UPDATE book_notes
-                SET title = $1, author = $2, isbn = $3, status = $4, read_date = $5, rating = $6, notes = $7
-                WHERE id = $8`,
-        [title, author, isbn, false, null, null, null, bookId]
-      );
-      res.sendStatus(200);
+    const userNoteResult = await client.query(
+      `SELECT id
+       FROM user_notes
+       WHERE book_id = $1`,
+      [bookId]
+    );
+
+    if (userNoteResult.rows.length === 0) {
+      throw new Error('User note not found for the given book');
     }
+
+    // Update the user note
+    await client.query(
+      `UPDATE user_notes
+       SET status = $1, read_date = $2, rating = $3, note = $4
+       WHERE book_id = $5`,
+      [readStatus, date, rating, notes, bookId]
+    );
+    res.sendStatus(200);
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Error editing book');

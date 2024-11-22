@@ -47,9 +47,9 @@
 }
 
 .add-book-btn {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 7px;
   border: none;
   color: white;
@@ -73,16 +73,16 @@
 }
 
 .profile-img {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 .profile-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50px;
   background-color: white;
   border: none;
