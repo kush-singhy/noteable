@@ -43,14 +43,13 @@ const db = new pg.Client({
 
 db.connect();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const agent = new https.Agent({
   rejectUnauthorized: false,
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
 app.use(express.json());
 
 const apiKey = process.env.API_KEY;
