@@ -1,10 +1,14 @@
 import React from 'react';
 import logo from '../../assets/books.svg';
+import profile from '../../assets/profile.svg';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    window.open(`http://localhost:3000/auth/logout`, '_self');
+  };
   const handleAddBook = () => {
     navigate('/add');
   };
@@ -24,6 +28,9 @@ function Header() {
         <div className="add-book">
           <button onClick={handleAddBook} className="add-book-btn">
             Add Book
+          </button>
+          <button onClick={handleLogout} className="profile-btn">
+            <img src={profile} className="profile-img" />
           </button>
         </div>
       </div>

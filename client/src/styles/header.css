@@ -40,6 +40,8 @@
 }
 
 .add-book {
+  display: flex;
+  gap: 20px;
   margin-left: auto;
   text-align: center;
 }
@@ -52,6 +54,7 @@
   border: none;
   color: white;
   background-color: #3498db;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -67,4 +70,28 @@
   background-color: #3498db;
   transform: translateY(0px) scale(0.98);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+}
+
+.profile-img {
+  width: 20px;
+  height: 20px;
+}
+
+.profile-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  background-color: white;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-btn:hover {
+  background-color: white;
+  transform: translateY(-1px);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
 }

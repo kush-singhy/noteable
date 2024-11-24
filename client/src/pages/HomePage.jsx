@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from '../components/ui/Header';
-import AddBookForm from '../components/AddBookForm';
+import Home from '../components/Home';
 
-function AddBookPage() {
+function HomePage() {
   return (
     <div className="page">
       <Header />
-      <AddBookForm />
+      <Home />
     </div>
   );
 }
 
-export default AddBookPage;
+export default HomePage;

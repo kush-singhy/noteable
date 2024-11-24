@@ -1,25 +1,25 @@
-import React from "react";
+import React from 'react';
 
 function Toggle({ status, setStatus, leftText, rightText }) {
-    return (
-        <div className="toggle">
-            <div
-                className={`slider ${status ? 'left' : 'right'}`}
-            ></div>
-            <button
-                className={status ? 'active' : ''}
-                onClick={() => setStatus(true)}
-            >
-                {leftText}
-            </button>
-            <button
-                className={!status ? 'active' : ''}
-                onClick={() => setStatus(false)}
-            >
-                {rightText}
-            </button>
-        </div>
-    )
+  return (
+    <div className="toggle">
+      <div
+        className={`slider ${status === 'Completed' ? 'left' : 'right'}`}
+      ></div>
+      <button
+        className={status === 'Completed' ? 'active' : ''}
+        onClick={() => setStatus('Completed')}
+      >
+        {leftText}
+      </button>
+      <button
+        className={status === 'To Read' ? 'active' : ''}
+        onClick={() => setStatus('To Read')}
+      >
+        {rightText}
+      </button>
+    </div>
+  );
 }
 
 export default Toggle;
