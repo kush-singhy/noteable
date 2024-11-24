@@ -86,17 +86,16 @@ app.get('/books', async (req, res) => {
   try {
     const result = await db.query(
       `SELECT 
-	  		un.id,
-	  		b.title,
-	  		b.author,
-	  		b.isbn,
-	  		un.status,
-	  		un.read_date,
-	  		un.rating,
-	  		un.note
-  		FROM users u
-  		JOIN user_notes un ON u.id = un.user_id
-  		JOIN books b ON un.book_id = b.id
+	  		bn.id,
+	  		bn.title,
+	  		bn.author,
+	  		bn.isbn,
+	  		bn.status,
+	  		bn.read_date,
+	  		bn.rating,
+	  		bn.note
+  		FROM book_notes bn
+  		INNER JOIN users u ON bn.user_id = u.id
   		WHERE u.email = $1`,
       [userEmail]
     );
@@ -120,41 +119,59 @@ app.post('/book', async (req, res) => {
     ]);
     const userId = userResult.rows[0].id;
 
-    const bookResult = await db.query('SELECT id FROM books WHERE isbn = $1', [
-      isbn,
-    ]);
-
-    let bookId;
-    if (bookResult.rows.length > 0) {
-      // Book exists
-      bookId = bookResult.rows[0].id;
-    } else {
-      // Insert the book if it doesn't exist
-      const insertBookResult = await db.query(
-        'INSERT INTO books (title, author, isbn) VALUES ($1, $2, $3) RETURNING id',
-        [title, author, isbn]
-      );
-      bookId = insertBookResult.rows[0].id;
-    }
-
-    if (readStatus === 'Completed') {
-      await db.query(
-        `INSERT INTO user_notes (user_id, book_id, status, read_date, rating, note)
-        VALUES ($1, $2, $3, $4, $5, $6)`,
-        [userId, bookId, readStatus, date, rating, notes]
-      );
-    } else {
-      await db.query(
-        `INSERT INTO user_notes (user_id, book_id, status)
-        VALUES ($1, $2, $3)`,
-        [userId, bookId, readStatus]
-      );
-    }
+    await db.query(
+      `INSERT INTO book_notes (user_id, title, author, isbn, status, read_date, rating, note)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      [
+        userId,
+        title,
+        author,
+        isbn,
+        readStatus,
+        date || null,
+        rating || null,
+        notes || null,
+      ]
+    );
 
     res.sendStatus(200);
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Error adding book');
+  }
+});
+
+app.post('/edit/:id', async (req, res) => {
+  const noteId = parseInt(req.params.id);
+  const { title, author, isbn, readStatus, date, rating, notes } = req.body;
+
+  try {
+    await db.query(
+      `UPDATE book_notes
+       SET title = $1, author = $2, isbn = $3, status = $4, read_date = $5, rating = $6, note = $7
+       WHERE id = $8`,
+      [title, author, isbn, readStatus, date, rating, notes, noteId]
+    );
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Error editing book');
+  }
+});
+
+app.get('/delete/:id', async (req, res) => {
+  const noteId = parseInt(req.params.id);
+
+  try {
+    await db.query(
+      `DELETE FROM book_notes
+            WHERE id = $1`,
+      [noteId]
+    );
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Error deleting book');
   }
 });
 
@@ -191,53 +208,6 @@ app.post('/search', async (req, res) => {
       console.error('Error searching: ', error.message);
       res.status(500).send('Error searching for book');
     }
-  }
-});
-
-app.post('/edit/:id', async (req, res) => {
-  const bookId = parseInt(req.params.id);
-
-  const { title, author, isbn, readStatus, date, rating, notes } = req.body;
-
-  try {
-    const userNoteResult = await client.query(
-      `SELECT id
-       FROM user_notes
-       WHERE book_id = $1`,
-      [bookId]
-    );
-
-    if (userNoteResult.rows.length === 0) {
-      throw new Error('User note not found for the given book');
-    }
-
-    // Update the user note
-    await client.query(
-      `UPDATE user_notes
-       SET status = $1, read_date = $2, rating = $3, note = $4
-       WHERE book_id = $5`,
-      [readStatus, date, rating, notes, bookId]
-    );
-    res.sendStatus(200);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Error editing book');
-  }
-});
-
-app.get('/delete/:id', async (req, res) => {
-  const bookId = parseInt(req.params.id);
-
-  try {
-    const result = await db.query(
-      `DELETE FROM book_notes
-            WHERE id = $1`,
-      [bookId]
-    );
-    res.sendStatus(200);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Error deleting book');
   }
 });
 

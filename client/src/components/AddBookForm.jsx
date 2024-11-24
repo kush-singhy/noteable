@@ -36,7 +36,6 @@ function AddBookForm() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setNewBook((prevValue) => {
       return {
         ...prevValue,
@@ -69,7 +68,6 @@ function AddBookForm() {
       const response = await axios.post('http://localhost:3000/book', newBook, {
         withCredentials: true,
       });
-      console.log(response);
       navigate('/');
     } catch (err) {
       console.error('Error adding book:', err);

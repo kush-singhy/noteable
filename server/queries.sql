@@ -4,24 +4,20 @@ CREATE TABLE users (
     password TEXT NOT NULL
 )
 
-CREATE TABLE books (
-    id SERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
-    author TEXT UNIQUE NOT NULL,
-    isbn TEXT UNIQUE NOT NULL
-)
-
-CREATE TABLE user_notes (
+CREATE TABLE book_notes (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
-    book_id INT NOT NULL,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL,
+    isbn TEXT NOT NULL,
     status TEXT NOT NULL,
     read_date DATE,
     rating INTEGER,
     note TEXT,
     FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (book_id) REFERENCES books(id)
-)
+    UNIQUE (user_id, isbn)
+);
+
 
 -- Insert sample users
 INSERT INTO users (email, password) VALUES
@@ -29,16 +25,13 @@ INSERT INTO users (email, password) VALUES
 ('bob@example.com', 'securepass456'),
 ('charlie@example.com', 'charliepass789')
 
--- Insert sample books
-INSERT INTO books (title, author, isbn) VALUES
-('To Kill a Mockingbird', 'Harper Lee', '9780061120084'),
-('1984', 'George Orwell', '9780451524935'),
-('Pride and Prejudice', 'Jane Austen', '9780679783268')
-
--- Insert sample user notes
-INSERT INTO user_notes (user_id, book_id, status, read_date, rating, note) VALUES
-(1, 1, 'Completed', '2024-01-15', 3, '<p>An inspiring and thought-provoking read.</p>'),
-(2, 2, 'To Read', NULL, NULL, NULL),
-(3, 3, 'To Read', NULL, NULL, NULL),
-(1, 2, 'Completed', '2023-11-10', 4, '<p>A classic that resonates with current times.</p>'),
-(2, 3, 'Completed', '2024-03-20', 5, '<p>Loved the character development and wit.</p>')
+INSERT INTO book_notes (user_id, title, author, isbn, status, read_date, rating, note)
+VALUES
+(1, 'To Kill a Mockingbird', 'Harper Lee', '9780060935467', 'Read', '2023-01-15', 5, '<p>A powerful book about justice and morality.</p>'),
+(1, '1984', 'George Orwell', '9780451524935', 'Reading', NULL, NULL, NULL),
+(2, 'The Great Gatsby', 'F. Scott Fitzgerald', '9780743273565', 'Read', '2022-11-20', 4, '<p>Beautifully written with complex characters.</p>'),
+(3, 'Moby Dick', 'Herman Melville', '9781503280786', 'To Read', NULL, NULL, NULL),
+(3, 'Pride and Prejudice', 'Jane Austen', '9781503290563', 'Read', '2023-05-05', 5, '<p>A timeless romance with sharp wit.</p>'),
+(4, 'The Great Gatsby', 'F. Scott Fitzgerald', '9780743273565', 'Read', '2022-11-20', 4, '<p>Beautifully written with complex characters.</p>'),
+(4, 'Moby Dick', 'Herman Melville', '9781503280786', 'To Read', NULL, NULL, NULL),
+(4, 'Pride and Prejudice', 'Jane Austen', '9781503290563', 'Read', '2023-05-05', 5, '<p>A timeless romance with sharp wit.</p>');
