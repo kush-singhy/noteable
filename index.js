@@ -8,10 +8,20 @@ import axios from 'axios';
 import https from 'https';
 import 'dotenv/config';
 import GoogleStrategy from 'passport-google-oauth2';
+import path from 'path';
 import authRoute from './routes/auth.js';
+import pool from './db.js';
 
+// CONST DEFINITIONS
+const port = process.env.PORT || 3000;
 const app = express();
+const apiKey = process.env.API_KEY;
+const coverCache = new Map();
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
+// MIDDLEWARE
 app.use(
   cookieSession({
     name: 'session',
@@ -19,41 +29,22 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000,
   })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.CLIENT_URL,
     methods: 'GET,POST,PUT,DELETE',
     credentials: true,
   })
 );
-
 app.use('/auth', authRoute);
-
-const db = new pg.Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-});
-
-db.connect();
-
-const port = process.env.PORT || 3000;
-
-const agent = new https.Agent({
-  rejectUnauthorized: false,
-});
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-const apiKey = process.env.API_KEY;
-const coverCache = new Map();
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+}
 
 // UTILITY FUNCTIONS
 
@@ -83,7 +74,7 @@ async function fetchBookCover(book) {
 app.get('/books', async (req, res) => {
   const userEmail = req.user.email;
   try {
-    const result = await db.query(
+    const result = await pool.query(
       `SELECT 
 	  		bn.id,
 	  		bn.title,
@@ -113,12 +104,13 @@ app.post('/book', async (req, res) => {
   const userEmail = req.user.email;
   const { title, author, isbn, readStatus, date, rating, notes } = req.body;
   try {
-    const userResult = await db.query('SELECT id FROM users WHERE email = $1', [
-      userEmail,
-    ]);
+    const userResult = await pool.query(
+      'SELECT id FROM users WHERE email = $1',
+      [userEmail]
+    );
     const userId = userResult.rows[0].id;
 
-    await db.query(
+    await pool.query(
       `INSERT INTO book_notes (user_id, title, author, isbn, status, read_date, rating, note)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
       [
@@ -145,7 +137,7 @@ app.post('/edit/:id', async (req, res) => {
   const { title, author, isbn, readStatus, date, rating, notes } = req.body;
 
   try {
-    await db.query(
+    await pool.query(
       `UPDATE book_notes
        SET title = $1, author = $2, isbn = $3, status = $4, read_date = $5, rating = $6, note = $7
        WHERE id = $8`,
@@ -162,7 +154,7 @@ app.get('/delete/:id', async (req, res) => {
   const noteId = parseInt(req.params.id);
 
   try {
-    await db.query(
+    await pool.query(
       `DELETE FROM book_notes
             WHERE id = $1`,
       [noteId]
@@ -220,11 +212,12 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, callback) => {
       try {
-        const result = await db.query('SELECT * FROM users WHERE email = $1', [
-          profile.email,
-        ]);
+        const result = await pool.query(
+          'SELECT * FROM users WHERE email = $1',
+          [profile.email]
+        );
         if (result.rows.length === 0) {
-          const newUser = db.query(
+          const newUser = pool.query(
             'INSERT INTO users (email, password) VALUES ($1, $2)',
             [profile.email, 'google']
           );
