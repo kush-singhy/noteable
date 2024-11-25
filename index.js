@@ -206,6 +206,7 @@ app.post('/search', async (req, res) => {
 });
 
 const callbackURL = process.env.CALLBACK_URL || '/auth/google/callback';
+console.log(callbackURL);
 
 passport.use(
   new GoogleStrategy(
