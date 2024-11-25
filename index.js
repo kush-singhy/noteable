@@ -9,6 +9,8 @@ import 'dotenv/config';
 import GoogleStrategy from 'passport-google-oauth2';
 import authRoute from './routes/auth.js';
 import pool from './db.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // CONST DEFINITIONS
 const port = process.env.PORT || 3000;
@@ -16,6 +18,8 @@ const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 const app = express();
 const apiKey = process.env.API_KEY;
 const coverCache = new Map();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const agent = new https.Agent({
   rejectUnauthorized: false,
 });
@@ -42,7 +46,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+  app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
 // UTILITY FUNCTIONS
