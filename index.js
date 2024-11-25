@@ -3,17 +3,16 @@ import cors from 'cors';
 import passport from 'passport';
 import cookieSession from 'cookie-session';
 import bodyParser from 'body-parser';
-import pg from 'pg';
 import axios from 'axios';
 import https from 'https';
 import 'dotenv/config';
 import GoogleStrategy from 'passport-google-oauth2';
-import path from 'path';
 import authRoute from './routes/auth.js';
 import pool from './db.js';
 
 // CONST DEFINITIONS
 const port = process.env.PORT || 3000;
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 const app = express();
 const apiKey = process.env.API_KEY;
 const coverCache = new Map();
@@ -33,7 +32,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: CLIENT_URL,
     methods: 'GET,POST,PUT,DELETE',
     credentials: true,
   })
