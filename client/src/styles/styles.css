@@ -239,3 +239,12 @@ body {
 .empty-icon {
   width: 100px;
 }
+
+.ProseMirror {
+  min-height: 250px;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid rgb(222, 226, 230);
+  border-radius: 6px;
+  outline: none;
+}
