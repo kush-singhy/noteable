@@ -7,9 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
+    "vite": "^5.4.11",
+    "@vitejs/plugin-react": "^4.3.3",
     "@react-oauth/google": "^0.12.1",
     "@tiptap/extension-placeholder": "^2.9.1",
     "@tiptap/pm": "^2.9.1",
@@ -23,19 +26,20 @@
     "react-dom": "^18.3.1",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.27.0",
-    "react-star-ratings": "^2.3.0",
-    "vite": "^5.4.11"
+    "react-star-ratings": "^2.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.3",
     "eslint": "^9.13.0",
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.13",
-    "globals": "^15.11.0",
-    "vite": "^5.4.11"
+    "globals": "^15.11.0"
+  },
+  "engines": {
+    "node": ">=20.17.0",
+    "npm": ">=10.8.2"
   }
 }
