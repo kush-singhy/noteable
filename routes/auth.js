@@ -2,6 +2,7 @@ import { Router } from 'express';
 import passport from 'passport';
 
 const router = Router();
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
 router.get('/login/success', (req, res) => {
   if (req.user) {
@@ -25,7 +26,7 @@ router.get('/login/failed', (req, res) => {
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: process.env.CLIENT_URL,
+    successRedirect: CLIENT_URL,
     failureRedirect: '/login/failed',
   })
 );
@@ -34,7 +35,7 @@ router.get('/google', passport.authenticate('google', ['profile', 'email']));
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect(process.env.CLIENT_URL);
+  res.redirect(CLIENT_URL);
 });
 
 export default router;
