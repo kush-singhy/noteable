@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Bookcard from './Bookcard';
+import EmptyMessage from './EmptyMessage';
 
 function Bookgrid(props) {
   const { books, readStatus, sortType } = props;
@@ -20,7 +21,15 @@ function Bookgrid(props) {
     filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
   }
 
-  return <div className="book-grid">{filteredBooks.map(createCard)}</div>;
+  return (
+    <div>
+      {filteredBooks.length === 0 ? (
+        <EmptyMessage />
+      ) : (
+        <div className="book-grid">{filteredBooks.map(createCard)}</div>
+      )}
+    </div>
+  );
 }
 
 export default Bookgrid;
