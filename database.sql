@@ -1,5 +1,3 @@
-CREATE DATABASE noteable;
-
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email TEXT UNIQUE NOT NULL,
@@ -18,4 +16,4 @@ CREATE TABLE book_notes (
     note TEXT,
     FOREIGN KEY (user_id) REFERENCES users(id),
     UNIQUE (user_id, isbn)
-);;
+);
