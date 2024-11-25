@@ -10,6 +10,12 @@ function SearchBar(props) {
   const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   const handleFocus = () => {
     setShowResults(true);
   };
@@ -70,6 +76,7 @@ function SearchBar(props) {
           ref={inputRef}
           value={input}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           onFocus={handleFocus}
         />

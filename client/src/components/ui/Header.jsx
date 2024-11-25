@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../../assets/books.svg';
 import profile from '../../assets/profile.svg';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const navigate = useNavigate();
+
+  const [isDropdown, setDropdown] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdown((prev) => !prev);
+  };
 
   const handleLogout = () => {
     window.open(`/auth/logout`, '_self');
@@ -29,9 +35,18 @@ function Header() {
           <button onClick={handleAddBook} className="add-book-btn">
             Add Book
           </button>
-          <button onClick={handleLogout} className="profile-btn">
-            <img src={profile} className="profile-img" />
-          </button>
+          <div className="dropdown">
+            <button className="profile-btn" data-bs-toggle="dropdown">
+              <img src={profile} className="profile-img" />
+            </button>
+            <ul class="profile-dropdown dropdown-menu">
+              <li>
+                <button class="logout-btn dropdown-item" onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

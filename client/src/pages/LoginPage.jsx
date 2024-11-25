@@ -14,9 +14,13 @@ function LoginPage() {
           <img src={logo} className="login-logo" alt="Logo" />
           <div className="login-title">noteable</div>
         </div>
+        <div className="login-description">
+          <p>Create a beautiful digital library.</p>
+        </div>
+        <hr className="login-divider" />
         <div className="login-btn-box">
           <button onClick={googleAuth} className="login-btn">
-            <img src={googleLogo} className="google-logo" />
+            <img src={googleLogo} className="google-logo" alt="Google Logo" />
             Sign in with Google
           </button>
         </div>
