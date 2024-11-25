@@ -65,7 +65,7 @@ function AddBookForm() {
 
   async function handleSubmit() {
     try {
-      const response = await axios.post('http://localhost:3000/book', newBook, {
+      const response = await axios.post('/book', newBook, {
         withCredentials: true,
       });
       navigate('/');

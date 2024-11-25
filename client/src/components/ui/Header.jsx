@@ -7,7 +7,7 @@ function Header() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    window.open(`http://localhost:3000/auth/logout`, '_self');
+    window.open(`/auth/logout`, '_self');
   };
   const handleAddBook = () => {
     navigate('/add');

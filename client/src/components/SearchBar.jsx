@@ -33,7 +33,7 @@ function SearchBar(props) {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/search', {
+      const response = await axios.post('/search', {
         input,
       });
       const searchResults = response.data;

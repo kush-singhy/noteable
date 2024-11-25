@@ -21,9 +21,7 @@ function BookView(props) {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/delete/${book.id}`
-      );
+      const response = await axios.get(`/delete/${book.id}`);
       navigate('/');
     } catch (err) {
       console.error('Error deleting book:', err);

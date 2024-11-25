@@ -4,7 +4,7 @@ import googleLogo from '../assets/google-icon-logo.svg';
 
 function LoginPage() {
   const googleAuth = () => {
-    window.open('http://localhost:3000/auth/google/callback', '_self');
+    window.open('/auth/google/callback', '_self');
   };
 
   return (

@@ -59,10 +59,7 @@ function EditBookForm(props) {
 
   async function handleSubmit() {
     try {
-      const response = await axios.post(
-        `http://localhost:3000/edit/${book.id}`,
-        newBook
-      );
+      const response = await axios.post(`/edit/${book.id}`, newBook);
       navigate('/');
     } catch (err) {
       console.error('Error adding book:', err);
@@ -102,7 +99,9 @@ function EditBookForm(props) {
           />
         </div>
 
-        <div className={newBook.readStatus ? `` : `hide-inputs`}>
+        <div
+          className={newBook.readStatus === 'Completed' ? `` : `hide-inputs`}
+        >
           <h5>Add your thoughts: </h5>
           <Input
             id="date"
