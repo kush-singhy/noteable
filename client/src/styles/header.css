@@ -95,3 +95,13 @@
   transform: translateY(-1px);
   box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
 }
+
+@media (max-width: 500px) {
+  .header-content {
+    padding: 15px 20px;
+  }
+
+  .header .title {
+    display: none;
+  }
+}

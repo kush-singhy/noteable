@@ -7,17 +7,19 @@
 
 .login-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  width: 800px;
-  height: 400px;
   border-radius: 15px;
   background-color: #b7e0ff77;
+  padding: 80px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
 }
 
 .login-logo-box {
   display: flex;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 .login-logo {
@@ -42,9 +44,33 @@
   padding: 10px 15px;
   border-radius: 8px;
   border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+}
+
+.login-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 6px;
 }
 
 .google-logo {
   width: 22px;
+}
+
+.login-description {
+  font-size: 1.3rem;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.login-divider {
+  width: 250px;
+  height: 1px;
+  margin: 0 0 45px 0;
+}
+
+@media (max-width: 690px) {
+  .login-container {
+    padding: 50px 30px;
+  }
 }
