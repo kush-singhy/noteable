@@ -61,8 +61,7 @@
 .add-book-btn:hover {
   color: white;
   background-color: #3498db;
-  transform: translateY(-1px);
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
 }
 
 .add-book-btn:active {
@@ -91,9 +90,21 @@
 }
 
 .profile-btn:hover {
-  background-color: white;
-  transform: translateY(-1px);
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+}
+
+.profile-dropdown {
+  padding: 0;
+  border: 1px solid #ccc;
+}
+
+.logout-btn {
+  padding: 8px 12px;
+}
+
+.logout-btn:hover {
+  border: none;
+  border-radius: 6px;
 }
 
 @media (max-width: 500px) {
