@@ -23,7 +23,8 @@
     "react-dom": "^18.3.1",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.27.0",
-    "react-star-ratings": "^2.3.0"
+    "react-star-ratings": "^2.3.0",
+    "vite": "^5.4.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
@@ -35,6 +36,6 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.13",
     "globals": "^15.11.0",
-    "vite": "^5.4.9"
+    "vite": "^5.4.11"
   }
 }
