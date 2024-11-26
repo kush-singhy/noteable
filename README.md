@@ -1,19 +1,83 @@
-# Noteable - A book notes app
 
-Noteable is an app designed from the ground up to track books, rate them and write notes.
+![Logo](https://github.com/kush-singhy/noteable/blob/main/client/public/assets/logo.png)
 
-Build your library today!
+
+## Create a beautiful digital library
+
+Noteable is a web app designed to track books, rate them and write notes.
+
+
+## Screenshots
+
+
+
+## Tech Stack
+
+**Client:** React, Vite, Bootstrap CSS
+
+**Server:** Node, Express
+
+**Database:** PostgreSQL
+
 
 ## Roadmap
 
-- Book description from API
+- Form validation for adding books
+
+- Better book search experience
 
 - Loading skeleton on home page
 
-- Appropriate Error handling
+- Better rich text formatting for inputs
 
-- Better rich text formatting
 
-## Authors
+## Environment Variables
 
-- [@kush-singhy](https://github.com/kush-singhy)
+To run this project, you will need to add the following environment variables to your .env file
+
+`API_KEY`
+
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/kush-singhy/noteable.git
+```
+
+Go to the project directory
+
+```bash
+  cd noteable
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+Start the server
+```bash
+  node index.js
+```
+
+Go to the client directory
+
+```bash
+  cd client
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the frontend
+
+```bash
+  npm run dev
+```
+
