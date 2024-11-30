@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "preview": "vite preview"
   },
   "dependencies": {
     "vite": "^5.4.11",

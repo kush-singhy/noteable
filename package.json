@@ -4,13 +4,10 @@
   "description": "Backend for Noteable",
   "main": "index.js",
   "type": "module",
-  "engines": {
-    "node": "20.17.0",
-    "npm": "10.8.2"
-  },
   "scripts": {
     "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "build": "cd client && npm install && npm run build",
+    "start:prod": "npm run build && npm run start"
   },
   "author": "",
   "license": "ISC",

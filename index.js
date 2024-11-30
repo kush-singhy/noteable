@@ -13,7 +13,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // CONST DEFINITIONS
-const port = process.env.PORT || 3000;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 const app = express();
 const apiKey = process.env.API_KEY;
@@ -245,6 +244,11 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
+});
+
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}/`);
 });
