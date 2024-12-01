@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-
-import bookNotes from '../mock-data';
-
 import Bookgrid from './Bookgrid';
 import Toggle from './ui/Toggle';
 import SortSelect from './ui/SortSelect';
@@ -10,7 +7,6 @@ import SortSelect from './ui/SortSelect';
 function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const [readStatus, setReadStatus] = useState('Completed');
   const [sortType, setSortType] = useState('date');
@@ -24,8 +20,6 @@ function Home() {
         setBooks(response.data);
       } catch (err) {
         console.error('Error fetching books:', err);
-        setError('Error fetching books');
-        setBooks(bookNotes);
       } finally {
         setLoading(false);
       }

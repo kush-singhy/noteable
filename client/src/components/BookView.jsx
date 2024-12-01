@@ -1,15 +1,14 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import StatusBadge from './ui/StatusBadge';
-import defaultCover from '../assets/gradient.jpg';
+import defaultCover from '../assets/not-found-alt.svg';
 import formatDate from '../util/formatDate';
 import editIcon from '../assets/edit.svg';
 import deleteIcon from '../assets/delete.svg';
 
-function BookView(props) {
+function BookView({ book }) {
   const navigate = useNavigate();
-  const { book } = props;
   const status = book.status === 'Completed';
   const date = formatDate(book.read_date);
 
@@ -21,7 +20,7 @@ function BookView(props) {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.get(`/delete/${book.id}`);
+      await axios.get(`/delete/${book.id}`);
       navigate('/');
     } catch (err) {
       console.error('Error deleting book:', err);
@@ -108,5 +107,17 @@ function BookView(props) {
     </div>
   );
 }
+BookView.propTypes = {
+  book: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    cover: PropTypes.string,
+    status: PropTypes.string.isRequired,
+    read_date: PropTypes.string,
+    rating: PropTypes.number,
+    note: PropTypes.string,
+  }).isRequired,
+};
 
 export default BookView;

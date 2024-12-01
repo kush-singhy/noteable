@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import DOMPurify from 'dompurify';
@@ -8,9 +9,8 @@ import Toggle from './ui/Toggle';
 import RatingSelect from './ui/RatingSelect';
 import NotesInput from './NotesInput';
 
-function EditBookForm(props) {
+function EditBookForm({ book }) {
   const navigate = useNavigate();
-  const { book } = props;
 
   let date = new Date(book.read_date);
   const day = date.getDate() + 1;
@@ -59,7 +59,7 @@ function EditBookForm(props) {
 
   async function handleSubmit() {
     try {
-      const response = await axios.post(`/edit/${book.id}`, newBook);
+      await axios.post(`/edit/${book.id}`, newBook);
       navigate('/');
     } catch (err) {
       console.error('Error adding book:', err);
@@ -95,12 +95,12 @@ function EditBookForm(props) {
             status={newBook.readStatus}
             setStatus={handleStatus}
             leftText="Have Read"
-            rightText="Want to Read"
+            rightText="To Read"
           />
         </div>
 
         <div
-          className={newBook.readStatus === 'Completed' ? `` : `hide-inputs`}
+          className={newBook.readStatus === 'Completed' ? '' : 'hide-inputs'}
         >
           <h5>Add your thoughts: </h5>
           <Input
@@ -135,5 +135,18 @@ function EditBookForm(props) {
     </div>
   );
 }
+
+EditBookForm.propTypes = {
+  book: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    isbn: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    read_date: PropTypes.string,
+    rating: PropTypes.number,
+    note: PropTypes.string,
+    id: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
 export default EditBookForm;

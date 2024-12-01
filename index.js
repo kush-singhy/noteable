@@ -50,7 +50,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // UTILITY FUNCTIONS
 
-async function fetchBookCover(book) {
+async function addBookCover(book) {
   if (coverCache.has(book.isbn)) {
     book.cover = coverCache.get(book.isbn);
   } else {
@@ -66,6 +66,7 @@ async function fetchBookCover(book) {
         `Error fetching cover for ISBN ${book.isbn}:`,
         error.message
       );
+      book.cover = null;
     }
   }
   return book;
@@ -93,7 +94,7 @@ app.get('/books', async (req, res) => {
     );
 
     const bookList = result.rows;
-    const books = await Promise.all(bookList.map(fetchBookCover));
+    const books = await Promise.all(bookList.map(addBookCover));
 
     res.json(books);
   } catch (error) {
@@ -193,8 +194,7 @@ app.post('/search', async (req, res) => {
             )
           : null;
         const isbn = isbn13 ? isbn13.identifier : 'NA';
-
-        return { title, author, isbn };
+        return { title, author, isbn, cover: 'loading' };
       });
       res.json(filteredResults);
     } catch (error) {

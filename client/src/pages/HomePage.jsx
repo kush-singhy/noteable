@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from '../components/ui/Header';
 import Home from '../components/Home';
 

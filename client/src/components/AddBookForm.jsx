@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import DOMPurify from 'dompurify';
@@ -6,7 +6,6 @@ import DOMPurify from 'dompurify';
 import SearchBar from './SearchBar';
 import Input from './ui/Input';
 import RatingSelect from './ui/RatingSelect';
-import Textarea from './ui/Textarea';
 import NotesInput from './NotesInput';
 import Toggle from './ui/Toggle';
 
@@ -22,6 +21,7 @@ function AddBookForm() {
     rating: '',
     notes: '',
   });
+  const [errors, setErrors] = useState({});
 
   const handleBookSearch = (value) => {
     setNewBook((prevValue) => {
@@ -63,9 +63,23 @@ function AddBookForm() {
     });
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    if (!newBook.title) newErrors.title = 'Title is required';
+    if (!newBook.author) newErrors.author = 'Author is required';
+    if (!newBook.isbn) newErrors.isbn = 'ISBN is required';
+    return newErrors;
+  };
+
   async function handleSubmit() {
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
     try {
-      const response = await axios.post('/book', newBook, {
+      await axios.post('/book', newBook, {
         withCredentials: true,
       });
       navigate('/');
@@ -81,6 +95,7 @@ function AddBookForm() {
       <div className="add-form">
         <h5>Or enter details here: </h5>
         <div className="add-info">
+          {errors.title && <p className="error">{errors.title}</p>}
           <Input
             id="title"
             type="text"
@@ -88,6 +103,7 @@ function AddBookForm() {
             onChange={handleChange}
             label="Title"
           />
+          {errors.author && <p className="error">{errors.author}</p>}
           <Input
             id="author"
             type="text"
@@ -95,6 +111,7 @@ function AddBookForm() {
             onChange={handleChange}
             label="Author"
           />
+          {errors.isbn && <p className="error">{errors.isbn}</p>}
           <Input
             id="isbn"
             type="text"
@@ -106,12 +123,12 @@ function AddBookForm() {
             status={newBook.readStatus}
             setStatus={handleStatus}
             leftText="Have Read"
-            rightText="Want to Read"
+            rightText="To Read"
           />
         </div>
 
         <div
-          className={newBook.readStatus === 'Completed' ? `` : `hide-inputs`}
+          className={newBook.readStatus === 'Completed' ? '' : 'hide-inputs'}
         >
           <h5>Add your thoughts: </h5>
           <Input
@@ -129,10 +146,19 @@ function AddBookForm() {
           />
           <NotesInput value={newBook.notes} onChange={handleNotes} />
         </div>
-
-        <button onClick={handleSubmit} className="add-book-btn">
-          Add
-        </button>
+        <div className="edit-btn-box">
+          <button onClick={handleSubmit} className="save-btn edit-page-btn">
+            Add
+          </button>
+          <button
+            onClick={() => {
+              navigate('/');
+            }}
+            className="cancel-btn edit-page-btn"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );

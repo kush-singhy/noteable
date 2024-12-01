@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 function SortSelect({ status, setSortType }) {
   return (
@@ -22,5 +22,10 @@ function SortSelect({ status, setSortType }) {
     </div>
   );
 }
+
+SortSelect.propTypes = {
+  status: PropTypes.string.isRequired,
+  setSortType: PropTypes.func.isRequired,
+};
 
 export default SortSelect;
