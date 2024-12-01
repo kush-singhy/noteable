@@ -1,8 +1,8 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 import StatusBadge from './ui/StatusBadge';
-import defaultCover from '../assets/gradient.jpg';
+import defaultCover from '../assets/not-found-alt.svg';
 import formatDate from '../util/formatDate';
 
 function Bookcard({ book }) {
@@ -43,5 +43,16 @@ function Bookcard({ book }) {
     </div>
   );
 }
+Bookcard.propTypes = {
+  book: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    cover: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    read_date: PropTypes.string,
+    rating: PropTypes.number,
+  }).isRequired,
+};
 
 export default Bookcard;

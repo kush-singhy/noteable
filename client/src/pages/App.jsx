@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { GoogleLogin } from '@react-oauth/google';
+import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
-import Header from '../components/ui/Header';
 import LoginPage from './LoginPage';
 import HomePage from './HomePage';
 import AddBookPage from './AddBookPage';

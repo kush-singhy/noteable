@@ -1,6 +1,9 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import searchIcon from '../assets/search.svg';
+import notFound from '../assets/not-found.svg';
+import loading from '../assets/loading.svg';
 
 function SearchBar(props) {
   const { onResultChange } = props;
@@ -45,6 +48,25 @@ function SearchBar(props) {
       const searchResults = response.data;
       setResults(searchResults);
       setShowResults(true);
+
+      searchResults.forEach(async (result, index) => {
+        try {
+          const coverResponse = await axios.get(
+            `https://bookcover.longitood.com/bookcover/${result.isbn}`
+          );
+          setResults((prevResults) =>
+            prevResults.map((r, i) =>
+              i === index ? { ...r, cover: coverResponse.data.url } : r
+            )
+          );
+        } catch {
+          setResults((prevResults) =>
+            prevResults.map((r, i) =>
+              i === index ? { ...r, cover: notFound } : r
+            )
+          );
+        }
+      });
     } catch (err) {
       console.error('Error searching for book:', err);
     }
@@ -59,9 +81,23 @@ function SearchBar(props) {
     return (
       <button
         onClick={handleSelectResult}
-        class="list-group-item list-group-item-action"
+        className="list-group-item list-group-item-action d-flex align-items-center"
       >
-        <strong>{result.title}</strong> by {result.author}
+        <img
+          src={
+            result.cover
+              ? result.cover === 'loading'
+                ? loading
+                : result.cover
+              : notFound
+          }
+          alt={result.title}
+          className="book-cover"
+        />
+        <div className="result-info">
+          <strong>{result.title}</strong>
+          <div>{result.author}</div>
+        </div>
       </button>
     );
   }
@@ -92,5 +128,9 @@ function SearchBar(props) {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  onResultChange: PropTypes.func.isRequired,
+};
 
 export default SearchBar;

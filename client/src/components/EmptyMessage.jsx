@@ -1,4 +1,3 @@
-import React from 'react';
 import EmptyIcon from '../assets/empty-icon.svg';
 
 function EmptyMessage() {

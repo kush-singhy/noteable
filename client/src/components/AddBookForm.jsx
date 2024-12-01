@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import DOMPurify from 'dompurify';
@@ -6,7 +6,6 @@ import DOMPurify from 'dompurify';
 import SearchBar from './SearchBar';
 import Input from './ui/Input';
 import RatingSelect from './ui/RatingSelect';
-import Textarea from './ui/Textarea';
 import NotesInput from './NotesInput';
 import Toggle from './ui/Toggle';
 
@@ -65,7 +64,7 @@ function AddBookForm() {
 
   async function handleSubmit() {
     try {
-      const response = await axios.post('/book', newBook, {
+      await axios.post('/book', newBook, {
         withCredentials: true,
       });
       navigate('/');
@@ -105,13 +104,13 @@ function AddBookForm() {
           <Toggle
             status={newBook.readStatus}
             setStatus={handleStatus}
-            leftText="Have Read"
-            rightText="Want to Read"
+            leftText="Read"
+            rightText="To Read"
           />
         </div>
 
         <div
-          className={newBook.readStatus === 'Completed' ? `` : `hide-inputs`}
+          className={newBook.readStatus === 'Completed' ? '' : 'hide-inputs'}
         >
           <h5>Add your thoughts: </h5>
           <Input
@@ -129,10 +128,19 @@ function AddBookForm() {
           />
           <NotesInput value={newBook.notes} onChange={handleNotes} />
         </div>
-
-        <button onClick={handleSubmit} className="add-book-btn">
-          Add
-        </button>
+        <div className="edit-btn-box">
+          <button onClick={handleSubmit} className="save-btn edit-page-btn">
+            Add
+          </button>
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="cancel-btn edit-page-btn"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );

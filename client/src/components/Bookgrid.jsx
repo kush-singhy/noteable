@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
 import Bookcard from './Bookcard';
 import EmptyMessage from './EmptyMessage';
+import PropTypes from 'prop-types';
 
-function Bookgrid(props) {
-  const { books, readStatus, sortType } = props;
-
+function Bookgrid({ books, readStatus, sortType }) {
   function createCard(book) {
     return <Bookcard key={book.id} book={book} />;
   }
@@ -31,5 +29,18 @@ function Bookgrid(props) {
     </div>
   );
 }
+Bookgrid.propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      status: PropTypes.string.isRequired,
+      read_date: PropTypes.string,
+      rating: PropTypes.number,
+      title: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  readStatus: PropTypes.string.isRequired,
+  sortType: PropTypes.string.isRequired,
+};
 
 export default Bookgrid;

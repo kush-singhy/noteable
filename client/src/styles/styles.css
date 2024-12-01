@@ -62,6 +62,16 @@ body {
   border-radius: 6px;
 }
 
+.search-results img {
+  border-radius: 6px;
+  width: 50px;
+  height: 75px;
+}
+
+.result-info {
+  margin-left: 15px;
+}
+
 .add-form {
   margin-top: 20px;
 }

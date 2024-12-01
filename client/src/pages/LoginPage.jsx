@@ -1,4 +1,3 @@
-import React from 'react';
 import logo from '../assets/books.svg';
 import googleLogo from '../assets/google-icon-logo.svg';
 
