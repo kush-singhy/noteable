@@ -13,6 +13,7 @@ function NotesInput({ value, onChange }) {
 
   return <EditorContent editor={editor} />;
 }
+
 NotesInput.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

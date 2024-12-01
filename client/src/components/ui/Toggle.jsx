@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 function Toggle({ status, setStatus, leftText, rightText }) {
   return (
@@ -21,5 +21,12 @@ function Toggle({ status, setStatus, leftText, rightText }) {
     </div>
   );
 }
+
+Toggle.propTypes = {
+  status: PropTypes.string.isRequired,
+  setStatus: PropTypes.func.isRequired,
+  leftText: PropTypes.string.isRequired,
+  rightText: PropTypes.string.isRequired,
+};
 
 export default Toggle;

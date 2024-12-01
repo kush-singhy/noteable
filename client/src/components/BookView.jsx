@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import StatusBadge from './ui/StatusBadge';
-import defaultCover from '../assets/gradient.jpg';
+import defaultCover from '../assets/not-found-alt.svg';
 import formatDate from '../util/formatDate';
 import editIcon from '../assets/edit.svg';
 import deleteIcon from '../assets/delete.svg';

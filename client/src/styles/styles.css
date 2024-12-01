@@ -80,6 +80,12 @@ body {
   margin: 10px 0 25px 0;
 }
 
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
 .hide-inputs {
   display: none;
 }

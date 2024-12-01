@@ -94,7 +94,7 @@ function EditBookForm({ book }) {
           <Toggle
             status={newBook.readStatus}
             setStatus={handleStatus}
-            leftText="Read"
+            leftText="Have Read"
             rightText="To Read"
           />
         </div>

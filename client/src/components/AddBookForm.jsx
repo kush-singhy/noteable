@@ -21,6 +21,7 @@ function AddBookForm() {
     rating: '',
     notes: '',
   });
+  const [errors, setErrors] = useState({});
 
   const handleBookSearch = (value) => {
     setNewBook((prevValue) => {
@@ -62,7 +63,21 @@ function AddBookForm() {
     });
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    if (!newBook.title) newErrors.title = 'Title is required';
+    if (!newBook.author) newErrors.author = 'Author is required';
+    if (!newBook.isbn) newErrors.isbn = 'ISBN is required';
+    return newErrors;
+  };
+
   async function handleSubmit() {
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
     try {
       await axios.post('/book', newBook, {
         withCredentials: true,
@@ -80,6 +95,7 @@ function AddBookForm() {
       <div className="add-form">
         <h5>Or enter details here: </h5>
         <div className="add-info">
+          {errors.title && <p className="error">{errors.title}</p>}
           <Input
             id="title"
             type="text"
@@ -87,6 +103,7 @@ function AddBookForm() {
             onChange={handleChange}
             label="Title"
           />
+          {errors.author && <p className="error">{errors.author}</p>}
           <Input
             id="author"
             type="text"
@@ -94,6 +111,7 @@ function AddBookForm() {
             onChange={handleChange}
             label="Author"
           />
+          {errors.isbn && <p className="error">{errors.isbn}</p>}
           <Input
             id="isbn"
             type="text"
@@ -104,7 +122,7 @@ function AddBookForm() {
           <Toggle
             status={newBook.readStatus}
             setStatus={handleStatus}
-            leftText="Read"
+            leftText="Have Read"
             rightText="To Read"
           />
         </div>
@@ -134,7 +152,7 @@ function AddBookForm() {
           </button>
           <button
             onClick={() => {
-              navigate(-1);
+              navigate('/');
             }}
             className="cancel-btn edit-page-btn"
           >
