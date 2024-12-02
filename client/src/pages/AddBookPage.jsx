@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import DOMPurify from 'dompurify';
+// import DOMPurify from 'dompurify';
 
 import SearchBar from '../components/SearchBar';
 import Input from '../components/ui/Input';
 import RatingSelect from '../components/ui/RatingSelect';
-import NotesInput from '../components/NotesInput';
 import Toggle from '../components/ui/Toggle';
 import Header from '../components/ui/Header';
 
@@ -20,7 +19,7 @@ function AddBookPage() {
     isbn: '',
     readStatus: 'Completed',
     date: today.toISOString(),
-    rating: '',
+    rating: '1',
     notes: '',
   });
   const [errors, setErrors] = useState({});
@@ -48,15 +47,15 @@ function AddBookPage() {
     });
   };
 
-  const handleNotes = (value) => {
-    const sanitizedValue = DOMPurify.sanitize(value);
-    setNewBook((prevValue) => {
-      return {
-        ...prevValue,
-        notes: sanitizedValue,
-      };
-    });
-  };
+  // const handleNotes = (value) => {
+  //   const sanitizedValue = DOMPurify.sanitize(value);
+  //   setNewBook((prevValue) => {
+  //     return {
+  //       ...prevValue,
+  //       notes: sanitizedValue,
+  //     };
+  //   });
+  // };
 
   const handleStatus = (status) => {
     setNewBook((prevValue) => {
@@ -83,10 +82,11 @@ function AddBookPage() {
     }
 
     try {
-      await axios.post('/book', newBook, {
+      const response = await axios.post('/book', newBook, {
         withCredentials: true,
       });
-      navigate('/');
+      const noteId = response.data.id;
+      navigate(`/book-edit/${noteId}`);
     } catch (err) {
       console.error('Error adding book:', err);
     }
@@ -155,7 +155,6 @@ function AddBookPage() {
                 label="Rating"
               />
             </div>
-            <NotesInput value={newBook.notes} onChange={handleNotes} />
           </div>
           <div className="edit-btn-box">
             <button onClick={handleSubmit} className="save-btn edit-page-btn">

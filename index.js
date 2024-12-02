@@ -103,6 +103,38 @@ app.get('/books', async (req, res) => {
   }
 });
 
+app.get('/book/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      `SELECT 
+        bn.id,
+        bn.title,
+        bn.author,
+        bn.isbn,
+        bn.status,
+        bn.read_date,
+        bn.rating,
+        bn.note
+      FROM book_notes bn
+      WHERE bn.id = $1`,
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).send('Book note not found');
+    }
+
+    const book = result.rows[0];
+    const bookWithCover = await addBookCover(book);
+
+    res.json(bookWithCover);
+  } catch (error) {
+    console.error('Error fetching book note:', error);
+    res.status(500).send('Error fetching book note');
+  }
+});
+
 app.post('/book', async (req, res) => {
   const userEmail = req.user.email;
   const { title, author, isbn, readStatus, date, rating, notes } = req.body;
@@ -113,9 +145,9 @@ app.post('/book', async (req, res) => {
     );
     const userId = userResult.rows[0].id;
 
-    await pool.query(
+    const insertResult = await pool.query(
       `INSERT INTO book_notes (user_id, title, author, isbn, status, read_date, rating, note)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
       [
         userId,
         title,
@@ -128,7 +160,8 @@ app.post('/book', async (req, res) => {
       ]
     );
 
-    res.sendStatus(200);
+    const bookNoteId = insertResult.rows[0].id;
+    res.status(200).json({ id: bookNoteId });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Error adding book');

@@ -180,10 +180,72 @@ body {
   margin-bottom: 60px;
 }
 
+/* BOOK VIEW */
+
 .notes-header {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.notes-img {
+  width: 150px;
+  height: 220px;
+  border-radius: 10px;
+  margin-right: 25px;
+  object-fit: cover;
+}
+
+.notes-header h1 {
+  font-size: 2.3rem;
+  line-height: 1.8;
+  margin: 0;
+  color: #333;
+}
+
+.notes-header h5 {
+  font-size: 1.3rem;
+  color: #666;
+}
+
+.book-details {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 30px;
+  color: #444;
+  margin-top: 10px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #aaa;
+}
+
+.book-details div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.book-details div span {
+  margin-top: 1px;
+}
+
+.notes-info {
+  margin-bottom: 20px;
+}
+
+.notes-info p {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #444;
+}
+
+.notes-body {
+  margin-bottom: 40px;
+}
+
+.notes-body p {
+  font-size: 1.2rem;
+  line-height: 1.3;
 }
 
 .notes-buttons {
@@ -242,48 +304,10 @@ body {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
 }
 
-.notes-img {
-  width: 150px;
-  height: 220px;
-  border-radius: 10px;
-  margin-right: 25px;
-  object-fit: cover;
-}
-
-.notes-header h1 {
-  font-size: 2.3rem;
-  margin: 0;
-  color: #333;
-}
-
-.notes-header h5 {
-  font-size: 1.3rem;
-  margin: 0 0 15px 0;
-  color: #666;
-}
-
-.notes-info {
-  margin-bottom: 20px;
-}
-
-.notes-info p {
-  margin: 10px 0;
-  font-size: 1.2rem;
-  color: #444;
-}
-
-.notes-body {
-  margin-bottom: 40px;
-}
-
-.notes-body p {
-  font-size: 1.2rem;
-  line-height: 1.3;
-}
-
 .edit-btn-box {
   display: flex;
   gap: 5px;
+  margin-top: 10px;
 }
 
 .edit-page-btn {

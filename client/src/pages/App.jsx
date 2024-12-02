@@ -7,6 +7,7 @@ import HomePage from './HomePage';
 import AddBookPage from './AddBookPage';
 import BookViewPage from './BookViewPage';
 import EditBookPage from './EditBookPage';
+import BookEditPage from './BookEditPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -52,6 +53,11 @@ function App() {
           exact
           path="/edit/:id"
           element={user ? <EditBookPage /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/book-edit/:id"
+          element={user ? <BookEditPage /> : <Navigate to="/login" />}
         />
       </Routes>
     </div>
