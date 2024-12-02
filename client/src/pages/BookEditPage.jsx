@@ -30,7 +30,7 @@ function BookEditPage() {
     fetchBook();
   }, [id]);
 
-  const status = book.status === 'Completed';
+  // const status = book.status === 'Completed';
   const date = formatDate(book.read_date);
 
   if (loading) {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { EditorContent, useEditor } from '@tiptap/react';
+import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
 function NotesInput({ value, onChange }) {
@@ -11,7 +11,11 @@ function NotesInput({ value, onChange }) {
     },
   });
 
-  return <EditorContent editor={editor} />;
+  return (
+    <div>
+      <EditorContent editor={editor} />
+    </div>
+  );
 }
 
 NotesInput.propTypes = {
