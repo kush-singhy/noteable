@@ -106,13 +106,3 @@
   border: none;
   border-radius: 6px;
 }
-
-@media (max-width: 500px) {
-  .header-content {
-    padding: 15px 20px;
-  }
-
-  .header .title {
-    display: none;
-  }
-}

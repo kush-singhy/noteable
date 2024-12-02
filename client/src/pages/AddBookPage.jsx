@@ -38,6 +38,8 @@ function AddBookPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log('NV:', name, value);
+
     setNewBook((prevValue) => {
       return {
         ...prevValue,
@@ -99,30 +101,34 @@ function AddBookPage() {
         <div className="add-form">
           <h5>Or enter details here: </h5>
           <div className="add-info">
-            {errors.title && <p className="error">{errors.title}</p>}
             <Input
               id="title"
               type="text"
               value={newBook.title}
               onChange={handleChange}
               label="Title"
+              error={errors.title}
             />
-            {errors.author && <p className="error">{errors.author}</p>}
-            <Input
-              id="author"
-              type="text"
-              value={newBook.author}
-              onChange={handleChange}
-              label="Author"
-            />
-            {errors.isbn && <p className="error">{errors.isbn}</p>}
-            <Input
-              id="isbn"
-              type="text"
-              value={newBook.isbn}
-              onChange={handleChange}
-              label="ISBN"
-            />
+            <div className="half-length">
+              <Input
+                id="author"
+                type="text"
+                value={newBook.author}
+                onChange={handleChange}
+                label="Author"
+                error={errors.author}
+              />
+              <Input
+                id="isbn"
+                type="text"
+                value={newBook.isbn}
+                onChange={handleChange}
+                label="ISBN"
+                error={errors.isbn}
+              />
+            </div>
+          </div>
+          <div className="toggle-box">
             <Toggle
               status={newBook.readStatus}
               setStatus={handleStatus}
@@ -134,25 +140,26 @@ function AddBookPage() {
           <div
             className={newBook.readStatus === 'Completed' ? '' : 'hide-inputs'}
           >
-            <h5>Add your thoughts: </h5>
-            <Input
-              id="date"
-              type="date"
-              value={newBook.date ? newBook.date.split('T')[0] : ''}
-              onChange={handleChange}
-              label="Date Read"
-            />
-            <RatingSelect
-              id="rating"
-              value={newBook.rating}
-              onChange={handleChange}
-              label="Rating"
-            />
+            <div className="half-length">
+              <Input
+                id="date"
+                type="date"
+                value={newBook.date ? newBook.date.split('T')[0] : ''}
+                onChange={handleChange}
+                label="Date Read"
+              />
+              <RatingSelect
+                id="rating"
+                value={newBook.rating}
+                onChange={handleChange}
+                label="Rating"
+              />
+            </div>
             <NotesInput value={newBook.notes} onChange={handleNotes} />
           </div>
           <div className="edit-btn-box">
             <button onClick={handleSubmit} className="save-btn edit-page-btn">
-              Add
+              {newBook.readStatus === 'Completed' ? 'Next' : 'Add'}
             </button>
             <button
               onClick={() => {

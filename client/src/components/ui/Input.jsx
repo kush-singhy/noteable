@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 
-function Input({ id, type, value, onChange, label }) {
+function Input({ id, type, value, onChange, label, error }) {
+  const className = 'form-control info-input ' + (error ? 'is-invalid' : '');
+
   return (
     <div className="form-floating mb-3">
       <input
         id={id}
         type={type}
         name={id}
-        className="form-control"
+        className={className}
         placeholder={label}
         value={value}
         onChange={onChange}
@@ -24,6 +26,7 @@ Input.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
+  error: PropTypes.string,
 };
 
 export default Input;

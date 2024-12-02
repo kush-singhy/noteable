@@ -12,7 +12,7 @@
   }
 }
 
-@media (max-width: 690px) {
+@media (max-width: 650px) {
   .large {
     display: flex;
     flex-direction: column;
@@ -28,5 +28,18 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+  }
+
+  .half-length {
+    display: block;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  .header-content {
+    padding: 15px 20px;
+  }
+
+  .header .title {
+    display: none;
   }
 }

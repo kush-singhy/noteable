@@ -39,8 +39,9 @@ body {
 .search-bar {
   width: 100%;
   display: flex;
-  border: 1px solid #bbb;
+  border: 1px solid #ccc;
   border-radius: 6px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .search-input {
@@ -79,17 +80,17 @@ body {
   position: absolute;
   width: 100%;
   z-index: 99;
-  border: 1px solid #bbb;
+  border: 1px solid #ccc;
   border-top: none;
   border-radius: 0 0 6px 6px;
-  box-shadow: 0 0 0 0.2rem #ddd;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.1s ease-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .search-results.show {
+  box-shadow: 0 0 0 0.2rem #ddd;
   max-height: 750px;
   opacity: 1;
 }
@@ -136,21 +137,38 @@ body {
 /* ADD BOOK FORM */
 
 .add-form {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .add-form h5 {
   line-height: 1.8;
 }
 
-.add-info {
-  margin: 10px 0 25px 0;
+.info-input {
+  border: 1px solid #ccc;
 }
 
-.error {
-  color: red;
-  font-size: 0.9rem;
-  margin: 0;
+.form-floating label {
+  color: #777;
+}
+
+.info-input:focus {
+  border: 1px solid #ccc;
+  box-shadow: 0 0 0 0.2rem #ddd;
+}
+
+.half-length {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.half-length .form-floating {
+  width: 100%;
+}
+
+.toggle-box {
+  margin: 10px 0 30px 0;
 }
 
 .hide-inputs {
