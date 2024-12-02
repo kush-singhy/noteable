@@ -6,6 +6,7 @@ import Header from '../components/ui/Header';
 
 import calendarIcon from '../assets/Calendar.svg';
 import starIcon from '../assets/Star.svg';
+import NotesInput from '../components/NotesInput';
 
 function BookEditPage() {
   const { id } = useParams();
@@ -62,6 +63,8 @@ function BookEditPage() {
             <span>{book.rating}/5</span>
           </div>
         </div>
+
+        <NotesInput />
       </div>
     </div>
   );
