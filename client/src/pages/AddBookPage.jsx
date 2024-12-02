@@ -1,11 +1,170 @@
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import DOMPurify from 'dompurify';
+
+import SearchBar from '../components/SearchBar';
+import Input from '../components/ui/Input';
+import RatingSelect from '../components/ui/RatingSelect';
+import NotesInput from '../components/NotesInput';
+import Toggle from '../components/ui/Toggle';
 import Header from '../components/ui/Header';
-import AddBookForm from '../components/AddBookForm';
 
 function AddBookPage() {
+  const navigate = useNavigate();
+  const today = new Date();
+
+  const [newBook, setNewBook] = useState({
+    title: '',
+    author: '',
+    isbn: '',
+    readStatus: 'Completed',
+    date: today.toISOString(),
+    rating: '',
+    notes: '',
+  });
+  const [errors, setErrors] = useState({});
+
+  const handleBookSearch = (value) => {
+    setNewBook((prevValue) => {
+      return {
+        ...prevValue,
+        title: value.title,
+        author: value.author,
+        isbn: value.isbn,
+      };
+    });
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setNewBook((prevValue) => {
+      return {
+        ...prevValue,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleNotes = (value) => {
+    const sanitizedValue = DOMPurify.sanitize(value);
+    setNewBook((prevValue) => {
+      return {
+        ...prevValue,
+        notes: sanitizedValue,
+      };
+    });
+  };
+
+  const handleStatus = (status) => {
+    setNewBook((prevValue) => {
+      return {
+        ...prevValue,
+        readStatus: status,
+      };
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!newBook.title) newErrors.title = 'Title is required';
+    if (!newBook.author) newErrors.author = 'Author is required';
+    if (!newBook.isbn) newErrors.isbn = 'ISBN is required';
+    return newErrors;
+  };
+
+  async function handleSubmit() {
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
+    try {
+      await axios.post('/book', newBook, {
+        withCredentials: true,
+      });
+      navigate('/');
+    } catch (err) {
+      console.error('Error adding book:', err);
+    }
+  }
+
   return (
     <div className="page">
       <Header />
-      <AddBookForm />
+      <div className="container small-container">
+        <SearchBar onResultChange={handleBookSearch} />
+
+        <div className="add-form">
+          <h5>Or enter details here: </h5>
+          <div className="add-info">
+            {errors.title && <p className="error">{errors.title}</p>}
+            <Input
+              id="title"
+              type="text"
+              value={newBook.title}
+              onChange={handleChange}
+              label="Title"
+            />
+            {errors.author && <p className="error">{errors.author}</p>}
+            <Input
+              id="author"
+              type="text"
+              value={newBook.author}
+              onChange={handleChange}
+              label="Author"
+            />
+            {errors.isbn && <p className="error">{errors.isbn}</p>}
+            <Input
+              id="isbn"
+              type="text"
+              value={newBook.isbn}
+              onChange={handleChange}
+              label="ISBN"
+            />
+            <Toggle
+              status={newBook.readStatus}
+              setStatus={handleStatus}
+              leftText="Have Read"
+              rightText="To Read"
+            />
+          </div>
+
+          <div
+            className={newBook.readStatus === 'Completed' ? '' : 'hide-inputs'}
+          >
+            <h5>Add your thoughts: </h5>
+            <Input
+              id="date"
+              type="date"
+              value={newBook.date ? newBook.date.split('T')[0] : ''}
+              onChange={handleChange}
+              label="Date Read"
+            />
+            <RatingSelect
+              id="rating"
+              value={newBook.rating}
+              onChange={handleChange}
+              label="Rating"
+            />
+            <NotesInput value={newBook.notes} onChange={handleNotes} />
+          </div>
+          <div className="edit-btn-box">
+            <button onClick={handleSubmit} className="save-btn edit-page-btn">
+              Add
+            </button>
+            <button
+              onClick={() => {
+                navigate('/');
+              }}
+              className="cancel-btn edit-page-btn"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

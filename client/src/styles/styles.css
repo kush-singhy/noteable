@@ -5,7 +5,7 @@ body {
 
 .page {
   width: 100%;
-  font-family: 'Afacad Flux', sans-serif;
+  font-family: 'Figtree', sans-serif;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -29,14 +29,35 @@ body {
   min-width: 350px;
 }
 
+/* SEARCH BAR */
+
 .add-search {
   position: relative;
-  margin-bottom: 18px;
+  margin: 30px 0;
 }
 
 .search-bar {
+  width: 100%;
   display: flex;
-  height: 52px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+}
+
+.search-input {
+  width: calc(100% - 60px);
+  height: 60px;
+  padding: 16px 12px;
+  border: none;
+  border-radius: 6px 0 0 6px;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-bar:focus-within {
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 0 0 0.2rem #ddd;
 }
 
 .search-icon {
@@ -46,9 +67,9 @@ body {
 }
 
 .search-btn {
-  width: 52px;
-  border: 1px solid rgb(222, 226, 230);
-  border-radius: 6px;
+  width: 60px;
+  border: none;
+  border-radius: 0 6px 6px 0;
   background-color: transparent;
   padding: 0 10px;
 }
@@ -57,12 +78,51 @@ body {
   margin: 0;
   position: absolute;
   width: 100%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px;
   z-index: 99;
-  border-radius: 6px;
+  border: 1px solid #bbb;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 0 0 0.2rem #ddd;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.1s ease-out;
 }
 
-.search-results img {
+.search-results.show {
+  max-height: 750px;
+  opacity: 1;
+}
+
+.search-list {
+  border: none;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.single-result {
+  max-height: 92px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: white;
+  border: 1px solid #dddddd;
+  border-style: none none solid none;
+  transition: background-color 0.3s ease;
+}
+
+.single-result:last-child {
+  border-radius: 0 0 6px 6px;
+}
+
+.single-result:hover {
+  background-color: #eee;
+}
+
+.single-result img {
   border-radius: 6px;
   width: 50px;
   height: 75px;
@@ -70,10 +130,17 @@ body {
 
 .result-info {
   margin-left: 15px;
+  text-align: left;
 }
+
+/* ADD BOOK FORM */
 
 .add-form {
   margin-top: 20px;
+}
+
+.add-form h5 {
+  line-height: 1.8;
 }
 
 .add-info {

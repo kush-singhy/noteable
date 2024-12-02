@@ -24,9 +24,7 @@ function SearchBar(props) {
   };
 
   const handleBlur = () => {
-    setTimeout(() => {
-      setShowResults(false);
-    }, 200);
+    setShowResults(false);
   };
 
   const handleChange = async (event) => {
@@ -79,10 +77,7 @@ function SearchBar(props) {
     };
 
     return (
-      <button
-        onClick={handleSelectResult}
-        className="list-group-item list-group-item-action d-flex align-items-center"
-      >
+      <button onClick={handleSelectResult} className="single-result">
         <img
           src={
             result.cover
@@ -103,27 +98,27 @@ function SearchBar(props) {
   }
 
   return (
-    <div className="add-search">
-      <div className="search-bar input-group">
+    <div className="add-search" onBlur={handleBlur} onFocus={handleFocus}>
+      <div className="search-bar">
         <input
           type="text"
-          className="form-control"
+          className="search-input"
           placeholder="Search for a title..."
           ref={inputRef}
           value={input}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
         />
         <button onClick={handleSubmit} className="search-btn">
           <img src={searchIcon} className="search-icon" alt="Search" />
         </button>
       </div>
-      <div className="search-results">
-        {results.length > 0 && showResults && (
-          <ul className="list-group">{results.map(singleResult)}</ul>
-        )}
+      <div
+        className={`search-results ${
+          results.length > 0 && showResults ? 'show' : ''
+        }`}
+      >
+        <ul className="search-list">{results.map(singleResult)}</ul>
       </div>
     </div>
   );
