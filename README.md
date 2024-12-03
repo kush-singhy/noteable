@@ -7,10 +7,6 @@
 Noteable is a web app designed to track books, rate them and write notes.
 
 
-## Screenshots
-
-
-
 ## Tech Stack
 
 **Client:** React, Vite, Bootstrap CSS
@@ -30,14 +26,14 @@ Noteable is a web app designed to track books, rate them and write notes.
 
 - Better rich text formatting for inputs
 
+- Import books from Goodread and other apps
+
 
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`API_KEY`
-
-
+...
 
 ## Run Locally
 
