@@ -1,16 +1,15 @@
 import logo from '../../assets/books.svg';
 import profile from '../../assets/profile.svg';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function Header() {
+function Header({ button }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     window.open(`/auth/logout`, '_self');
   };
-  const handleAddBook = () => {
-    navigate('/add');
-  };
+
   const handleGoHome = () => {
     navigate('/');
   };
@@ -25,9 +24,7 @@ function Header() {
           </div>
         </div>
         <div className="add-book">
-          <button onClick={handleAddBook} className="add-book-btn">
-            Add Book
-          </button>
+          {button}
           <div className="dropdown">
             <button className="profile-btn" data-bs-toggle="dropdown">
               <img src={profile} className="profile-img" />
@@ -48,5 +45,8 @@ function Header() {
     </div>
   );
 }
+Header.propTypes = {
+  button: PropTypes.node,
+};
 
 export default Header;

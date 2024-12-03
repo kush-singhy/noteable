@@ -71,6 +71,20 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 }
 
+.save-changes-btn {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 3px;
+  border-radius: 7px;
+  border: none;
+  background-color: transparent;
+  color: #444;
+}
+
+.save-changes-btn:hover {
+  color: #222;
+}
+
 .profile-img {
   width: 20px;
   height: 20px;

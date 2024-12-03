@@ -1,11 +1,66 @@
+import { useState, useEffect } from 'react';
 import Header from '../components/ui/Header';
-import Home from '../components/Home';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Bookgrid from '../components/Bookgrid';
+import Toggle from '../components/ui/Toggle';
+import SortSelect from '../components/ui/SortSelect';
 
 function HomePage() {
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const [readStatus, setReadStatus] = useState('Completed');
+  const [sortType, setSortType] = useState('date');
+  const navigate = useNavigate();
+
+  const handleAddBook = () => {
+    navigate('/add');
+  };
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get('/books', {
+          withCredentials: true,
+        });
+        setBooks(response.data);
+      } catch (err) {
+        console.error('Error fetching books:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBooks();
+  }, []);
+
   return (
     <div className="page">
-      <Header />
-      <Home />
+      <Header
+        button={
+          <button onClick={handleAddBook} className="add-book-btn">
+            Add Book
+          </button>
+        }
+      />
+      <div className="container large">
+        <div className="filters">
+          <Toggle
+            status={readStatus}
+            setStatus={setReadStatus}
+            leftText="Notes"
+            rightText="Wishlist"
+          />
+          <SortSelect status={readStatus} setSortType={setSortType} />
+        </div>
+
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <Bookgrid books={books} readStatus={readStatus} sortType={sortType} />
+        )}
+      </div>
     </div>
   );
 }

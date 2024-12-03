@@ -4,7 +4,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import StarterKit from '@tiptap/starter-kit';
 import { useEffect } from 'react';
 
-function NotesInput({ value, onChange, focus }) {
+function NotesInput({ value, onChange, focus, editing }) {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -13,16 +13,22 @@ function NotesInput({ value, onChange, focus }) {
       }),
     ],
     content: value,
+    editable: editing,
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      if (editing) {
+        onChange(editor.getHTML());
+      }
     },
   });
 
   useEffect(() => {
-    if (focus && editor) {
-      editor.commands.focus();
+    if (editor) {
+      editor.setEditable(editing);
+      if (focus && editing) {
+        editor.commands.focus();
+      }
     }
-  }, [focus, editor]);
+  }, [focus, editor, editing]);
 
   return (
     <div>
@@ -32,9 +38,10 @@ function NotesInput({ value, onChange, focus }) {
 }
 
 NotesInput.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   focus: PropTypes.bool,
+  editing: PropTypes.bool,
 };
 
 export default NotesInput;

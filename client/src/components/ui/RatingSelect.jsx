@@ -5,7 +5,7 @@ function RatingSelect({ id, value, onChange, label }) {
     <div className="form-floating mb-3">
       <select
         id={id}
-        className="form-select"
+        className="form-select info-input"
         name="rating"
         value={value}
         onChange={onChange}
