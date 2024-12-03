@@ -24,8 +24,10 @@ body {
   min-width: 350px;
 }
 
-.medium {
-  max-width: 700px;
+.book-display {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1rem;
+  max-width: 800px;
   min-width: 350px;
 }
 
@@ -182,30 +184,39 @@ body {
 
 /* BOOK VIEW */
 
-.notes-header {
+.book-header {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid #888;
+  padding: 30px 0;
+  gap: 25px;
 }
 
-.notes-img {
+.book-info {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.book-img {
   width: 150px;
   height: 220px;
   border-radius: 10px;
-  margin-right: 25px;
   object-fit: cover;
 }
 
-.notes-header h1 {
-  font-size: 2.3rem;
+.book-header h1 {
+  font-size: 2.1rem;
   line-height: 1.8;
   margin: 0;
-  color: #333;
+  color: #444;
 }
 
-.notes-header h5 {
-  font-size: 1.3rem;
+.book-header h2 {
+  font-size: 1.1rem;
   color: #666;
+  margin-bottom: 15px;
 }
 
 .book-details {
@@ -214,12 +225,10 @@ body {
   align-items: center;
   gap: 30px;
   color: #444;
-  margin-top: 10px;
-  padding-bottom: 25px;
-  border-bottom: 1px solid #aaa;
 }
 
-.book-details div {
+.book-date,
+.book-rating {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -228,6 +237,30 @@ body {
 .book-details div span {
   margin-top: 1px;
 }
+
+.book-menu {
+  padding: 7px;
+  cursor: pointer;
+}
+
+.ProseMirror {
+  font-family: 'Noto Serif', serif;
+  color: #333;
+  font-size: 18px;
+  min-height: 250px;
+  padding: 30px 0;
+  outline: none;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  color: #aaa;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Maybe delete */
 
 .notes-info {
   margin-bottom: 20px;
@@ -363,11 +396,4 @@ body {
 
 .empty-icon {
   width: 100px;
-}
-
-.ProseMirror {
-  min-height: 250px;
-  padding: 30px 0;
-  outline: none;
-  font-size: 18px;
 }

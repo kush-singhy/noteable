@@ -28,7 +28,7 @@ function BookView({ book }) {
   };
 
   return (
-    <div className="container medium">
+    <div className="container book-display">
       <div className="notes-header">
         <img
           src={book.cover ? book.cover : defaultCover}

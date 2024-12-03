@@ -37,7 +37,6 @@ function AddBookPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log('NV:', name, value);
 
     setNewBook((prevValue) => {
       return {
@@ -46,16 +45,6 @@ function AddBookPage() {
       };
     });
   };
-
-  // const handleNotes = (value) => {
-  //   const sanitizedValue = DOMPurify.sanitize(value);
-  //   setNewBook((prevValue) => {
-  //     return {
-  //       ...prevValue,
-  //       notes: sanitizedValue,
-  //     };
-  //   });
-  // };
 
   const handleStatus = (status) => {
     setNewBook((prevValue) => {
@@ -158,7 +147,7 @@ function AddBookPage() {
           </div>
           <div className="edit-btn-box">
             <button onClick={handleSubmit} className="save-btn edit-page-btn">
-              {newBook.readStatus === 'Completed' ? 'Next' : 'Add'}
+              Add
             </button>
             <button
               onClick={() => {
