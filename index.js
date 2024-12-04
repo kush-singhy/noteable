@@ -170,14 +170,20 @@ app.post('/book', async (req, res) => {
 
 app.post('/edit/:id', async (req, res) => {
   const noteId = parseInt(req.params.id);
-  const { title, author, isbn, status, date, rating, note } = req.body;
+  const { title, author, isbn, status, read_date, rating, note } = req.body;
+
+  //Accounting for Date bug
+  let date = new Date(read_date);
+  const day = date.getDate() + 1;
+  date.setDate(day);
+  const formattedDate = date.toISOString();
 
   try {
     await pool.query(
       `UPDATE book_notes
        SET title = $1, author = $2, isbn = $3, status = $4, read_date = $5, rating = $6, note = $7
        WHERE id = $8`,
-      [title, author, isbn, status, date, rating, note, noteId]
+      [title, author, isbn, status, formattedDate, rating, note, noteId]
     );
     res.sendStatus(200);
   } catch (error) {

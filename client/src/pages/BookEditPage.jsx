@@ -23,8 +23,9 @@ function BookEditPage() {
         const response = await axios.get(`/book/${id}`, {
           withCredentials: true,
         });
-        const book = response.data;
-        setBook(book);
+        const bookData = response.data;
+
+        setBook(bookData);
       } catch (err) {
         console.error('Error fetching book:', err);
       } finally {
@@ -52,6 +53,7 @@ function BookEditPage() {
   };
 
   const handleSaveChanges = async () => {
+    console.log('Saving changes:', book);
     setEditing(false);
     try {
       await axios.post(`/edit/${book.id}`, book, {
