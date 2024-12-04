@@ -26,7 +26,7 @@ function RatingSelect({ id, value, onChange, label }) {
 
 RatingSelect.propTypes = {
   id: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
 };

@@ -64,7 +64,11 @@ function BookEditPage() {
     setEditing(true);
   };
 
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    navigate(`/edit/${book.id}`, {
+      state: book,
+    });
+  };
   const handleDelete = async () => {
     try {
       await axios.get(`/delete/${book.id}`);

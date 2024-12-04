@@ -137,7 +137,7 @@ app.get('/book/:id', async (req, res) => {
 
 app.post('/book', async (req, res) => {
   const userEmail = req.user.email;
-  const { title, author, isbn, status, date, rating, note } = req.body;
+  const { title, author, isbn, status, read_date, rating, note } = req.body;
   try {
     const userResult = await pool.query(
       'SELECT id FROM users WHERE email = $1',
@@ -154,7 +154,7 @@ app.post('/book', async (req, res) => {
         author,
         isbn,
         status,
-        date || null,
+        read_date || null,
         rating || null,
         note || null,
       ]

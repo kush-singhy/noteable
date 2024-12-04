@@ -6,8 +6,8 @@ import LoginPage from './LoginPage';
 import HomePage from './HomePage';
 import AddBookPage from './AddBookPage';
 import BookViewPage from './BookViewPage';
-import EditBookPage from './EditBookPage';
 import BookEditPage from './BookEditPage';
+import EditDetailsPage from './EditDetailsPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -52,7 +52,7 @@ function App() {
         <Route
           exact
           path="/edit/:id"
-          element={user ? <EditBookPage /> : <Navigate to="/login" />}
+          element={user ? <EditDetailsPage /> : <Navigate to="/login" />}
         />
         <Route
           exact
