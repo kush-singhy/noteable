@@ -74,9 +74,7 @@ function AddBookPage() {
         withCredentials: true,
       });
       const noteId = response.data.id;
-      navigate(`/book-edit/${noteId}`, {
-        state: true,
-      });
+      navigate(`/book/${noteId}`, { state: { editingStatus: true } });
     } catch (err) {
       console.error('Error adding book:', err);
     }
