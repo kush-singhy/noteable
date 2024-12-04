@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import formatDate from '../util/formatDate';
 import Header from '../components/ui/Header';
@@ -14,9 +14,12 @@ import StatusBadge from '../components/ui/StatusBadge';
 function BookEditPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { editingStatus } = location.state || {};
+
   const [book, setBook] = useState({});
   const [loading, setLoading] = useState(true);
-  const [isEditing, setEditing] = useState(true);
+  const [isEditing, setEditing] = useState(editingStatus);
 
   useEffect(() => {
     const fetchBook = async () => {

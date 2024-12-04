@@ -11,7 +11,7 @@ function Bookcard({ book }) {
   const date = formatDate(book.read_date);
 
   const handleClick = () => {
-    navigate(`/book-edit/${book.id}`);
+    navigate(`/book-edit/${book.id}`, { state: { editingStatus: false } });
   };
 
   return (
