@@ -239,6 +239,8 @@ body {
 }
 
 .book-menu {
+  margin-right: 3px;
+  margin-left: auto;
   padding: 7px;
   cursor: pointer;
 }

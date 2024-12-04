@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import formatDate from '../util/formatDate';
 import Header from '../components/ui/Header';
@@ -13,6 +13,7 @@ import StatusBadge from '../components/ui/StatusBadge';
 
 function BookEditPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [book, setBook] = useState({});
   const [loading, setLoading] = useState(true);
   const [isEditing, setEditing] = useState(true);
@@ -48,12 +49,7 @@ function BookEditPage() {
     });
   };
 
-  const handleMenu = () => {
-    console.log('Menu clicked');
-  };
-
   const handleSaveChanges = async () => {
-    console.log('Saving changes:', book);
     setEditing(false);
     try {
       await axios.post(`/edit/${book.id}`, book, {
@@ -66,6 +62,16 @@ function BookEditPage() {
 
   const handleStartEditing = () => {
     setEditing(true);
+  };
+
+  const handleEdit = () => {};
+  const handleDelete = async () => {
+    try {
+      await axios.get(`/delete/${book.id}`);
+      navigate('/');
+    } catch (err) {
+      console.error('Error deleting book:', err);
+    }
   };
 
   if (loading) {
@@ -111,9 +117,28 @@ function BookEditPage() {
               <img src={starIcon} />
               <span>{book.rating}/5</span>
             </div>
-            <div className="book-menu" onClick={handleMenu}>
+            <div className="book-menu" data-bs-toggle="dropdown">
               <img src={dotsIcon} />
             </div>
+            <ul className="profile-dropdown dropdown-menu">
+              <li>
+                <button
+                  onClick={handleEdit}
+                  className="logout-btn dropdown-item"
+                >
+                  Edit Details
+                </button>
+              </li>
+              <li>
+                <button
+                  className="logout-btn dropdown-item"
+                  data-bs-toggle="modal"
+                  data-bs-target="#deleteModal"
+                >
+                  Delete Book
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -124,6 +149,37 @@ function BookEditPage() {
           focus={true}
           editing={isEditing}
         />
+      </div>
+
+      <div className="modal fade" id="deleteModal" tabIndex="-1">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="deleteModalLabel">
+                Hold your horses!
+              </h1>
+            </div>
+            <div className="modal-body">
+              Are you sure you want to delete this entry?
+            </div>
+            <div className="modal-footer">
+              <button
+                onClick={handleDelete}
+                className="modal-btn delete-btn"
+                data-bs-dismiss="modal"
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                className="modal-btn cancel-btn"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
