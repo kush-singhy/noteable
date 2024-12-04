@@ -11,9 +11,7 @@ function Bookcard({ book }) {
   const date = formatDate(book.read_date);
 
   const handleClick = () => {
-    navigate(`/book/${book.id}`, {
-      state: book,
-    });
+    navigate(`/book-edit/${book.id}`);
   };
 
   return (
@@ -45,7 +43,7 @@ function Bookcard({ book }) {
 }
 Bookcard.propTypes = {
   book: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     cover: PropTypes.string,
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,

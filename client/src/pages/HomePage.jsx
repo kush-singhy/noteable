@@ -10,7 +10,7 @@ function HomePage() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [readStatus, setReadStatus] = useState('Completed');
+  const [status, setstatus] = useState('Completed');
   const [sortType, setSortType] = useState('date');
   const navigate = useNavigate();
 
@@ -47,18 +47,18 @@ function HomePage() {
       <div className="container large">
         <div className="filters">
           <Toggle
-            status={readStatus}
-            setStatus={setReadStatus}
+            status={status}
+            setStatus={setstatus}
             leftText="Notes"
             rightText="Wishlist"
           />
-          <SortSelect status={readStatus} setSortType={setSortType} />
+          <SortSelect status={status} setSortType={setSortType} />
         </div>
 
         {loading ? (
           <div>Loading...</div>
         ) : (
-          <Bookgrid books={books} readStatus={readStatus} sortType={sortType} />
+          <Bookgrid books={books} status={status} sortType={sortType} />
         )}
       </div>
     </div>

@@ -16,7 +16,6 @@ function BookEditPage() {
   const [book, setBook] = useState({});
   const [loading, setLoading] = useState(true);
   const [isEditing, setEditing] = useState(true);
-  const [buttonText, setButtonText] = useState('');
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -26,7 +25,6 @@ function BookEditPage() {
         });
         const book = response.data;
         setBook(book);
-        setButtonText('Save Changes');
       } catch (err) {
         console.error('Error fetching book:', err);
       } finally {
@@ -44,7 +42,7 @@ function BookEditPage() {
     setBook((prevValue) => {
       return {
         ...prevValue,
-        notes: sanitizedValue,
+        note: sanitizedValue,
       };
     });
   };
@@ -55,12 +53,17 @@ function BookEditPage() {
 
   const handleSaveChanges = async () => {
     setEditing(false);
-    setButtonText('Edit Notes');
+    try {
+      await axios.post(`/edit/${book.id}`, book, {
+        withCredentials: true,
+      });
+    } catch (err) {
+      console.error('Error saving changes:', err);
+    }
   };
 
   const handleStartEditing = () => {
     setEditing(true);
-    setButtonText('Save Changes');
   };
 
   if (loading) {
@@ -80,7 +83,7 @@ function BookEditPage() {
             onClick={isEditing ? handleSaveChanges : handleStartEditing}
             className="save-changes-btn"
           >
-            {buttonText}
+            {isEditing ? 'Save Changes' : 'Edit Notes'}
           </button>
         }
       />
@@ -114,7 +117,7 @@ function BookEditPage() {
 
         {/* User input notes */}
         <NotesInput
-          value={book.notes}
+          value={book.note}
           onChange={handleChange}
           focus={true}
           editing={isEditing}

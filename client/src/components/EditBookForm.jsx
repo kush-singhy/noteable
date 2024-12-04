@@ -21,7 +21,7 @@ function EditBookForm({ book }) {
     title: book.title,
     author: book.author,
     isbn: book.isbn,
-    readStatus: book.status,
+    status: book.status,
     date: book.status ? formattedDate : null,
     rating: book.status ? book.rating : '',
     notes: book.status ? book.note : '',
@@ -52,7 +52,7 @@ function EditBookForm({ book }) {
     setNewBook((prevValue) => {
       return {
         ...prevValue,
-        readStatus: status,
+        status: status,
       };
     });
   };
@@ -92,16 +92,14 @@ function EditBookForm({ book }) {
             label="ISBN"
           />
           <Toggle
-            status={newBook.readStatus}
+            status={newBook.status}
             setStatus={handleStatus}
             leftText="Have Read"
             rightText="To Read"
           />
         </div>
 
-        <div
-          className={newBook.readStatus === 'Completed' ? '' : 'hide-inputs'}
-        >
+        <div className={newBook.status === 'Completed' ? '' : 'hide-inputs'}>
           <h5>Add your thoughts: </h5>
           <Input
             id="date"

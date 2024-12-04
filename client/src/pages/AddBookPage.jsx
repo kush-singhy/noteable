@@ -17,10 +17,10 @@ function AddBookPage() {
     title: '',
     author: '',
     isbn: '',
-    readStatus: 'Completed',
+    status: 'Completed',
     date: today.toISOString(),
     rating: '1',
-    notes: '',
+    note: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -50,7 +50,7 @@ function AddBookPage() {
     setNewBook((prevValue) => {
       return {
         ...prevValue,
-        readStatus: status,
+        status: status,
       };
     });
   };
@@ -119,16 +119,14 @@ function AddBookPage() {
           </div>
           <div className="toggle-box">
             <Toggle
-              status={newBook.readStatus}
+              status={newBook.status}
               setStatus={handleStatus}
               leftText="Have Read"
               rightText="To Read"
             />
           </div>
 
-          <div
-            className={newBook.readStatus === 'Completed' ? '' : 'hide-inputs'}
-          >
+          <div className={newBook.status === 'Completed' ? '' : 'hide-inputs'}>
             <div className="half-length">
               <Input
                 id="date"

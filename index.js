@@ -137,7 +137,7 @@ app.get('/book/:id', async (req, res) => {
 
 app.post('/book', async (req, res) => {
   const userEmail = req.user.email;
-  const { title, author, isbn, readStatus, date, rating, notes } = req.body;
+  const { title, author, isbn, status, date, rating, note } = req.body;
   try {
     const userResult = await pool.query(
       'SELECT id FROM users WHERE email = $1',
@@ -153,10 +153,10 @@ app.post('/book', async (req, res) => {
         title,
         author,
         isbn,
-        readStatus,
+        status,
         date || null,
         rating || null,
-        notes || null,
+        note || null,
       ]
     );
 
@@ -170,14 +170,14 @@ app.post('/book', async (req, res) => {
 
 app.post('/edit/:id', async (req, res) => {
   const noteId = parseInt(req.params.id);
-  const { title, author, isbn, readStatus, date, rating, notes } = req.body;
+  const { title, author, isbn, status, date, rating, note } = req.body;
 
   try {
     await pool.query(
       `UPDATE book_notes
        SET title = $1, author = $2, isbn = $3, status = $4, read_date = $5, rating = $6, note = $7
        WHERE id = $8`,
-      [title, author, isbn, readStatus, date, rating, notes, noteId]
+      [title, author, isbn, status, date, rating, note, noteId]
     );
     res.sendStatus(200);
   } catch (error) {
