@@ -19,7 +19,7 @@ function AddBookPage() {
     isbn: '',
     status: 'Completed',
     read_date: today.toISOString(),
-    rating: '1',
+    rating: '',
     note: '',
   });
   const [errors, setErrors] = useState({});

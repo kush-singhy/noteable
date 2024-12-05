@@ -14,10 +14,13 @@ function EditDetailsPage() {
 
   const [errors, setErrors] = useState({});
 
-  let date = new Date(bookData.read_date);
-  const day = date.getDate() + 1;
-  date.setDate(day);
-  const formattedDate = date.toISOString();
+  let formattedDate = new Date().toISOString();
+  if (bookData.read_date) {
+    let date = new Date(bookData.read_date);
+    const day = date.getDate() + 1;
+    date.setDate(day);
+    formattedDate = date.toISOString();
+  }
 
   const [book, setBook] = useState({ ...bookData, read_date: formattedDate });
 
@@ -55,8 +58,6 @@ function EditDetailsPage() {
       setErrors(formErrors);
       return;
     }
-
-    console.log('Book: ', book);
 
     try {
       await axios.post(`/api/edit/${book.id}`, book, {
