@@ -82,26 +82,26 @@ function EditDetailsPage() {
               label="Title"
               error={errors.title}
             />
-            <div className="half-length">
-              <Input
-                id="author"
-                type="text"
-                value={book.author}
-                onChange={handleChange}
-                label="Author"
-                error={errors.author}
-              />
-              <Input
-                id="isbn"
-                type="text"
-                value={book.isbn}
-                onChange={handleChange}
-                label="ISBN"
-                error={errors.isbn}
-              />
-            </div>
+            <Input
+              id="author"
+              type="text"
+              value={book.author}
+              onChange={handleChange}
+              label="Author"
+              error={errors.author}
+            />
+            <Input
+              id="isbn"
+              type="text"
+              value={book.isbn}
+              onChange={handleChange}
+              label="ISBN"
+              error={errors.isbn}
+            />
           </div>
+          <hr />
           <div className="toggle-box">
+            <span className="info-input-label">Status</span>
             <Toggle
               status={book.status}
               setStatus={handleStatus}
@@ -111,6 +111,7 @@ function EditDetailsPage() {
           </div>
 
           <div className={book.status === 'Completed' ? '' : 'hide-inputs'}>
+            <hr />
             <div className="half-length">
               <Input
                 id="read_date"

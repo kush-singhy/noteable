@@ -4,7 +4,10 @@ function Input({ id, type, value, onChange, label, error }) {
   const className = 'form-control info-input ' + (error ? 'is-invalid' : '');
 
   return (
-    <div className="form-floating mb-3">
+    <div className="info-input-group mb-3">
+      <label className="info-input-label" htmlFor={id}>
+        {label}
+      </label>
       <input
         id={id}
         type={type}
@@ -15,7 +18,6 @@ function Input({ id, type, value, onChange, label, error }) {
         onChange={onChange}
         autoComplete="off"
       />
-      <label htmlFor={id}>{label}</label>
     </div>
   );
 }

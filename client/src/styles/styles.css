@@ -24,13 +24,13 @@ body {
 }
 
 .small-container {
-  max-width: 600px;
+  max-width: 560px;
   min-width: 350px;
 }
 
 .book-display {
   font-family: 'Figtree', sans-serif;
-  max-width: 800px;
+  max-width: 760px;
   min-width: 350px;
 }
 
@@ -150,18 +150,30 @@ body {
   margin-top: 35px;
 }
 
+.add-form hr {
+  margin: 20px 0;
+}
+
 .add-form-subtitle {
   font-size: 1rem;
   color: black;
   margin: 0 0 15px 0;
 }
 
-.info-input {
-  border: 1px solid #ccc;
+.info-input-group {
+  display: flex;
+  align-items: center;
 }
 
-.form-floating label {
-  color: #777;
+.info-input-label {
+  min-width: 100px;
+}
+
+.info-input {
+  border: 1px solid #ccc;
+  height: 45px;
+  max-width: 400px;
+  margin-left: auto;
 }
 
 .info-input:focus {
@@ -169,18 +181,9 @@ body {
   box-shadow: 0 0 0 0.2rem #ddd;
 }
 
-.half-length {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-}
-
-.half-length .form-floating {
-  width: 100%;
-}
-
 .toggle-box {
-  margin: 10px 0 30px 0;
+  display: flex;
+  align-items: center;
 }
 
 .hide-inputs {
@@ -218,8 +221,7 @@ body {
 
 .book-header h1 {
   font-size: 2.1rem;
-  line-height: 1.8;
-  margin: 0;
+  margin: 0 0 10px 0;
   color: #444;
 }
 
@@ -294,9 +296,11 @@ body {
 .delete-btn-2 {
   color: red;
 }
+
 .delete-btn-2:hover {
   color: red;
 }
+
 .delete-btn-2:active {
   background-color: #ddd;
   color: red;
@@ -327,7 +331,7 @@ body {
 .edit-btn-box {
   display: flex;
   gap: 5px;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 .edit-page-btn {

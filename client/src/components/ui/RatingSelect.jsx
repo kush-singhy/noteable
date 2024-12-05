@@ -2,7 +2,10 @@ import PropTypes from 'prop-types';
 
 function RatingSelect({ id, value, onChange, label }) {
   return (
-    <div className="form-floating mb-3">
+    <div className="info-input-group mb-3">
+      <label className="info-input-label" htmlFor={id}>
+        {label}
+      </label>
       <select
         id={id}
         className="form-select info-input"
@@ -19,7 +22,6 @@ function RatingSelect({ id, value, onChange, label }) {
         <option value="4">4</option>
         <option value="5">5</option>
       </select>
-      <label htmlFor={id}>{label}</label>
     </div>
   );
 }

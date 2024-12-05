@@ -138,6 +138,8 @@ app.get('/api/book/:id', async (req, res) => {
 app.post('/api/book', async (req, res) => {
   const userEmail = req.user.email;
   const { title, author, isbn, status, read_date, rating, note } = req.body;
+  const statusCheck = status === 'Completed';
+
   try {
     const userResult = await pool.query(
       'SELECT id FROM users WHERE email = $1',
@@ -154,9 +156,9 @@ app.post('/api/book', async (req, res) => {
         author,
         isbn,
         status,
-        read_date || null,
-        rating || null,
-        note || null,
+        statusCheck ? read_date : null,
+        statusCheck ? rating : null,
+        statusCheck ? note : null,
       ]
     );
 

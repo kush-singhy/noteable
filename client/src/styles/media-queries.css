@@ -4,7 +4,7 @@
   }
 
   .small-container {
-    max-width: 600px;
+    max-width: 560px;
   }
 
   .book-grid {
@@ -30,16 +30,33 @@
     gap: 10px;
   }
 
-  .half-length {
-    display: block;
-    justify-content: space-between;
-    gap: 15px;
-  }
   .header-content {
     padding: 15px 20px;
   }
 
   .header .title {
+    display: none;
+  }
+}
+
+@media (max-width: 525px) {
+  .book-info {
+    flex-direction: column;
+  }
+  .book-text-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 450px) {
+  .toggle-box {
+    justify-content: center;
+  }
+
+  .toggle-box .info-input-label {
     display: none;
   }
 }

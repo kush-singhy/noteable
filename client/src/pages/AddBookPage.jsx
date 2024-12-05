@@ -89,7 +89,7 @@ function AddBookPage() {
 
         <div className="add-form">
           <h5 className="add-form-subtitle">Or enter details here: </h5>
-          <hr></hr>
+          <hr />
           <div className="add-info">
             <Input
               id="title"
@@ -99,26 +99,26 @@ function AddBookPage() {
               label="Title"
               error={errors.title}
             />
-            <div className="half-length">
-              <Input
-                id="author"
-                type="text"
-                value={newBook.author}
-                onChange={handleChange}
-                label="Author"
-                error={errors.author}
-              />
-              <Input
-                id="isbn"
-                type="text"
-                value={newBook.isbn}
-                onChange={handleChange}
-                label="ISBN"
-                error={errors.isbn}
-              />
-            </div>
+            <Input
+              id="author"
+              type="text"
+              value={newBook.author}
+              onChange={handleChange}
+              label="Author"
+              error={errors.author}
+            />
+            <Input
+              id="isbn"
+              type="text"
+              value={newBook.isbn}
+              onChange={handleChange}
+              label="ISBN"
+              error={errors.isbn}
+            />
           </div>
+          <hr />
           <div className="toggle-box">
+            <span className="info-input-label">Status</span>
             <Toggle
               status={newBook.status}
               setStatus={handleStatus}
@@ -128,21 +128,20 @@ function AddBookPage() {
           </div>
 
           <div className={newBook.status === 'Completed' ? '' : 'hide-inputs'}>
-            <div className="half-length">
-              <Input
-                id="read_date"
-                type="date"
-                value={newBook.read_date ? newBook.read_date.split('T')[0] : ''}
-                onChange={handleChange}
-                label="Date Read"
-              />
-              <RatingSelect
-                id="rating"
-                value={newBook.rating}
-                onChange={handleChange}
-                label="Rating"
-              />
-            </div>
+            <hr />
+            <Input
+              id="read_date"
+              type="date"
+              value={newBook.read_date ? newBook.read_date.split('T')[0] : ''}
+              onChange={handleChange}
+              label="Date Read"
+            />
+            <RatingSelect
+              id="rating"
+              value={newBook.rating}
+              onChange={handleChange}
+              label="Rating"
+            />
           </div>
           <div className="edit-btn-box">
             <button onClick={handleSubmit} className="save-btn edit-page-btn">
