@@ -11,14 +11,13 @@ import Header from '../components/ui/Header';
 
 function AddBookPage() {
   const navigate = useNavigate();
-  const today = new Date();
 
   const [newBook, setNewBook] = useState({
     title: '',
     author: '',
     isbn: '',
     status: 'Completed',
-    read_date: today.toISOString(),
+    read_date: '',
     rating: '',
     note: '',
   });
