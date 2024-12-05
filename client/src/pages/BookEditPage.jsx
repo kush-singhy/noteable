@@ -7,9 +7,9 @@ import DOMPurify from 'dompurify';
 
 import calendarIcon from '../assets/Calendar.svg';
 import starIcon from '../assets/Star.svg';
-import dotsIcon from '../assets/dots.svg';
 import NotesInput from '../components/NotesInput';
 import StatusBadge from '../components/ui/StatusBadge';
+import MenuDots from '../components/ui/MenuDots';
 
 function BookEditPage() {
   const { id } = useParams();
@@ -112,41 +112,30 @@ function BookEditPage() {
               <h2>{book.author}</h2>
               <StatusBadge status={book.status} />
             </div>
+
+            {book.status === 'To Read' && (
+              <div className="book-menu">
+                <MenuDots handleEdit={handleEdit} handleDelete={handleDelete} />
+              </div>
+            )}
           </div>
 
           {/* User input details */}
-          <div className="book-details">
-            <div className="book-date">
-              <img src={calendarIcon} />
-              <span>{date}</span>
+          {book.status === 'Completed' && (
+            <div className="book-details">
+              <div className="book-date">
+                <img src={calendarIcon} />
+                <span>{date}</span>
+              </div>
+              <div className="book-rating">
+                <img src={starIcon} />
+                <span>{book.rating}/5</span>
+              </div>
+              <div className="book-menu">
+                <MenuDots handleEdit={handleEdit} handleDelete={handleDelete} />
+              </div>
             </div>
-            <div className="book-rating">
-              <img src={starIcon} />
-              <span>{book.rating}/5</span>
-            </div>
-            <div className="book-menu" data-bs-toggle="dropdown">
-              <img src={dotsIcon} />
-            </div>
-            <ul className="profile-dropdown dropdown-menu">
-              <li>
-                <button
-                  onClick={handleEdit}
-                  className="logout-btn dropdown-item"
-                >
-                  Edit Details
-                </button>
-              </li>
-              <li>
-                <button
-                  className="logout-btn dropdown-item"
-                  data-bs-toggle="modal"
-                  data-bs-target="#deleteModal"
-                >
-                  Delete Book
-                </button>
-              </li>
-            </ul>
-          </div>
+          )}
         </div>
 
         {/* User input notes */}
@@ -156,37 +145,6 @@ function BookEditPage() {
           focus={true}
           editing={isEditing}
         />
-      </div>
-
-      <div className="modal fade" id="deleteModal" tabIndex="-1">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="deleteModalLabel">
-                Hold your horses!
-              </h1>
-            </div>
-            <div className="modal-body">
-              Are you sure you want to delete this entry?
-            </div>
-            <div className="modal-footer">
-              <button
-                onClick={handleDelete}
-                className="modal-btn delete-btn"
-                data-bs-dismiss="modal"
-              >
-                Delete
-              </button>
-              <button
-                type="button"
-                className="modal-btn cancel-btn"
-                data-bs-dismiss="modal"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -242,6 +242,15 @@ body {
   margin-right: 3px;
   margin-left: auto;
   padding: 7px;
+  margin-top: auto;
+  cursor: pointer;
+}
+
+.book-menu-alt {
+  margin-right: 3px;
+  margin-top: auto;
+  margin-left: auto;
+  padding: 7px;
   cursor: pointer;
 }
 
