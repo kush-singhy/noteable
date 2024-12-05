@@ -40,6 +40,9 @@
 }
 
 @media (max-width: 525px) {
+  .add-book-title {
+    margin: 0 0 20px 0;
+  }
   .book-info {
     flex-direction: column;
   }
