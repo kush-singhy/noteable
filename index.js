@@ -74,7 +74,7 @@ async function addBookCover(book) {
 
 // ROUTING
 
-app.get('/books', async (req, res) => {
+app.get('/api/books', async (req, res) => {
   const userEmail = req.user.email;
   try {
     const result = await pool.query(
@@ -103,7 +103,7 @@ app.get('/books', async (req, res) => {
   }
 });
 
-app.get('/book/:id', async (req, res) => {
+app.get('/api/book/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const result = await pool.query(
@@ -135,7 +135,7 @@ app.get('/book/:id', async (req, res) => {
   }
 });
 
-app.post('/book', async (req, res) => {
+app.post('/api/book', async (req, res) => {
   const userEmail = req.user.email;
   const { title, author, isbn, status, read_date, rating, note } = req.body;
   try {
@@ -168,7 +168,7 @@ app.post('/book', async (req, res) => {
   }
 });
 
-app.post('/edit/:id', async (req, res) => {
+app.post('/api/edit/:id', async (req, res) => {
   const noteId = parseInt(req.params.id);
   const { title, author, isbn, status, read_date, rating, note } = req.body;
 
@@ -192,7 +192,7 @@ app.post('/edit/:id', async (req, res) => {
   }
 });
 
-app.get('/delete/:id', async (req, res) => {
+app.get('/api/delete/:id', async (req, res) => {
   const noteId = parseInt(req.params.id);
 
   try {
@@ -208,7 +208,7 @@ app.get('/delete/:id', async (req, res) => {
   }
 });
 
-app.post('/search', async (req, res) => {
+app.post('/api/search', async (req, res) => {
   const { input } = req.body;
 
   if (input === '') {

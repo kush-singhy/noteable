@@ -24,7 +24,7 @@ function BookEditPage() {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const response = await axios.get(`/book/${id}`, {
+        const response = await axios.get(`/api/book/${id}`, {
           withCredentials: true,
         });
         const bookData = response.data;
@@ -55,7 +55,7 @@ function BookEditPage() {
   const handleSaveChanges = async () => {
     setEditing(false);
     try {
-      await axios.post(`/edit/${book.id}`, book, {
+      await axios.post(`/api/edit/${book.id}`, book, {
         withCredentials: true,
       });
     } catch (err) {
@@ -74,7 +74,7 @@ function BookEditPage() {
   };
   const handleDelete = async () => {
     try {
-      await axios.get(`/delete/${book.id}`);
+      await axios.get(`/api/delete/${book.id}`);
       navigate('/');
     } catch (err) {
       console.error('Error deleting book:', err);

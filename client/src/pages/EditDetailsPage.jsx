@@ -59,7 +59,7 @@ function EditDetailsPage() {
     console.log('Book: ', book);
 
     try {
-      await axios.post(`/edit/${book.id}`, book, {
+      await axios.post(`/api/edit/${book.id}`, book, {
         withCredentials: true,
       });
       navigate(-1);

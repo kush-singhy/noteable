@@ -21,7 +21,7 @@ function HomePage() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get('/books', {
+        const response = await axios.get('/api/books', {
           withCredentials: true,
         });
         setBooks(response.data);

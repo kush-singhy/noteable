@@ -70,7 +70,7 @@ function AddBookPage() {
     }
 
     try {
-      const response = await axios.post('/book', newBook, {
+      const response = await axios.post('/api/book', newBook, {
         withCredentials: true,
       });
       const noteId = response.data.id;

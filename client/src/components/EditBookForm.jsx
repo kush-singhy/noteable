@@ -59,7 +59,7 @@ function EditBookForm({ book }) {
 
   async function handleSubmit() {
     try {
-      await axios.post(`/edit/${book.id}`, newBook);
+      await axios.post(`/api/edit/${book.id}`, newBook);
       navigate('/');
     } catch (err) {
       console.error('Error adding book:', err);
