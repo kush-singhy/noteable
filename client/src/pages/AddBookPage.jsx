@@ -84,10 +84,12 @@ function AddBookPage() {
     <div className="page">
       <Header />
       <div className="container small-container">
+        <h3 className="add-book-title">Add a book</h3>
         <SearchBar onResultChange={handleBookSearch} />
 
         <div className="add-form">
-          <h5>Or enter details here: </h5>
+          <h5 className="add-form-subtitle">Or enter details here: </h5>
+          <hr></hr>
           <div className="add-info">
             <Input
               id="title"

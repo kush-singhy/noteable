@@ -38,7 +38,7 @@ body {
 
 .add-search {
   position: relative;
-  margin: 30px 0;
+  margin: 0;
 }
 
 .search-bar {
@@ -141,12 +141,19 @@ body {
 
 /* ADD BOOK FORM */
 
-.add-form {
-  margin-top: 10px;
+.add-book-title {
+  font-size: 1.3rem;
+  margin: 25px 0 20px 0;
 }
 
-.add-form h5 {
-  line-height: 1.8;
+.add-form {
+  margin-top: 35px;
+}
+
+.add-form-subtitle {
+  font-size: 1rem;
+  color: black;
+  margin: 0 0 15px 0;
 }
 
 .info-input {
