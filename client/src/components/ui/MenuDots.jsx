@@ -9,13 +9,16 @@ function MenuDots({ handleEdit, handleDelete }) {
       </div>
       <ul className="profile-dropdown dropdown-menu">
         <li>
-          <button onClick={handleEdit} className="logout-btn dropdown-item">
+          <button
+            onClick={handleEdit}
+            className="logout-btn dropdown-item edit-btn-2"
+          >
             Edit Details
           </button>
         </li>
         <li>
           <button
-            className="logout-btn dropdown-item"
+            className="logout-btn dropdown-item delete-btn-2"
             data-bs-toggle="modal"
             data-bs-target="#deleteModal"
           >

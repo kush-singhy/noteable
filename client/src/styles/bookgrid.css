@@ -12,12 +12,12 @@
   background-color: white;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.24) -3px 3px 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
 
 .book-card:hover {
-  transform: translateY(-1px);
+  transform: translateY(-8px);
   box-shadow: rgba(0, 0, 0, 0.3) -4px 4px 12px;
 }
 
@@ -32,12 +32,27 @@
   height: 180px;
 }
 
+.book-card-date {
+  margin-top: 10px;
+}
+.book-card-rating {
+  margin-top: 4px;
+}
+
 .book-card-text {
+  font-size: 0.9rem;
+  color: #555;
   margin-top: 14px;
   line-height: 0.6;
 }
 
+.book-card-icon {
+  width: 18px;
+  margin-right: 5px;
+}
+
 .book-card-title {
+  font-size: 1.2rem;
   height: 30px;
   margin: 0;
   overflow: hidden;
@@ -46,11 +61,12 @@
 }
 
 .book-card-subtitle {
-  margin: 0 0 12px 0;
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0 0 8px 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: #777;
 }
 
 .cover-img {

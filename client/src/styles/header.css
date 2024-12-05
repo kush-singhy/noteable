@@ -47,7 +47,7 @@
 }
 
 .add-book-btn {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   padding: 6px 12px;
   border-radius: 7px;
@@ -72,7 +72,7 @@
 }
 
 .save-changes-btn {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   padding: 3px;
   border-radius: 7px;
@@ -94,8 +94,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35px;
-  height: 35px;
+  width: 38px;
+  height: 38px;
   border-radius: 50px;
   background-color: white;
   border: none;
