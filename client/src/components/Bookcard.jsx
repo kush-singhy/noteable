@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import StatusBadge from './ui/StatusBadge';
 import defaultCover from '../assets/not-found-alt.svg';
 import formatDate from '../util/formatDate';
+import calendarIcon from '../assets/Calendar.svg';
+import starIcon from '../assets/Star.svg';
 
 function Bookcard({ book }) {
   const navigate = useNavigate();
@@ -11,9 +13,7 @@ function Bookcard({ book }) {
   const date = formatDate(book.read_date);
 
   const handleClick = () => {
-    navigate(`/book/${book.id}`, {
-      state: book,
-    });
+    navigate(`/book/${book.id}`, { state: { editingStatus: false } });
   };
 
   return (
@@ -32,10 +32,16 @@ function Bookcard({ book }) {
             <p className="book-card-subtitle">{book.author}</p>
             <StatusBadge status={book.status} />
             {book.status === 'Completed' && (
-              <p className="book-card-text">{date}</p>
-            )}
-            {book.status === 'Completed' && (
-              <p className="book-card-text">{book.rating}/5</p>
+              <div>
+                <div className="book-card-date">
+                  <img src={calendarIcon} className="book-card-icon" />
+                  <span className="book-card-text">{date}</span>
+                </div>
+                <div className="book-card-rating">
+                  <img src={starIcon} className="book-card-icon" />
+                  <span className="book-card-text">{book.rating}/5</span>
+                </div>
+              </div>
             )}
           </div>
         </div>
@@ -45,7 +51,7 @@ function Bookcard({ book }) {
 }
 Bookcard.propTypes = {
   book: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     cover: PropTypes.string,
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,

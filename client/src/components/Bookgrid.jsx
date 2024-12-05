@@ -2,13 +2,13 @@ import Bookcard from './Bookcard';
 import EmptyMessage from './EmptyMessage';
 import PropTypes from 'prop-types';
 
-function Bookgrid({ books, readStatus, sortType }) {
+function Bookgrid({ books, status, sortType }) {
   function createCard(book) {
     return <Bookcard key={book.id} book={book} />;
   }
 
   const filteredBooks = books.filter((book) => {
-    return book.status === readStatus;
+    return book.status === status;
   });
 
   if (sortType === 'date') {
@@ -39,7 +39,7 @@ Bookgrid.propTypes = {
       title: PropTypes.string.isRequired,
     })
   ).isRequired,
-  readStatus: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
   sortType: PropTypes.string.isRequired,
 };
 

@@ -74,7 +74,7 @@ async function addBookCover(book) {
 
 // ROUTING
 
-app.get('/books', async (req, res) => {
+app.get('/api/books', async (req, res) => {
   const userEmail = req.user.email;
   try {
     const result = await pool.query(
@@ -103,9 +103,43 @@ app.get('/books', async (req, res) => {
   }
 });
 
-app.post('/book', async (req, res) => {
+app.get('/api/book/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      `SELECT 
+        bn.id,
+        bn.title,
+        bn.author,
+        bn.isbn,
+        bn.status,
+        bn.read_date,
+        bn.rating,
+        bn.note
+      FROM book_notes bn
+      WHERE bn.id = $1`,
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).send('Book note not found');
+    }
+
+    const book = result.rows[0];
+    const bookWithCover = await addBookCover(book);
+
+    res.json(bookWithCover);
+  } catch (error) {
+    console.error('Error fetching book note:', error);
+    res.status(500).send('Error fetching book note');
+  }
+});
+
+app.post('/api/book', async (req, res) => {
   const userEmail = req.user.email;
-  const { title, author, isbn, readStatus, date, rating, notes } = req.body;
+  const { title, author, isbn, status, read_date, rating, note } = req.body;
+  const statusCheck = status === 'Completed';
+
   try {
     const userResult = await pool.query(
       'SELECT id FROM users WHERE email = $1',
@@ -113,38 +147,45 @@ app.post('/book', async (req, res) => {
     );
     const userId = userResult.rows[0].id;
 
-    await pool.query(
+    const insertResult = await pool.query(
       `INSERT INTO book_notes (user_id, title, author, isbn, status, read_date, rating, note)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
       [
         userId,
         title,
         author,
         isbn,
-        readStatus,
-        date || null,
-        rating || null,
-        notes || null,
+        status,
+        statusCheck ? read_date : null,
+        statusCheck ? rating : null,
+        statusCheck ? note : null,
       ]
     );
 
-    res.sendStatus(200);
+    const bookNoteId = insertResult.rows[0].id;
+    res.status(200).json({ id: bookNoteId });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Error adding book');
   }
 });
 
-app.post('/edit/:id', async (req, res) => {
+app.post('/api/edit/:id', async (req, res) => {
   const noteId = parseInt(req.params.id);
-  const { title, author, isbn, readStatus, date, rating, notes } = req.body;
+  const { title, author, isbn, status, read_date, rating, note } = req.body;
+
+  //Accounting for Date bug
+  let date = new Date(read_date);
+  const day = date.getDate() + 1;
+  date.setDate(day);
+  const formattedDate = date.toISOString();
 
   try {
     await pool.query(
       `UPDATE book_notes
        SET title = $1, author = $2, isbn = $3, status = $4, read_date = $5, rating = $6, note = $7
        WHERE id = $8`,
-      [title, author, isbn, readStatus, date, rating, notes, noteId]
+      [title, author, isbn, status, formattedDate, rating, note, noteId]
     );
     res.sendStatus(200);
   } catch (error) {
@@ -153,7 +194,7 @@ app.post('/edit/:id', async (req, res) => {
   }
 });
 
-app.get('/delete/:id', async (req, res) => {
+app.get('/api/delete/:id', async (req, res) => {
   const noteId = parseInt(req.params.id);
 
   try {
@@ -169,7 +210,7 @@ app.get('/delete/:id', async (req, res) => {
   }
 });
 
-app.post('/search', async (req, res) => {
+app.post('/api/search', async (req, res) => {
   const { input } = req.body;
 
   if (input === '') {

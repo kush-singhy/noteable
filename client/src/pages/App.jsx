@@ -5,8 +5,8 @@ import axios from 'axios';
 import LoginPage from './LoginPage';
 import HomePage from './HomePage';
 import AddBookPage from './AddBookPage';
-import BookViewPage from './BookViewPage';
-import EditBookPage from './EditBookPage';
+import BookEditPage from './BookEditPage';
+import EditDetailsPage from './EditDetailsPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,6 +28,7 @@ function App() {
   return (
     <div className="page">
       <Routes>
+        <Route path="*" element={<Navigate to="/" />} />
         <Route
           exact
           path="/"
@@ -45,13 +46,13 @@ function App() {
         />
         <Route
           exact
-          path="/book/:id"
-          element={user ? <BookViewPage /> : <Navigate to="/login" />}
+          path="/edit/:id"
+          element={user ? <EditDetailsPage /> : <Navigate to="/login" />}
         />
         <Route
           exact
-          path="/edit/:id"
-          element={user ? <EditBookPage /> : <Navigate to="/login" />}
+          path="/book/:id"
+          element={user ? <BookEditPage /> : <Navigate to="/login" />}
         />
       </Routes>
     </div>

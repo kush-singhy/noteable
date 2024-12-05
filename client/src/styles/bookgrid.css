@@ -1,73 +1,90 @@
 .book-grid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 40px;
-	transition: height 0.3s ease-out;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  transition: height 0.3s ease-out;
 }
 
 .book-card {
-	width: 100%;
-	max-width: 340px;
-	height: auto;
-	background-color: white;
-	border-radius: 12px;
-	box-shadow: rgba(0, 0, 0, 0.24) -3px 3px 8px;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-	cursor: pointer;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.24) -3px 3px 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .book-card:hover {
-	transform: translateY(-1px);
-	box-shadow: rgba(0, 0, 0, 0.3) -4px 4px 12px;
+  transform: translateY(-8px);
+  box-shadow: rgba(0, 0, 0, 0.3) -4px 4px 12px;
 }
 
 .book-card:active {
-	transform: translateY(0px) scale(0.99);
-	box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+  transform: translateY(0px) scale(0.99);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 }
 
 .book-card-body {
-	width: 200px;
-	padding: 15px 20px;
-	height: 180px;
+  width: 200px;
+  padding: 15px 20px;
+  height: 180px;
+}
+
+.book-card-date {
+  margin-top: 10px;
+}
+.book-card-rating {
+  margin-top: 4px;
 }
 
 .book-card-text {
-	margin-top: 14px;
-	line-height: 0.6;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 14px;
+  line-height: 0.6;
+}
+
+.book-card-icon {
+  width: 18px;
+  margin-right: 5px;
 }
 
 .book-card-title {
-	height: 30px;
-	margin: 0;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+  font-size: 1.2rem;
+  height: 30px;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .book-card-subtitle {
-	margin: 0 0 12px 0;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	color: #777;
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0 0 8px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .cover-img {
-	width: 100%;
-	height: 100%;
-	max-height: 180px;
-	object-fit: cover;
-	border-radius: 12px 0 0 12px;
+  width: 100%;
+  height: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 12px 0 0 12px;
 }
 
 .read-badge {
-	border: 1px solid #198754;
-	color: #198754;
-	width: 42px;
+  font-weight: 600;
+  border: 1px solid #198754;
+  color: #198754;
+  width: 50px;
 }
 
 .to-read-badge {
-	border: 1px solid #999;
-	color: #999;
+  border: 1px solid #999;
+  color: #999;
 }

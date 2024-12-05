@@ -47,7 +47,7 @@
 }
 
 .add-book-btn {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   padding: 6px 12px;
   border-radius: 7px;
@@ -71,6 +71,20 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 }
 
+.save-changes-btn {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 3px;
+  border-radius: 7px;
+  border: none;
+  background-color: transparent;
+  color: #444;
+}
+
+.save-changes-btn:hover {
+  color: #222;
+}
+
 .profile-img {
   width: 20px;
   height: 20px;
@@ -80,8 +94,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35px;
-  height: 35px;
+  width: 38px;
+  height: 38px;
   border-radius: 50px;
   background-color: white;
   border: none;
@@ -105,14 +119,4 @@
 .logout-btn:hover {
   border: none;
   border-radius: 6px;
-}
-
-@media (max-width: 500px) {
-  .header-content {
-    padding: 15px 20px;
-  }
-
-  .header .title {
-    display: none;
-  }
 }
