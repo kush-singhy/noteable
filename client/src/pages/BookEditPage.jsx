@@ -5,6 +5,7 @@ import formatDate from '../util/formatDate';
 import Header from '../components/ui/Header';
 import DOMPurify from 'dompurify';
 
+import defaultCover from '../assets/not-found-alt.svg';
 import calendarIcon from '../assets/Calendar.svg';
 import starIcon from '../assets/Star.svg';
 import NotesInput from '../components/NotesInput';
@@ -106,7 +107,11 @@ function BookEditPage() {
         <div className="book-header">
           {/* Book specific info */}
           <div className="book-info">
-            <img src={book.cover} className="book-img" alt="Book Cover" />
+            <img
+              src={book.cover ? book.cover : defaultCover}
+              className="book-img"
+              alt="Book Cover"
+            />
             <div className="book-text-info">
               <h1>{book.title}</h1>
               <h2>{book.author}</h2>
