@@ -381,3 +381,12 @@ body {
 .empty-icon {
   width: 100px;
 }
+
+.loading {
+  font-size: 1.3rem;
+  color: #777;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+}

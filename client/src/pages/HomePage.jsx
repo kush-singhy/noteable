@@ -56,7 +56,7 @@ function HomePage() {
         </div>
 
         {loading ? (
-          <div>Loading...</div>
+          <div className="loading">Loading...</div>
         ) : (
           <Bookgrid books={books} status={status} sortType={sortType} />
         )}
