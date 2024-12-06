@@ -7,7 +7,7 @@ function MenuDots({ handleEdit, handleDelete }) {
       <div data-bs-toggle="dropdown">
         <img src={dotsIcon} />
       </div>
-      <ul className="profile-dropdown dropdown-menu">
+      <ul className="profile-dropdown dropdown-menu dropdown-menu-end">
         <li>
           <button
             onClick={handleEdit}
