@@ -283,6 +283,11 @@ body {
   pointer-events: none;
 }
 
+.menu-btn {
+  color: #444;
+  padding: 8px 15px;
+}
+
 .edit-btn-2:active {
   color: #333;
   background-color: #ddd;
@@ -375,4 +380,13 @@ body {
 
 .empty-icon {
   width: 100px;
+}
+
+.loading {
+  font-size: 1.3rem;
+  color: #777;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
 }

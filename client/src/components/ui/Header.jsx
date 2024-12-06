@@ -1,10 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../pages/UserContext';
+import PropTypes from 'prop-types';
+
 import logo from '../../assets/books.svg';
 import profile from '../../assets/profile.svg';
-import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 function Header({ button }) {
   const navigate = useNavigate();
+  const user = useUser();
 
   const handleLogout = () => {
     window.open(`/auth/logout`, '_self');
@@ -27,9 +30,19 @@ function Header({ button }) {
           {button}
           <div className="dropdown">
             <button className="profile-btn" data-bs-toggle="dropdown">
-              <img src={profile} className="profile-img" />
+              <img src={user.picture || profile} className="profile-img" />
             </button>
-            <ul className="profile-dropdown dropdown-menu">
+            <ul className="dropdown-menu dropdown-menu-end profile-dropdown">
+              <li className="profile-info">
+                <img src={user.picture || profile} className="profile-img" />
+                <div className="profile-text">
+                  <span className="profile-name">{user.name || 'Guest'}</span>
+                  <span>{user.email || ''}</span>
+                </div>
+              </li>
+              <li>
+                <hr className="profile-divider" />
+              </li>
               <li>
                 <button
                   className="logout-btn dropdown-item"

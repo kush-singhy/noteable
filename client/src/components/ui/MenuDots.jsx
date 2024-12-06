@@ -7,18 +7,18 @@ function MenuDots({ handleEdit, handleDelete }) {
       <div data-bs-toggle="dropdown">
         <img src={dotsIcon} />
       </div>
-      <ul className="profile-dropdown dropdown-menu">
+      <ul className="profile-dropdown dropdown-menu dropdown-menu-end">
         <li>
           <button
             onClick={handleEdit}
-            className="logout-btn dropdown-item edit-btn-2"
+            className="menu-btn dropdown-item edit-btn-2"
           >
             Edit Details
           </button>
         </li>
         <li>
           <button
-            className="logout-btn dropdown-item delete-btn-2"
+            className="delete-btn-2 menu-btn dropdown-item"
             data-bs-toggle="modal"
             data-bs-target="#deleteModal"
           >

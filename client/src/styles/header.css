@@ -54,14 +54,14 @@
   border: none;
   color: white;
   background-color: #3498db;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px; */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .add-book-btn:hover {
   color: white;
   background-color: #3498db;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
 }
 
 .add-book-btn:active {
@@ -86,8 +86,9 @@
 }
 
 .profile-img {
-  width: 20px;
-  height: 20px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50px;
 }
 
 .profile-btn {
@@ -99,12 +100,11 @@
   border-radius: 50px;
   background-color: white;
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profile-btn:hover {
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
 }
 
 .profile-dropdown {
@@ -112,11 +112,36 @@
   border: 1px solid #ccc;
 }
 
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.profile-divider {
+  margin: 0;
+}
+
 .logout-btn {
-  padding: 8px 12px;
+  color: #444;
+  padding: 8px 15px;
 }
 
 .logout-btn:hover {
   border: none;
   border-radius: 6px;
+  color: #000;
+  background-color: #fff;
 }
