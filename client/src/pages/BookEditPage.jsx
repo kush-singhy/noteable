@@ -86,7 +86,7 @@ function BookEditPage() {
     return (
       <div className="page">
         <Header />
-        <div className="loading">Adding...</div>
+        <div className="loading">Loading...</div>
       </div>
     );
   }
